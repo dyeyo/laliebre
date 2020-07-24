@@ -13,14 +13,18 @@
     <script src="https://kit.fontawesome.com/7e8f963e2a.js" crossorigin="anonymous"></script>
     <link href="{{ asset('node_modules/morrisjs/morris.css') }}" rel="stylesheet">
     <link href="{{ asset('dist/css/style.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/misEstilos.css')}}" rel="stylesheet">
     <link href="{{ asset('node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
     <link href="{{ asset('dist/css/pages/dashboard1.css')}}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body class="skin-default-dark fixed-layout">
-@routes
+{{-- @routes --}}
 <style>
+  .select2{
+    width: 100%;
+  }
 .btncelular{
   display:none !important;
 }
@@ -35,17 +39,12 @@
 
 }
 </style>
-    <div id="main-wrapper">
-    <div id="app">
-    @guest
-      <main class="py-4">
-        @yield('contenido')
-      </main>
-    @else
-      @include('layouts.nav')
-    @endguest
+  <div id="main-wrapper">
+    @include('layouts.nav')
     <div class="page-wrapper">
+      <div class="container-fluid">
         @yield('content')
+      </div>
     </div>
 </div>
 
@@ -69,7 +68,7 @@
     {{-- <script src="{{ asset('dist/js/validacion.js') }}"></script>
     <script src="{{ asset('dist/js/functions.js') }}"></script> --}}
 
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function() {
       $('.select2').select2({
         allowClear: true,
@@ -111,7 +110,7 @@
         }, 3000);
       }
     });
-  </script> --}}
+  </script>
 
 
 </body>

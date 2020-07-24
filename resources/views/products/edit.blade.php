@@ -7,8 +7,8 @@
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item">Table Basic</li>
+              <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+              <li class="breadcrumb-item"><a href="/productos">Productos</a></li>
                 <li class="breadcrumb-item active">Editar {{$product->name}}</li>
             </ol>
         </div>
@@ -18,15 +18,14 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Basic Table</h4>
-                <h6 class="card-subtitle">Add class <code>.table</code></h6>
+                <h4 class="card-title">Editar producto {{$product->name}}</h4>
                 <div class="table-responsive">
                     <form action="{{ route('product.update',$product->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('put') }}
                         <div class="form-group">
                             <label>Categoria perteneciente</label>
-                            <select name="store_id" class="form-control form-control-line" id="">
+                            <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($categories as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -34,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <label>Tienda perteneciente</label>
-                            <select name="store_id" class="form-control form-control-line" id="">
+                            <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($stores as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -61,7 +60,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Actualziar</button>
-                            <a href="{{ route('typeStore') }}" class="btn btn-warning">Cancelar</a>
+                            <a href="{{ route('products') }}" class="btn btn-warning">Cancelar</a>
                         </div>
                     </form>
                 </div>

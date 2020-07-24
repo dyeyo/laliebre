@@ -2,17 +2,18 @@
 @section('content')
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor">Tienedas</h4>
+        <h4 class="text-themecolor">Tiendas</h4>
     </div>
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Table Basic</li>
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+                <li class="breadcrumb-item active">Tiendas</li>
             </ol>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Agregar Tienda
-              </button>
+            <button type="button" class="btn btn-info d-none d-lg-block m-l-15" data-toggle="modal" data-target="#exampleModal">
+              <i class="fa fa-plus-circle"></i>
+              Agregar Tienda
+            </button>
         </div>
     </div>
 </div>
@@ -20,7 +21,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Basic Table</h4>
+                <h4 class="card-title">Listado de Tiendas</h4>
                 @if(Session::has('message'))
                 <div class="alert alert-success">
                   {!! Session::get('message') !!}
@@ -70,7 +71,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Tienda</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -80,7 +81,7 @@
             @csrf
             <div class="form-group">
                 <label>Tienda perteneciente</label>
-                <select name="store_id" class="form-control form-control-line" id="">
+                <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
                     @foreach($typeStores as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
@@ -88,7 +89,7 @@
             </div>
             <div class="form-group">
                 <label>Distrito perteneciente</label>
-                <select name="district_id" class="form-control form-control-line" id="">
+                <select name="district_id" style="width:100%" class="select2 form-control form-control-line" id="">
                     @foreach($distritos as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach

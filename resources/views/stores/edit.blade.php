@@ -7,8 +7,8 @@
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item">Table Basic</li>
+                <li class="breadcrumb-item"><a href="/home">inicio</a></li>
+                <li class="breadcrumb-item"><a href="/tiendas">Tiendas</a></li>
                 <li class="breadcrumb-item active">Editar {{$store->name}}</li>
             </ol>
         </div>
@@ -26,15 +26,15 @@
                         {{ method_field('put') }}
                         <div class="form-group">
                             <label>Tienda perteneciente</label>
-                            <select name="store_id" class="form-control form-control-line" id="">
+                            <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($typeStores as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                  <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Distrito perteneciente</label>
-                            <select name="district_id" class="form-control form-control-line" id="">
+                            <select name="district_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($distritos as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach

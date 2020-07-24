@@ -2,24 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 //PRODUCTOS
 Route::get('/productos', 'ProductsController@index')->name('products');
@@ -55,3 +41,10 @@ Route::post('/distritos/create', 'DistrictsController@store')->name('distritos.s
 Route::get('/distritos/editar/{id}', 'DistrictsController@edit')->name('distritos.edit');
 Route::put('/distritos/{id}', 'DistrictsController@update')->name('distritos.update');
 Route::delete('/distritos/{id}', 'DistrictsController@destroy')->name('distritos.delete');
+
+//PASILLOS
+Route::get('/pasillos', 'HallwaysController@index')->name('pasillos');
+Route::post('/pasillo/create', 'HallwaysController@store')->name('pasillo.store');
+Route::get('/pasillo/editar/{id}', 'HallwaysController@edit')->name('pasillo.edit');
+Route::put('/pasillo/{id}', 'HallwaysController@update')->name('pasillo.update');
+Route::delete('/pasillo/{id}', 'HallwaysController@destroy')->name('pasillo.delete');

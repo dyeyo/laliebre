@@ -7,12 +7,13 @@
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Table Basic</li>
+              <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+              <li class="breadcrumb-item active">Productos</li>
             </ol>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Agregar Producto
-              </button>
+            <button type="button" class="btn btn-info d-none d-lg-block m-l-15" data-toggle="modal" data-target="#exampleModal">
+              <i class="fa fa-plus-circle"></i>
+              Agregar Producto
+            </button>
         </div>
     </div>
 </div>
@@ -20,7 +21,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Basic Table</h4>
+                <h4 class="card-title">Listado de Productos</h4>
                 @if(Session::has('message'))
                 <div class="alert alert-success">
                   {!! Session::get('message') !!}
@@ -70,7 +71,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -80,11 +81,27 @@
             @csrf
             <div class="form-group">
                 <label>Categoria perteneciente</label>
-                <select name="categorie_id" class="form-control form-control-line" id="">
+                <select name="categorie_id" style="width:100%" class="select2 form-control form-control-line" id="">
                     @foreach($categories as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="form-group">
+              <label>Tienda perteneciente</label>
+              <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                  @foreach($stores as $item)
+                  <option value="{{$item->id}}">{{$item->name}}</option>
+                  @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Pasillo perteneciente</label>
+              <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                  @foreach($hallways as $item)
+                  <option value="{{$item->id}}">{{$item->name}}</option>
+                  @endforeach
+              </select>
             </div>
             <div class="form-group">
                 <label>Nombre</label>
@@ -102,24 +119,16 @@
                 <label>Precio</label>
                 <input type="text" name="price" class="form-control form-control-line">
             </div>
-            <div class="form-group">
-                <label>Tienda perteneciente</label>
-                <select name="store_id" class="form-control form-control-line" id="">
-                    @foreach($stores as $item)
-                    <option value="{{$item->id}}">{{$item->name}}</option>
-                    @endforeach
-                </select>
-            </div>
+
             <div class="form-group">
                 <label>Imagen</label>
                 <input type="file" name="image" class="form-control form-control-line">
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
           <button type="submit" class="btn btn-primary">Guardar Producto</button>
         </form>
-
         </div>
       </div>
     </div>

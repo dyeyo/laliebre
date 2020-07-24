@@ -7,9 +7,9 @@
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="/distritos">Distritos</a></li>
-              <li class="breadcrumb-item active">Editar {{$district->name}}</li>
+              <li class="breadcrumb-item"><a href="/home">Home</a></li>
+              <li class="breadcrumb-item"><a href="/pasillos">Pasillos</a></li>
+              <li class="breadcrumb-item active">Editar {{$hallway->name}}</li>
             </ol>
         </div>
     </div>
@@ -18,18 +18,18 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Editar Distrito {{$district->name}}</h4>
+                <h4 class="card-title">Editar pasillo {{$hallway->name}}</h4>
                 <div class="table-responsive">
-                    <form action="{{ route('distritos.update',$district->id) }}" method="post">
+                    <form action="{{ route('pasillo.update',$hallway->id) }}" method="post">
                         @csrf
                         {{ method_field('put') }}
                         <div class="form-group">
                             <label>Nombre Distrito</label>
-                            <input type="text" name="name" value="{{$district->name}}" class="form-control form-control-line">
+                            <input type="text" name="name" value="{{$hallway->name}}" class="form-control form-control-line">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Actualziar</button>
-                            <a href="{{ route('distritos') }}" class="btn btn-warning">Cancelar</a>
+                            <a href="{{ route('pasillos') }}" class="btn btn-warning">Cancelar</a>
                         </div>
                     </form>
                 </div>

@@ -7,12 +7,13 @@
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Table Basic</li>
+              <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+              <li class="breadcrumb-item active">Categorias</li>
             </ol>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Agregar Categoria
-              </button>
+            <button type="button" class="btn btn-info d-none d-lg-block m-l-15" data-toggle="modal" data-target="#exampleModal">
+              <i class="fa fa-plus-circle"></i>
+              Agregar Categoria
+            </button>
         </div>
     </div>
 </div>
@@ -20,7 +21,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Basic Table</h4>
+                <h4 class="card-title">Listado de Categorias</h4>
                 @if(Session::has('message'))
                 <div class="alert alert-success">
                   {!! Session::get('message') !!}
@@ -66,7 +67,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Categoria</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -84,7 +85,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
           <button type="submit" class="btn btn-primary">Guardar Categorias</button>
         </form>
 

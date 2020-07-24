@@ -2,17 +2,19 @@
 @section('content')
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor">  Tipos de Tienda</h4>
+        <h4 class="text-themecolor"> Tipos de Tienda</h4>
     </div>
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Table Basic</li>
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+                <li class="breadcrumb-item active">Tipos</li>
             </ol>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Agregar Tipo de Tienda
-              </button>
+            <button type="button" class="btn btn-info d-none d-lg-block m-l-15" data-toggle="modal" data-target="#exampleModal">
+              <i class="fa fa-plus-circle"></i>
+              Agregar Tipo de Tienda
+            </button>
+
         </div>
     </div>
 </div>
@@ -20,7 +22,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Basic Table</h4>
+                <h4 class="card-title">Listado de Tipo de Tienda</h4>
                 @if(Session::has('message'))
                 <div class="alert alert-success">
                   {!! Session::get('message') !!}
@@ -82,7 +84,7 @@
             </div>
             <div class="form-group">
                 <label>Imagen</label>
-                <input type="file" name="image  " class="form-control form-control-line">
+                <input type="file" name="image" class="form-control form-control-line">
             </div>
         </div>
         <div class="modal-footer">
@@ -95,3 +97,4 @@
     </div>
   </div>
 @endsection
+
