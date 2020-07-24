@@ -1,11 +1,18 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', function () {
+  if (Auth::check()) {
+    return redirect('/home');
+  } else {
+    return view('auth.login');
+  }
+});
 
 //PRODUCTOS
 Route::get('/productos', 'ProductsController@index')->name('products');

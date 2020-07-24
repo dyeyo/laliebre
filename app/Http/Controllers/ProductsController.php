@@ -38,10 +38,11 @@ class ProductsController extends Controller
 
   public function edit(Request $request, $id)
   {
-    $product = Products::find($id);
+    $product = Products::with('categories', 'stores', 'hallways')->find($id);
     $categories = CategoriesProducts::all();
+    $hallways = Hallways::all();
     $stores = Stores::all();
-    return view('products.edit', compact('product', 'categories', 'stores'));
+    return view('products.edit', compact('product', 'categories', 'stores', 'hallways'));
   }
 
   public function update(Request $request, $id)

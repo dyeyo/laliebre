@@ -27,7 +27,7 @@
                             <label>Categoria perteneciente</label>
                             <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($categories as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                <option @if($product->categories->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -35,7 +35,15 @@
                             <label>Tienda perteneciente</label>
                             <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($stores as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                <option @if($product->stores->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Pasillo perteneciente</label>
+                            <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                                @foreach($hallways as $item)
+                                <option @if($product->hallways->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>

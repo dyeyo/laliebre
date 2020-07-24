@@ -18,8 +18,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Basic Table</h4>
-                <h6 class="card-subtitle">Add class <code>.table</code></h6>
+                <h4 class="card-title">Editar tienda {{$store->name}}</h4>
                 <div class="table-responsive">
                     <form action="{{ route('store.update',$store->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -28,7 +27,7 @@
                             <label>Tienda perteneciente</label>
                             <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($typeStores as $item)
-                                  <option value="{{$item->id}}">{{$item->name}}</option>
+                                  <option @if($store->typeStore->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -36,7 +35,7 @@
                             <label>Distrito perteneciente</label>
                             <select name="district_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($distritos as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                <option @if($store->distritos->id === $item->id) selected='selected' @endif  value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
