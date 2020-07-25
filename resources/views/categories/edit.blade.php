@@ -2,7 +2,7 @@
 @section('content')
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor">Tipos de Tienda</h4>
+        <h4 class="text-themecolor">Categorias</h4>
     </div>
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
@@ -18,15 +18,14 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Basic Table</h4>
-                <h6 class="card-subtitle">Add class <code>.table</code></h6>
+                <h4 class="card-title">Editar Categoria {{$category->name}}</h4>
                 <div class="table-responsive">
-                    <form action="{{ route('category.update',$category->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('category.update',$category->id) }}" id="formCategorias" method="post" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('put') }}
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="name" value="{{$category->name}}" class="form-control form-control-line">
+                            <input type="text" name="name" id="name" value="{{$category->name}}" class="form-control form-control-line">
                         </div>
                         <div class="form-group">
                             <label>Descripcion</label>
@@ -34,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Actualziar</button>
-                            <a href="{{ route('typeStore') }}" class="btn btn-warning">Cancelar</a>
+                            <a href="{{ route('categories') }}" class="btn btn-warning">Cancelar</a>
                         </div>
                     </form>
                 </div>

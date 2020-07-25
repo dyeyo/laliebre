@@ -65,8 +65,7 @@
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    {{-- <script src="{{ asset('dist/js/validacion.js') }}"></script>
-    <script src="{{ asset('dist/js/functions.js') }}"></script> --}}
+    <script src="{{ asset('js/validacion.js') }}"></script>
 
     <script type="text/javascript">
     $(document).ready(function() {

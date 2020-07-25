@@ -2,12 +2,14 @@
 
 @section('login')
 
-<section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/background/login-register.jpg);">
+<section id="wrapper" class="login-register login-sidebar" style="background-image:url({{asset('images/login.jpg')}});">
   <div class="login-box card">
       <div class="card-body">
         <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('login') }}">
           @csrf
-              <a href="javascript:void(0)" class="text-center db"><img src="../assets/images/logo-icon.png" alt="Home" /><br/><img src="../assets/images/logo-text.png" alt="Home" /></a>
+              <a href="/" class="text-center db">
+                <img src="{{asset('images/logo.png')}}" width="50%" alt="La Liebre" />
+              </a>
               <div class="form-group m-t-40">
                   <div class="col-xs-12">
                     <input id="email" placeholder="Correo Electronico" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -20,7 +22,7 @@
               </div>
               <div class="form-group">
                   <div class="col-xs-12">
-                    <input id="password" placeholder="Contraseña" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input id="password" placeholder="Contrasena" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

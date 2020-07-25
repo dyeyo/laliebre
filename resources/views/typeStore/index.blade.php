@@ -70,21 +70,21 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Tipo de Tienda</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('typeStore.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('typeStore.store') }}" id="formTypeStore" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" name="name" class="form-control form-control-line">
+                <input type="text" id="name" name="name" class="form-control form-control-line">
             </div>
             <div class="form-group">
                 <label>Imagen</label>
-                <input type="file" name="image" class="form-control form-control-line">
+                <input type="file" id="image" name="image" class="form-control form-control-line">
             </div>
         </div>
         <div class="modal-footer">

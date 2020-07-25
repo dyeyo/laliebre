@@ -71,11 +71,11 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('distritos.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('distritos.store') }}" id="formDistrito" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" name="name" class="form-control form-control-line">
+                <input type="text" name="name" id="name" class="form-control form-control-line">
             </div>
         </div>
         <div class="modal-footer">

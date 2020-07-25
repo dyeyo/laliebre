@@ -7,7 +7,7 @@
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
                 <li class="breadcrumb-item active">Pasillos</li>
             </ol>
             <button type="button" class="btn btn-info d-none d-lg-block m-l-15" data-toggle="modal" data-target="#exampleModal">
@@ -71,11 +71,11 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('pasillo.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('pasillo.store') }}" id="formPasillos" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" name="name" class="form-control form-control-line">
+                <input type="text" name="name" id="name" class="form-control form-control-line">
             </div>
         </div>
         <div class="modal-footer">

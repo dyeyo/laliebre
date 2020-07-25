@@ -77,11 +77,11 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('store.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('store.store') }}" id="formStore" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label>Tienda perteneciente</label>
-                <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                <select id="store_id" name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
                     @foreach($typeStores as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
@@ -89,7 +89,7 @@
             </div>
             <div class="form-group">
                 <label>Distrito perteneciente</label>
-                <select name="district_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                <select id="district_id" name="district_id" style="width:100%" class="select2 form-control form-control-line" id="">
                     @foreach($distritos as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
@@ -97,17 +97,17 @@
             </div>
             <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" name="name" class="form-control form-control-line">
-                <input type="hidden" name="user_id" value={{Auth::user()->id}}>
+                <input type="text" id="name" name="name" class="form-control form-control-line">
+                <input type="hidden" id="user_id" name="user_id" value={{Auth::user()->id}}>
             </div>
             <div class="form-group">
                 <label>Descripcion</label>
-                <textarea  name="description" id="description" class="form-control form-control-line" style="resize: none;"></textarea>
+                <textarea  id="description" name="description" id="description" class="form-control form-control-line" style="resize: none;"></textarea>
             </div>
 
             <div class="form-group">
                 <label>Imagen</label>
-                <input type="file" name="logo" class="form-control form-control-line">
+                <input type="file" id="logo" name="logo" class="form-control form-control-line">
             </div>
         </div>
         <div class="modal-footer">

@@ -73,11 +73,11 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('category.store') }}" method="post" >
+          <form action="{{ route('category.store') }}" method="post" id="formCategorias">
             @csrf
             <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" name="name" class="form-control form-control-line">
+                <input type="text" name="name" id="name" class="form-control form-control-line">
             </div>
             <div class="form-group">
                 <label>Descripcion</label>

@@ -2,7 +2,7 @@
 @section('content')
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor">Tipos de Tienda</h4>
+        <h4 class="text-themecolor">Tipos de Pasillos</h4>
     </div>
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
@@ -20,12 +20,12 @@
             <div class="card-body">
                 <h4 class="card-title">Editar pasillo {{$hallway->name}}</h4>
                 <div class="table-responsive">
-                    <form action="{{ route('pasillo.update',$hallway->id) }}" method="post">
+                    <form action="{{ route('pasillo.update',$hallway->id) }}" id="formPasillos" method="post">
                         @csrf
                         {{ method_field('put') }}
                         <div class="form-group">
                             <label>Nombre Distrito</label>
-                            <input type="text" name="name" value="{{$hallway->name}}" class="form-control form-control-line">
+                            <input type="text" name="name" id="name" value="{{$hallway->name}}" class="form-control form-control-line">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Actualziar</button>

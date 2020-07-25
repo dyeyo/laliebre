@@ -77,11 +77,11 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('product.store') }}" id="formProductos" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label>Categoria perteneciente</label>
-                <select name="categorie_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                <select id="" name="categorie_id" style="width:100%" class="select2 form-control form-control-line" id="">
                     @foreach($categories as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
@@ -89,7 +89,7 @@
             </div>
             <div class="form-group">
               <label>Tienda perteneciente</label>
-              <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+              <select id="" name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
                   @foreach($stores as $item)
                   <option value="{{$item->id}}">{{$item->name}}</option>
                   @endforeach
@@ -97,7 +97,7 @@
             </div>
             <div class="form-group">
               <label>Pasillo perteneciente</label>
-              <select name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+              <select id="" name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
                   @foreach($hallways as $item)
                   <option value="{{$item->id}}">{{$item->name}}</option>
                   @endforeach
@@ -105,24 +105,24 @@
             </div>
             <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" name="name" class="form-control form-control-line">
+                <input type="text" id="" name="name" class="form-control form-control-line">
             </div>
             <div class="form-group">
                 <label>Descripcion</label>
-                <input type="text" name="description" class="form-control form-control-line">
+                <input type="text" id="" name="description" class="form-control form-control-line">
             </div>
             <div class="form-group">
                 <label>Codigo</label>
-                <input type="text" name="code" class="form-control form-control-line">
+                <input type="text" id="" name="code" class="form-control form-control-line">
             </div>
             <div class="form-group">
                 <label>Precio</label>
-                <input type="text" name="price" class="form-control form-control-line">
+                <input type="text" id="" name="price" class="form-control form-control-line">
             </div>
 
             <div class="form-group">
                 <label>Imagen</label>
-                <input type="file" name="image" class="form-control form-control-line">
+                <input type="file" id="" name="image" class="form-control form-control-line">
             </div>
         </div>
         <div class="modal-footer">
