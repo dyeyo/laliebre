@@ -19,10 +19,24 @@ class ProductsController extends Controller
     {
       if ( ! auth('api')->check()) {
         return response()->json(['error' => 'Unauthorized'], 401);
-    } else{$products = Products::all();
+    } else{
+
+            $products = Products::all();
             $categories = CategoriesProducts::all();
             $stores = Stores::all();
-            $hallways = Hallways::all();}
+            $hallways = Hallways::all();
+
+            return response()->json([
+              'status' => 'success',
+              'productos'=> $products,
+              'categories'=> $categories,
+              'stores'=>$stores,
+              "hallways"=>$hallways
+
+            ],200);
+
+
+          }
 
     }
 
@@ -40,6 +54,7 @@ class ProductsController extends Controller
               $product->image = $name1;
             }
             $product->save();
+            return response()->json(['status' => 'producto creado con exito'], 200);
           }
 
     }
@@ -58,6 +73,7 @@ class ProductsController extends Controller
               $product->image = $name1;
             }
             $product->update();
+            return response()->json(['status' => 'producto actualizado con exito'], 200);
           }
     }
 
@@ -65,7 +81,10 @@ class ProductsController extends Controller
     {
       if ( ! auth('api')->check()) {
         return response()->json(['error' => 'Unauthorized'], 401);
-    } else{Products::find($id)->delete();}
+    } else{Products::find($id)->delete();
+      return response()->json(['status' => 'producto eliminado con exito'], 200);
+
+    }
 
     }
 }

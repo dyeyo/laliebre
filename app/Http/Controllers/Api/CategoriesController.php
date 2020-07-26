@@ -30,6 +30,7 @@ class CategoriesController extends Controller
       } else{
         $category = new CategoriesProducts($request->all());
           $category->save();
+          return response()->json(['status' => 'Categoria creada con exito'], 200);
       }
     }
 
@@ -43,7 +44,7 @@ class CategoriesController extends Controller
     } else{
       $category = CategoriesProducts::find($id);
         $category->update($request->all());}
-
+        return response()->json(['status' => 'Categoria actualizada con exito'], 200);
     }
 
     public function destroy($id)
@@ -52,6 +53,7 @@ class CategoriesController extends Controller
         return response()->json(['error' => 'Unauthorized'], 401);
     } else{
       CategoriesProducts::find($id)->delete();
+      return response()->json(['status' => 'Categoria eliminada con exito'], 200);
     }
     }
 }

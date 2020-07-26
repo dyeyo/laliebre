@@ -13,7 +13,7 @@ class DistrictsController extends Controller
     if ( ! auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
   } else{
-    $districts = Districts::all();
+    return $districts = Districts::all();
   }
   }
 
@@ -23,16 +23,12 @@ class DistrictsController extends Controller
     if ( ! auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
   } else{ Districts::create($request->all());
+
+    return response()->json(['status' => 'Distrito creado con exito'], 200);
   }
   }
 
-  public function edit(Request $request, $id)
-  {
-    if ( ! auth('api')->check()) {
-      return response()->json(['error' => 'Unauthorized'], 401);
-  } else{ $district = Districts::find($id);}
 
-  }
 
   public function update(Request $request, $id)
   {
@@ -41,6 +37,7 @@ class DistrictsController extends Controller
   } else{ $district = Districts::find($id);
       $district->name = $request->name;
       $district->save();
+      return response()->json(['status' => 'Distrito actualizado con exito'], 200);
   }
   }
 
@@ -48,7 +45,10 @@ class DistrictsController extends Controller
   {
     if ( ! auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
-  } else{Districts::find($id)->delete();}
+  } else{Districts::find($id)->delete();
+
+    return response()->json(['status' => 'Distrito eliminado con exito'], 200);
+  }
 
   }
 }

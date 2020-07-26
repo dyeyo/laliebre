@@ -13,7 +13,7 @@ class CategorieStoreController extends Controller
     if ( ! auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
   } else{
-    $typeStores = CategoriesStore::all();}
+     return $typeStores = CategoriesStore::all();}
 
   }
 
@@ -31,6 +31,7 @@ class CategorieStoreController extends Controller
           $typeStores->image = $name1;
       }
       $typeStores->save();
+      return response()->json(['status' => 'Categoria store creada con exito'], 200);
     }
   }
 
@@ -50,6 +51,7 @@ class CategorieStoreController extends Controller
           $typeStores->image = $name1;
       }
       $typeStores->save();
+      return response()->json(['status' => 'Categoria store actualizada con exito'], 200);
     }
   }
 
@@ -59,6 +61,7 @@ class CategorieStoreController extends Controller
       return response()->json(['error' => 'Unauthorized'], 401);
   } else{
     CategoriesStore::find($id)->delete();
+    return response()->json(['status' => 'Categoria store eliminada con exito'], 200);
   }
   }
 

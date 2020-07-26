@@ -13,7 +13,7 @@ class HallwaysController extends Controller
     if ( ! auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
   } else{
-    $hallways = Hallways::all();
+    return   $hallways = Hallways::all();
     }
   }
 
@@ -22,7 +22,9 @@ class HallwaysController extends Controller
   {
     if ( ! auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
-  } else{ Hallways::create($request->all());}
+  } else{ Hallways::create($request->all());
+    return response()->json(['status' => 'Pasillo creado con exito'], 200);
+  }
 
   }
 
@@ -33,7 +35,9 @@ class HallwaysController extends Controller
       return response()->json(['error' => 'Unauthorized'], 401);
   } else{$hallways = Hallways::find($id);
       $hallways->name = $request->name;
-      $hallways->save();}
+      $hallways->save();
+      return response()->json(['status' => 'Pasillo actualizado con exito'], 200);
+    }
 
   }
 
@@ -41,7 +45,10 @@ class HallwaysController extends Controller
   {
     if ( ! auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
-  } else{ Hallways::find($id)->delete();}
+  } else{ Hallways::find($id)->delete();
+    return response()->json(['status' => 'Pasillo  eliminado con exito'], 200);
+
+  }
 
   }
 }
