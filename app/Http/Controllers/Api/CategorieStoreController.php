@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\CategoriesStore;
+
+class CategorieStoreController extends Controller
+{
+  public function index()
+  {
+    if ( ! auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+  } else{
+    $typeStores = CategoriesStore::all();}
+
+  }
+
+  public function store(Request $request)
+  {
+    if ( ! auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+  } else{
+    $typeStores = new CategoriesStore;
+      $typeStores->name = $request->name;
+      if ($request->hasFile('image')) {
+          $file = $request->file('image');
+          $name1 = $file->getClientOriginalName();
+          $file->move(public_path() . '/img/typeStore/', $name1);
+          $typeStores->image = $name1;
+      }
+      $typeStores->save();
+    }
+  }
+
+
+
+  public function update(Request $request, $id)
+  {
+    if ( ! auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+  } else{
+    $typeStores = CategoriesStore::find($id);
+      $typeStores->name = $request->name;
+      if ($request->hasFile('logo')) {
+          $file = $request->file('logo');
+          $name1 = $file->getClientOriginalName();
+          $file->move(public_path() . '/images/typeSotre/', $name1);
+          $typeStores->image = $name1;
+      }
+      $typeStores->save();
+    }
+  }
+
+  public function destroy($id)
+  {
+    if ( ! auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+  } else{
+    CategoriesStore::find($id)->delete();
+  }
+  }
+
+}

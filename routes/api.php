@@ -14,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+  'prefix' => 'auth',
+
+], function () {
+  Route::post('login', 'Api\AuthController@login');
+  Route::post('logout', 'Api\AuthController@logout');
+  Route::post('refresh', 'Api\AuthController@refresh');
+  Route::post('me', 'Api\AuthController@me');
 });
+  Route::get('tiendas', 'Api\StoreController@index');
+  Route::post('tiendas/store', 'Api\StoreController@store');
+  Route::put('tienda/update/{id}', 'Api\StoreController@update');
+  Route::delete('tienda/delete/{id}', 'Api\StoreController@destroy');
+  Route::get('categorias', 'Api\CategoriesController@index');
+
+

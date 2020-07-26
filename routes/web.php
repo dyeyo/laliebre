@@ -66,3 +66,4 @@ Route::group(['middleware' => ['auth']], function () {
   Route::put('/recetas/{id}', 'RecitesController@update')->name('receta.update');
   Route::delete('/recetas/{id}', 'RecitesController@destroy')->name('receta.delete');
 });
+
