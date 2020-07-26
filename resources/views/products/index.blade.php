@@ -97,7 +97,7 @@
             </div>
             <div class="form-group">
               <label>Pasillo perteneciente</label>
-              <select id="" name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+              <select id="" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
                   @foreach($hallways as $item)
                   <option value="{{$item->id}}">{{$item->name}}</option>
                   @endforeach
