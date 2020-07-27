@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group">
                             <label>Pasillo perteneciente</label>
-                            <select id="store_id" name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                            <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($hallways as $item)
                                 <option @if($product->hallways->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -68,7 +68,7 @@
                         </div>
                         <div class="form-group">
                             <label>Imagen</label>
-                            <input type="file" id="image" name="logo" class="form-control form-control-line">
+                            <input type="file" id="image" name="image" class="form-control form-control-line">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Actualziar</button>

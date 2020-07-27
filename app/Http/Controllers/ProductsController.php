@@ -24,7 +24,6 @@ class ProductsController extends Controller
   public function store(Request $request)
   {
     $product = new Products($request->all());
-    $product->update($request->all());
     if ($request->hasFile('image')) {
       $file = $request->file('image');
       $name1 = $file->getClientOriginalName();
