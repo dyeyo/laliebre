@@ -41,26 +41,30 @@
                             </tr>
                         </thead>
                         <tbody>
+                          @php $i=1; @endphp
+                          @foreach($recipes as $recipe)
                           <tr>
-                            <td>1</td>
-                            <td>Pizza</td>
-                            <td>foto</td>
-                            <td> <form class="user"  action="{{route('receta.show', 1)}}" method="get">
-                              <button class="btn btn-btn-outline-light"   type="submit">Ver</button>
-                          </form> </td>
-                          <td><form class="user"  action="{{route('category.delete', 1)}}" method="post">
-
-                            {{csrf_field()}}
-                            <button class="btn btn-btn-outline-light"   type="submit">Editar</button>
-                        </form> </td>
+                            <td>{{$i++}}</td>
+                            <td>{{$recipe->name}}</td>
+                            <td style="width: 20%" >
+                                <img src="{{asset('storage/recipes/'.$recipe->image)}}" class="img-responsive img-fluid" style="width: 76%;" alt="">
+                            </td>
                             <td>
-                                <form class="user"  action="{{route('category.delete', 1)}}" method="post">
-                                    {{ method_field('delete') }}
-                                    {{csrf_field()}}
-                                    <button class="btn btn-btn-outline-light"  onclick="return confirm('¿Esta seguro de eliminar este registro?')"  type="submit">ELIMINAR</button>
-                                </form>
+                              <a href="{{route('receta.show', $recipe->id)}}" class="btn btn-btn-outline-light">Ver</a>
+                            </td>
+                            <td>
+                              <input type="hidden" value="{{$recipe->id}}">
+                              <a href="#" class="btn btn-btn-outline-light btn-edit"{{--  data-toggle="modal" data-target="#editModal" --}}>Editar</a>
+                            </td>
+                            <td>
+                              <form class="user"  action="{{route('receta.delete', $recipe->id)}}" method="post">
+                                  {{ method_field('delete') }}
+                                  {{csrf_field()}}
+                                  <button class="btn btn-btn-outline-light"  onclick="return confirm('¿Esta seguro de eliminar este registro?')"  type="submit">ELIMINAR</button>
+                              </form>
                             </td>
                         </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -68,60 +72,105 @@
         </div>
     </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar Receta</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="{{ route('receta.store') }}" method="post" id="formCategorias">
-            @csrf
-            <div class="form-group">
-              <label>Codigo</label>
-              <input type="text" name="code" id="code" class="form-control form-control-line">
-          </div>
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" name="name" id="name" class="form-control form-control-line">
-            </div>
-            <div class="form-group">
-              <label>Ingredientes</label>
-              <button type="button" class="btn btn-primary" onclick="agregar()">+</button>
-              <button type="button" class="btn btn-primary" onclick="quitar()">-</button>
-              <div id="ingrediente"> </div>
-          </div>
 
-            <div class="form-group">
-                <label>Descripcion</label>
-                <textarea name="description" id="description" style="resize:none" class="form-control form-control-line"></textarea>
-            </div>
-            <div class="form-group">
-              <label>Link Video</label>
-              <input type="text" name="link" id="link" class="form-control form-control-line">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-primary">Guardar Receta</button>
-        </form>
+<!-- Modal create -->
+@include('recites.modals.create')
 
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Modal Edit -->
+@include('recites.modals.edit')
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
   <script>
 
-    function agregar(){
+  $(document).ready(function()
+  {
+    var productName = "";
+
+    $.get("/productos/recetas", function(result) {
+
+      let max = result.length;
+
+      for (var i=0; i<max; i++) {
+        productName += '<option value="'+result[i].id+'">'+result[i].name+'</option>';
+      }
+
+    })
+    .fail(function(){
+      alert('Uff! Algo salio mal (@E0)');
+    });
 
 
-      const elemento = document.getElementById('ingrediente');
-      elemento.innerHTML += '<div> <input type="text" class="form-control form-control-line" id="lname" style="width: 15%;" name="nombre" placeholder">' + '<input type="text" class="form-control form-control-line" style="width: 25%;" id="lname" name="lname">'+'<input type="text" style="width: 25%;" class="form-control form-control-line" id="lname" name="lname">'+'<input type="text"  class="form-control form-control-line" style="width: 25%;" id="lname" name="lname">'+'</br> </div>' ;  //
+    $('.btn-edit').click (function(e) {
+      e.preventDefault();
+
+      var id = $(this).prev('input').val();
+
+      $.get("/recetas/productos/"+id, function(result) {
+
+        $("#code"   ).val(result.code);
+        $("#name"   ).val(result.name);
+        // $("#store_id"   ).val(result.name);
+
+        $("#editModal").modal("show");
+
+
+        console.log(result);
+
+      })
+      .fail(function(){
+        alert('Uff! Algo salio mal (@E0)');
+      });
+
+    });
+
+    // var x = 2;
+    $('#product-add').click (function(e) {
+      e.preventDefault();
+      toAll();
+    });
+
+    $('#product-add-2').click (function(e) {
+      e.preventDefault();
+      toAll();
+    });
+
+    $('#product-row').on("click",".remove-row",function(e) {
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove();
+        // x--;
+    });
+
+    function toAll()
+    {
+        $('#product-row').append('<div class="form-row text-center">\
+          <div class="col-md-2 mb-3">\
+            <input type="text" name="product_code[]" class="form-control form-control-line">\
+          </div>\
+          <div class="col-md-5 mb-3">\
+            <select class="custom-select text-danger" required>\
+              <option selected disabled value="">Elegir...</option>'
+              +productName+
+            '</select>\
+          </div>\
+          <div class="col-md-2 mb-3">\
+            <input type="number" class="form-control text-danger" name="product_quantity[]" value="1" min="1" required>\
+          </div>\
+          <div class="col-md-2 mb-3">\
+            <select class="custom-select" name="product_unit[]" required>\
+              <option selected disabled value="">?</option>\
+              <option value="gm">gm</option>\
+              <option value="mg">mg</option>\
+            </select>\
+          </div>\
+          <div class="col-md-1 mb-3">\
+            <button type="button" class="btn btn-light remove-row">X</button>\
+          </div>\
+        </div>');
+      // x++;
     }
 
+  });
   </script>
+
 @endsection
