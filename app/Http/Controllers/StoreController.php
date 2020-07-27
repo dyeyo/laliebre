@@ -21,6 +21,7 @@ class StoreController extends Controller
 
   public function store(Request $request)
   {
+
     $store = new Stores($request->all());
     if ($request->hasFile('logo')) {
       $file = $request->file('logo');

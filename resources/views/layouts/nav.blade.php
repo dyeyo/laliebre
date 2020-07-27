@@ -75,7 +75,7 @@
               <a class="waves-effect waves-dark" href="{{route('pasillos')}}"><i class="fas fa-tags"></i><span class="hide-menu">Gestion de Pasillos</span></a>
           </li>
           <li>
-              <a class="waves-effect waves-dark" href="index.html"><i class="fas fa-clipboard"></i><span class="hide-menu">Gestion de Recetas</span></a>
+              <a class="waves-effect waves-dark" href="{{route('recetas')}}"><i class="fas fa-clipboard"></i><span class="hide-menu">Gestion de Recetas</span></a>
           </li>
         </ul>
       </nav>
