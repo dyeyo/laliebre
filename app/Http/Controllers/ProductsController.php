@@ -65,4 +65,14 @@ class ProductsController extends Controller
     Session::flash('message', 'Producto eliminado con exito');
     return redirect()->route('products');
   }
+
+  /*
+  /* Petición - AJAX
+  */
+  public function indexByRecipe(Request $request)
+  {
+    if ( $request->ajax() )
+      return response( Products::all() );
+  }
+
 }
