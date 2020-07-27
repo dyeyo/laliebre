@@ -22,4 +22,9 @@ class Products extends Model
   {
     return $this->belongsTo(Hallways::class, 'hallway_id');
   }
+
+  public function recipes()
+  {
+        return $this->belongsToMany(Recipe::class, 'product_recipes', 'recipe_id', 'id');
+  }
 }

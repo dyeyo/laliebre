@@ -12,18 +12,18 @@
             @csrf
             <div class="form-group">
               <label>Codigo</label>
-              <input type="text" name="code" id="code" class="form-control form-control-line">
+              <input type="text" name="code" id="code" value="" class="form-control form-control-line">
           </div>
             <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" name="name" id="name" class="form-control form-control-line">
+                <input type="text" name="name" id="name" value="" class="form-control form-control-line">
             </div>
 
         <div id="product-row">
           <div class="form-row">
             <div class="col-md-6 mb-3">
               <label for="quantity">Cantidad de porciones</label>
-              <input type="number" class="form-control text-danger" id="quantity" name="quantity" value="1" min="1" required>
+              <input type="number" class="form-control text-danger" id="quantity" name="quantity" value="" min="1" required>
             </div>
           </div>
           <div class="form-row">
@@ -37,16 +37,20 @@
               </select>
             </div>
           </div>
-
+        @php
+          $products = App\ProductRecipes::all()->where('recipe_id',$recipe->id);
+          $n = 0;
+        @endphp
+        @foreach( $products as $product )
           <div class="form-row text-center">
             <div class="col-md-2 mb-3">
-              <label for="product_code"><br>Cod.</label>
-              <input type="text" id="product_code[]" name="product_code[]" class="form-control form-control-line">
+              @if($n==0) <label for="product_code"><br>Cod.</label> @endif
+              <input type="text" id="product_code[]" name="product_code[]" value="{{$product->code}}" class="form-control form-control-line">
             </div>
-            <div class="col-md-4 mb-3">
-              <label for="producto_name">Nombre<br>producto</label>
+            <div class="col-md-5 mb-3">
+              @if($n==0) <label for="producto_name">Nombre<br>producto</label> @endif
 
-              <select class="custom-select text-danger" id="producto_name" name="producto_name[]" required>
+              <select class="custom-select text-danger" id="producto_name" name="producto_name[]" value="{{$product->name}}" required>
                 <option selected disabled value="">Elegir...</option>
               @foreach($products as $product)
                 <option value="{{$product->id}}">{{$product->name}}</option>
@@ -55,11 +59,11 @@
 
             </div>
             <div class="col-md-2 mb-3">
-              <label for="product_quantity">Cant. porción</label>
-              <input type="number" class="form-control text-danger" id="product_quantity" name="product_quantity[]" value="1" min="1" required>
+              @if($n==0) <label for="product_quantity">Cant. porción</label> @endif
+              <input type="number" class="form-control text-danger" id="product_quantity" name="product_quantity[]" value="{{$recipe->quantity}}" min="1" required>
             </div>
             <div class="col-md-2 mb-3">
-              <label for="product_unit">Unidad Medida</label>
+              @if($n==0) <label for="product_unit">Unidad Medida</label> @endif
               <select class="custom-select" id="product_unit" name="product_unit[]" required>
                 <option selected disabled value="">?</option>
                 <option value="gm">gm</option>
@@ -67,14 +71,12 @@
               </select>
             </div>
             <div class="col-md-1 mb-3">
-              <label for=""><br>.</label>
-              <button type="button" class="btn btn-light btn-search">O</button>
-            </div>
-            <div class="col-md-1 mb-3">
-              <label for=""><br>.</label>
+              @if($n==0) <label for=""><br>.</label> @endif
               <button type="button" class="btn btn-light btn-delete">X</button>
             </div>
           </div>
+          @php $n++; @endphp
+          @endforeach
 
         </div>
 
@@ -83,11 +85,11 @@
 
             <div class="form-group">
                 <label>Descripcion</label>
-                <textarea name="description" id="description" style="resize:none" class="form-control form-control-line text-danger"></textarea>
+                <textarea name="description" id="description" value="" style="resize:none" class="form-control form-control-line text-danger"></textarea>
             </div>
             <div class="form-group">
               <label>Link Video</label>
-              <input type="url" name="link" id="link" class="form-control form-control-line text-danger">
+              <input type="url" name="link" id="link" value="" class="form-control form-control-line text-danger">
           </div>
           <div class="form-group">
             <label for="">Imagen del plato</label>
@@ -103,3 +105,98 @@
       </div>
     </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+
+  $(document).ready(function()
+  {
+
+    // var productName = "";
+
+    // $.get("/productos/recetas", function(result) {
+
+    //   let max = result.length;
+
+    //   for (var i=0; i<max; i++) {
+    //     productName += '<option value="'+result[i].id+'">'+result[i].name+'</option>';
+    //   }
+
+    // })
+    // .fail(function(){
+    //   alert('Uff! Algo salio mal (@E0)');
+    // });
+
+
+    $('.btn-edit').click (function(e) {
+      e.preventDefault();
+
+      var id = $(this).prev('input').val();
+      // var products = [];
+
+      $.get("/recetas/productos/"+id, function(result) {
+        $("#code").val(result.code);
+        $("#name").val(result.name);
+        $("#quantity").val(result.quantity);
+        $("#description").val(result.description);
+        $("#link").val(result.link);
+
+           $.get("/producto/receta/"+id, function(result) {
+              console.log(result.id);
+          });
+           // .fail(function(){alert('Uff! Algo salio mal (@E1)');});
+
+
+      }).fail(function(){alert('Uff! Algo salio mal (@E0)');});
+
+
+
+         $("#editModal").modal("show");
+
+
+    });
+
+    // var x = 2;
+    // $('#product-add').click (function(e) {
+    //   e.preventDefault();
+    //   toAll();
+    // });
+
+    // $('#product-row').on("click",".remove-row",function(e) {
+    //     e.preventDefault();
+    //     $(this).parent('div').parent('div').remove();
+    //     // x--;
+    // });
+
+    // function toAll()
+    // {
+    //     $('#product-row').append('<div class="form-row text-center">\
+    //       <div class="col-md-2 mb-3">\
+    //         <input type="text" name="product_code[]" class="form-control form-control-line">\
+    //       </div>\
+    //       <div class="col-md-5 mb-3">\
+    //         <select class="custom-select text-danger" required>\
+    //           <option selected disabled value="">Elegir...</option>'
+    //           +productName+
+    //         '</select>\
+    //       </div>\
+    //       <div class="col-md-2 mb-3">\
+    //         <input type="number" class="form-control text-danger" name="product_quantity[]" value="1" min="1" required>\
+    //       </div>\
+    //       <div class="col-md-2 mb-3">\
+    //         <select class="custom-select" name="product_unit[]" required>\
+    //           <option selected disabled value="">?</option>\
+    //           <option value="gm">gm</option>\
+    //           <option value="mg">mg</option>\
+    //         </select>\
+    //       </div>\
+    //       <div class="col-md-1 mb-3">\
+    //         <button type="button" class="btn btn-light remove-row">X</button>\
+    //       </div>\
+    //     </div>');
+    //   // x++;
+    // }
+
+  });
+  </script>
