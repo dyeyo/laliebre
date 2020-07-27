@@ -28,6 +28,7 @@ class RecitesController extends Controller
 
   public function store(Request $request)
   {
+    // return $request->all();
     $recipe = new Recipe;
     $recipe->code = $request->input('code');
     $recipe->name = $request->input('name');
@@ -45,7 +46,7 @@ class RecitesController extends Controller
     $recipe->image = $fileName;
     $recipe->save();
 
-    $codes = $request->input('producto_name');
+    $codes = $request->input('product_name');
     $quantities = $request->input('product_quantity');
     $units = $request->input('product_unit');
 

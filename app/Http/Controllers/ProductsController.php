@@ -76,4 +76,11 @@ class ProductsController extends Controller
       return response( Products::all() );
   }
 
+  public function showByRecipe(Request $request, $id)
+  {
+    if ( $request->ajax() )
+      return response( App\ProductRecipes::where('recipe_id', $id)->get() );
+  }
+
+
 }

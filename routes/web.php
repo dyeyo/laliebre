@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::delete('/producto/{id}', 'ProductsController@destroy')->name('product.delete');
 
   /*AJAX*/ Route::get('productos/recetas', 'ProductsController@indexByRecipe');
+  /*AJAX*/ Route::get('producto/receta/{id}', 'ProductsController@showByRecipe');
 
   //CATEGORIAS
   Route::get('/categorias', 'CategoriesController@index')->name('categories');
