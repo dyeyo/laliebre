@@ -21,6 +21,7 @@ Route::group([
   Route::post('login', 'Api\AuthController@login');
   Route::post('logout', 'Api\AuthController@logout');
   Route::post('refresh', 'Api\AuthController@refresh');
+  Route::post('register', 'Api\AuthController@register');
   Route::post('me', 'Api\AuthController@me');
 });
 
@@ -48,23 +49,23 @@ Route::put('/producto/{id}', 'Api\ProductsController@update');
 Route::delete('/producto/{id}', 'Api\ProductsController@destroy');
 //listo
 
- //CATEGORIAS TIENDAS
-  Route::get('/tipoTienda', 'Api\CategorieStoreController@index')->name('typeStore');
-  Route::post('/tipoTienda/create', 'Api\CategorieStoreController@store')->name('typeStore.store');
-  Route::put('/tipoTienda/{id}', 'Api\CategorieStoreController@update')->name('typeStore.update');
-  Route::delete('/tipoTienda/{id}', 'Api\CategorieStoreController@destroy')->name('typeStore.delete');
-  //listo
-
-  //DISTRITOS
-  Route::get('/distritos', 'Api\DistrictsController@index')->name('distritos');
-  Route::post('/distritos/create', 'Api\DistrictsController@store')->name('distritos.store');
-  Route::put('/distritos/{id}', 'Api\DistrictsController@update')->name('distritos.update');
-  Route::delete('/distritos/{id}', 'Api\DistrictsController@destroy')->name('distritos.delete');
+//CATEGORIAS TIENDAS
+Route::get('/tipoTienda', 'Api\CategorieStoreController@index')->name('typeStore');
+Route::post('/tipoTienda/create', 'Api\CategorieStoreController@store')->name('typeStore.store');
+Route::put('/tipoTienda/{id}', 'Api\CategorieStoreController@update')->name('typeStore.update');
+Route::delete('/tipoTienda/{id}', 'Api\CategorieStoreController@destroy')->name('typeStore.delete');
 //listo
-  //PASILLOS
-  Route::get('/pasillos', 'Api\HallwaysController@index')->name('pasillos');
-  Route::post('/pasillo/create', 'Api\HallwaysController@store')->name('pasillo.store');
-  Route::put('/pasillo/{id}', 'Api\HallwaysController@update')->name('pasillo.update');
-  Route::delete('/pasillo/{id}', 'Api\HallwaysController@destroy')->name('pasillo.delete');
+
+//DISTRITOS
+Route::get('/distritos', 'Api\DistrictsController@index')->name('distritos');
+Route::post('/distritos/create', 'Api\DistrictsController@store')->name('distritos.store');
+Route::put('/distritos/{id}', 'Api\DistrictsController@update')->name('distritos.update');
+Route::delete('/distritos/{id}', 'Api\DistrictsController@destroy')->name('distritos.delete');
+//listo
+//PASILLOS
+Route::get('/pasillos', 'Api\HallwaysController@index')->name('pasillos');
+Route::post('/pasillo/create', 'Api\HallwaysController@store')->name('pasillo.store');
+Route::put('/pasillo/{id}', 'Api\HallwaysController@update')->name('pasillo.update');
+Route::delete('/pasillo/{id}', 'Api\HallwaysController@destroy')->name('pasillo.delete');
 
 //listo

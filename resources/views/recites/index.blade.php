@@ -47,7 +47,7 @@
                             <td>{{$i++}}</td>
                             <td>{{$recipe->name}}</td>
                             <td style="width: 20%" >
-                                <img src="{{asset('storage/recipes/'.$recipe->image)}}" class="img-responsive img-fluid" style="width: 76%;" alt="">
+                                <img src="{{asset('img/recetas/'.$recipe->image)}}" class="img-responsive img-fluid" style="width: 76%;" alt="">
                             </td>
                             <td>
                               <a href="{{route('receta.show', $recipe->id)}}" class="btn btn-btn-outline-light">Ver</a>

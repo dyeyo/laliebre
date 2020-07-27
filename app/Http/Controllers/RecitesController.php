@@ -17,10 +17,10 @@ class RecitesController extends Controller
     $products = Products::all();
     $stores = Stores::all();
 
-    return view('recites.index', compact('recipes','products','stores'));
+    return view('recites.index', compact('recipes', 'products', 'stores'));
   }
 
-   public function show($id)
+  public function show($id)
   {
 
     return view('recites.show');
@@ -37,12 +37,17 @@ class RecitesController extends Controller
     $recipe->store_id = $request->input('store_id');
     $recipe->product_id = 1;
     $recipe->store = "...";
+    if ($request->hasFile('image')) {
+      $file = $request->file('image');
+      $name1 = $file->getClientOriginalName();
+      $file->move(public_path() . '/img/recetas/', $name1);
+      $recipe->image = $name1;
+    }
+    // $file = $request->file('image');
+    // $fileName = date_timestamp_get(date_create()) . $file->getClientOriginalName();
+    // \Storage::disk('recipes')->put($fileName,  \File::get($file));
 
-    $file = $request->file('image');
-    $fileName = date_timestamp_get( date_create() ).$file->getClientOriginalName();
-    \Storage::disk('recipes')->put($fileName,  \File::get($file));
-
-    $recipe->image = $fileName;
+    //Controller.php$recipe->image = $fileName;
     $recipe->save();
 
     $codes = $request->input('producto_name');
@@ -51,8 +56,7 @@ class RecitesController extends Controller
 
     $max = sizeof($codes);
 
-    for ($i=0; $i < $max; $i++)
-    {
+    for ($i = 0; $i < $max; $i++) {
       ProductRecipe::create([
         'recipe_id'  => $recipe->id,
         'product_id' => $codes[$i],
@@ -63,29 +67,25 @@ class RecitesController extends Controller
 
     Session::flash('message', 'Receta creada con exito');
     return redirect()->route('recetas');
-
   }
 
   public function edit(Request $request, $id)
   {
-
   }
 
   public function update(Request $request, $id)
   {
-
   }
 
   public function destroy($id)
   {
     $recipe = Recipe::findOrFail($id);
 
-    \Storage::delete('public/recipes/'.$recipe->image);
+    \Storage::delete('public/recipes/' . $recipe->image);
 
     $productRecipe = ProductRecipe::all()->where('recipe_id', $id);
 
-    foreach ($productRecipe as $pr)
-    {
+    foreach ($productRecipe as $pr) {
       $pr->delete();
     }
 
@@ -93,7 +93,6 @@ class RecitesController extends Controller
 
     Session::flash('message', 'La receta a sido eliminada con exito');
     return redirect()->route('recetas');
-
   }
 
   /*
@@ -101,8 +100,7 @@ class RecitesController extends Controller
   */
   public function indexWithProducts(Request $request, $id)
   {
-    if ( $request->ajax() )
-      return response( Recipe::findOrFail($id) );
+    if ($request->ajax())
+      return response(Recipe::findOrFail($id));
   }
-
 }

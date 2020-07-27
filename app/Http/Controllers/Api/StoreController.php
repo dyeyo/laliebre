@@ -10,71 +10,70 @@ class StoreController extends Controller
 {
   public function index()
   {
-    if ( ! auth('api')->check()) {
-      return response()->json(['error' => 'Unauthorized'], 401);
-      }else{
-      $stores = Stores::all();
-      return  $stores;
-      }
+    // if (!auth('api')->check()) {
+    //   return response()->json(['error' => 'Unauthorized'], 401);
+    // } else {
+    $stores = Stores::all();
+    return  $stores;
+    //}
   }
   public function store(Request $request)
   {
 
-    if ( ! auth('api')->check()) {
+    if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
-      }else{
-        $store = new Stores($request->all());
-        if ($request->hasFile('logo')) {
-          $file = $request->file('logo');
-          $name1 = $file->getClientOriginalName();
-          $file->move(public_path() . '/img/stores/', $name1);
-          $store->logo = $name1;
-        }
-        $store->save();
-        return response()->json([
-          'status' => 'Tienda creada con exito',
-
-      ],200);
+    } else {
+      $store = new Stores($request->all());
+      if ($request->hasFile('logo')) {
+        $file = $request->file('logo');
+        $name1 = $file->getClientOriginalName();
+        $file->move(public_path() . '/img/stores/', $name1);
+        $store->logo = $name1;
       }
+      $store->save();
+      return response()->json([
+        'status' => 'Tienda creada con exito',
 
+      ], 200);
+    }
   }
 
   public function update(Request $request, $id)
   {
-    if ( ! auth('api')->check()) {
+    if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
-      }else{
+    } else {
 
-           $store = Stores::find($id);
-              $store->name = $request->name;
-              $store->description = $request->description;
-              $store->user_id = $request->user_id;
-              $store->store_id = $request->store_id;
-              $store->district_id = $request->district_id;
-              if ($request->hasFile('logo')) {
-                $file = $request->file('logo');
-                $name1 = $file->getClientOriginalName();
-                $file->move(public_path() . '/img/stores/', $name1);
-                $store->logo = $name1;
-              }
-              $store->update();
-              return response()->json([
-                'status' => 'Tienda actualizada con exito',
+      $store = Stores::find($id);
+      $store->name = $request->name;
+      $store->description = $request->description;
+      $store->user_id = $request->user_id;
+      $store->store_id = $request->store_id;
+      $store->district_id = $request->district_id;
+      if ($request->hasFile('logo')) {
+        $file = $request->file('logo');
+        $name1 = $file->getClientOriginalName();
+        $file->move(public_path() . '/img/stores/', $name1);
+        $store->logo = $name1;
+      }
+      $store->update();
+      return response()->json([
+        'status' => 'Tienda actualizada con exito',
 
-            ],200);
-     }
+      ], 200);
+    }
   }
 
   public function destroy($id)
   {
 
-    if ( ! auth('api')->check()) {
+    if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
-      }else{
-    Stores::find($id)->delete();
-    return response()->json([
-      'status' => 'Tienda Eliminada con exito', ],200);
+    } else {
+      Stores::find($id)->delete();
+      return response()->json([
+        'status' => 'Tienda Eliminada con exito',
+      ], 200);
+    }
   }
-}
-
 }

@@ -58,7 +58,7 @@ if ($("#formProductos").length > 0) {
       store_id: {
         required: true
       },
-      store_id: {
+      hallway_id: {
         required: true
       },
       name: {
@@ -73,7 +73,6 @@ if ($("#formProductos").length > 0) {
       },
       price: {
         required: true,
-        digits: true
       },
       image: {
         required: true,
@@ -101,11 +100,62 @@ if ($("#formProductos").length > 0) {
       },
       price: {
         required: "Este campo es obligatorio",
-        digits: "Este campo solo recibe numero"
       },
       image: {
         required: "Este campo es obligatorio",
       }
+    }
+  });
+}
+if ($("#formProductosEdit").length > 0) {
+  $("#formProductosEdit").validate({
+    rules: {
+      categorie_id: {
+        required: true
+      },
+      store_id: {
+        required: true
+      },
+      hallway_id: {
+        required: true
+      },
+      name: {
+        required: true
+      },
+      description: {
+        required: true
+      },
+      code: {
+        required: true,
+        digits: true
+      },
+      price: {
+        required: true,
+      }
+    },
+    messages: {
+      categorie_id: {
+        required: "Este campo es obligatorio"
+      },
+      store_id: {
+        required: "Este campo es obligatorio"
+      },
+      store_id: {
+        required: "Este campo es obligatorio"
+      },
+      name: {
+        required: "Este campo es obligatorio"
+      },
+      description: {
+        required: "Este campo es obligatorio"
+      },
+      code: {
+        required: "Este campo es obligatorio",
+        digits: "Este campo solo recibe numero"
+      },
+      price: {
+        required: "Este campo es obligatorio",
+      },
     }
   });
 }
@@ -148,6 +198,7 @@ if ($("#formStore").length > 0) {
     }
   });
 }
+
 if ($("#formTypeStore").length > 0) {
   $("#formTypeStore").validate({
     rules: {
@@ -162,6 +213,84 @@ if ($("#formTypeStore").length > 0) {
     messages: {
       name: {
         required: "Este campo es obligatorio"
+      },
+      image: {
+        required: "Este campo es obligatorio"
+      },
+    }
+  });
+}
+
+if ($("#formRecetas").length > 0) {
+  $("#formRecetas").validate({
+    rules: {
+      code: {
+        required: true
+      },
+      name: {
+        required: true
+      },
+      quantity: {
+        required: true
+      },
+      store_id: {
+        required: true
+      },
+      product_code: {
+        required: true
+      },
+      producto_name: {
+        required: true
+      },
+      product_quantity: {
+        required: true
+      },
+      product_unit: {
+        required: true
+      },
+      description: {
+        required: true
+      },
+      link: {
+        required: true,
+        url: true
+      },
+      image: {
+        required: true
+      },
+
+    },
+    messages: {
+      code: {
+        required: "Este campo es obligatorio"
+      },
+      name: {
+        required: "Este campo es obligatorio"
+      },
+      quantity: {
+        required: "Este campo es obligatorio"
+      },
+      store_id: {
+        required: "Este campo es obligatorio"
+      },
+      product_code: {
+        required: "Este campo es obligatorio"
+      },
+      producto_name: {
+        required: "Este campo es obligatorio"
+      },
+      product_quantity: {
+        required: "Este campo es obligatorio"
+      },
+      product_unit: {
+        required: "Este campo es obligatorio"
+      },
+      description: {
+        required: "Este campo es obligatorio"
+      },
+      link: {
+        required: "Este campo es obligatorio",
+        url: 'Este campo debe ser una url valida'
       },
       image: {
         required: "Este campo es obligatorio"
