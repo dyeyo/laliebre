@@ -10,6 +10,6 @@ class CategoriesProducts extends Model
 
   public function productos()
   {
-    return $this->hasMany(Products::class);
+    return $this->hasMany(Products_recipes::class);
   }
 }

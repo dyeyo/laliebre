@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Hallways;
+use App\Products_recipes;
 
 class HallwaysController extends Controller
 {
@@ -49,5 +50,10 @@ class HallwaysController extends Controller
       Hallways::find($id)->delete();
       return response()->json(['status' => 'Pasillo  eliminado con exito'], 200);
     }
+  }
+
+  public function pasillosProductos($id)
+  {
+    return response()->json(['productosPasillos' => Products_recipes::where('hallway_id', $id)->get()]);
   }
 }

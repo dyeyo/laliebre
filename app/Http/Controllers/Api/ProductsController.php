@@ -7,6 +7,7 @@ use App\Hallways;
 use App\Products;
 use App\Stores;
 use App\Http\Controllers\Controller;
+use App\Products_recipes;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -18,11 +19,7 @@ class ProductsController extends Controller
    */
   public function index()
   {
-    // if (!auth('api')->check()) {
-    //   return response()->json(['error' => 'Unauthorized'], 401);
-    // } else {
-
-    $products = Products::all();
+    $products = Products_recipes::all();
     $categories = CategoriesProducts::all();
     $stores = Stores::all();
     $hallways = Hallways::all();
@@ -44,8 +41,8 @@ class ProductsController extends Controller
     if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
     } else {
-      $product = new Products($request->all());
-      $product->update($request->all());
+      $product = new Products_recipes($request->all());
+      $product->save($request->all());
       if ($request->hasFile('image')) {
         $file = $request->file('image');
         $name1 = $file->getClientOriginalName();
@@ -57,13 +54,17 @@ class ProductsController extends Controller
     }
   }
 
+  public function show($id)
+  {
+    return response()->json(['producto' => Products_recipes::with('stores', 'hallways')->find($id)]);
+  }
 
   public function update(Request $request, $id)
   {
     if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
     } else {
-      $product = Products::find($id);
+      $product = Products_recipes::find($id);
       $product->update($request->all());
       if ($request->hasFile('image')) {
         $file = $request->file('image');
@@ -81,7 +82,7 @@ class ProductsController extends Controller
     if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
     } else {
-      Products::find($id)->delete();
+      Products_recipes::find($id)->delete();
       return response()->json(['status' => 'producto eliminado con exito'], 200);
     }
   }

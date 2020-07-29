@@ -29,7 +29,7 @@ class CreateProductsRecipesTable extends Migration
 
       $table->foreign('store_id')->references('id')->on('stores');
       $table->foreign('categorie_id')->references('id')->on('categories_products');
-      $table->foreign('hallway_id')->references('id')->on('hallways');
+      $table->foreign('hallway_id')->references('id')->on('hallways')->onDelete('cascade');
 
       $table->timestamps();
     });

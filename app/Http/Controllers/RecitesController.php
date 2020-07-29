@@ -106,7 +106,9 @@ class RecitesController extends Controller
 
   public function destroyIngredients($id)
   {
-    Products_recipe::find($id)->delete();
+    //Products_recipe::find($id)->delete();
+    $f = Recipes::with('productos')->find($id);
+    dd($f);
     Session::flash('message', 'Ingrediente eliminado con exito');
     return redirect()->back();
   }

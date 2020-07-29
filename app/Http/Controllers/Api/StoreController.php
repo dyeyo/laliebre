@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Products_recipes;
 use Illuminate\Http\Request;
 use App\Stores;
 
@@ -75,5 +76,10 @@ class StoreController extends Controller
         'status' => 'Tienda Eliminada con exito',
       ], 200);
     }
+  }
+
+  public function tiendaProductos($id)
+  {
+    return response()->json(['productosTienda' => Products_recipes::where('store_id', $id)->get()]);
   }
 }

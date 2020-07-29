@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\CategoriesProducts;
 use App\Http\Controllers\Controller;
+use App\Products_recipes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
@@ -34,7 +36,10 @@ class CategoriesController extends Controller
     }
   }
 
-
+  public function categoriaProductos($id)
+  {
+    return response()->json(['categorias' => Products_recipes::where('categorie_id', $id)->get()]);
+  }
 
   public function update(Request $request, $id)
   {
