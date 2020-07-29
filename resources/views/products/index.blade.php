@@ -9,6 +9,12 @@
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
               <li class="breadcrumb-item active">Productos</li>
+              <li class="breadcrumb-item" >
+                <button type="button" id="btncelular" style="display:none" class="btn btn-info " data-toggle="modal" data-target="#exampleModal">
+                  <i class="fa fa-plus-circle"></i>
+                  Agregar
+                </button>
+              </li>
             </ol>
             <button type="button" class="btn btn-info d-none d-lg-block m-l-15" data-toggle="modal" data-target="#exampleModal">
               <i class="fa fa-plus-circle"></i>
@@ -111,9 +117,29 @@
                 <label>Descripcion</label>
                 <input type="text" id="" name="description" class="form-control form-control-line">
             </div>
-            <div class="form-group">
-                <label>Codigo</label>
-                <input type="text" id="" name="code" class="form-control form-control-line">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Codigo</label>
+                  <input type="text" id="" name="code" class="form-control form-control-line">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Catidad</label>
+                  <input type="text" id="quantity" name="quantity" class="form-control form-control-line">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Unidad de Medida</label>
+                  <select id="um" name="um" style="width:100%" class="form-control form-control-line" id="">
+                    <option disabled="disabled" value="">Seleccionar una opcion</option>
+                    <option value="Gm">Gm</option>
+                    <option value="Ml">Ml</option>
+                </select>
+                </div>
+              </div>
             </div>
             <div class="form-group">
                 <label>Precio</label>

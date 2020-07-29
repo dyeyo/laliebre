@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CategoriesProducts;
 use App\Hallways;
 use App\Products;
+use App\Products_recipes;
 use App\Stores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -13,7 +14,7 @@ class ProductsController extends Controller
 {
   public function index()
   {
-    $products = Products::all();
+    $products = Products_recipes::all();
     $categories = CategoriesProducts::all();
     $stores = Stores::all();
     $hallways = Hallways::all();
@@ -23,7 +24,7 @@ class ProductsController extends Controller
 
   public function store(Request $request)
   {
-    $product = new Products($request->all());
+    $product = new Products_recipes($request->all());
     if ($request->hasFile('image')) {
       $file = $request->file('image');
       $name1 = $file->getClientOriginalName();
@@ -37,7 +38,7 @@ class ProductsController extends Controller
 
   public function edit(Request $request, $id)
   {
-    $product = Products::with('categories', 'stores', 'hallways')->find($id);
+    $product = Products_recipes::with('categories', 'stores', 'hallways')->find($id);
     $categories = CategoriesProducts::all();
     $hallways = Hallways::all();
     $stores = Stores::all();
@@ -46,7 +47,7 @@ class ProductsController extends Controller
 
   public function update(Request $request, $id)
   {
-    $product = Products::find($id);
+    $product = Products_recipes::find($id);
     $product->update($request->all());
     if ($request->hasFile('image')) {
       $file = $request->file('image');
@@ -71,8 +72,7 @@ class ProductsController extends Controller
   */
   public function indexByRecipe(Request $request)
   {
-    if ( $request->ajax() )
-      return response( Products::all() );
+    if ($request->ajax())
+      return response(Products_recipes::all());
   }
-
 }

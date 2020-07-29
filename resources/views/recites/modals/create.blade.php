@@ -19,17 +19,15 @@
                 <input type="text" id="name" name="name" class="form-control form-control-line">
             </div>
 
-        <div id="product-row">
+
           <div class="form-row">
             <div class="col-md-6 mb-3">
-              <label for="quantity">Cantidad de porciones</label>
-              <input type="number" class="form-control text-danger" id="quantity" name="quantity" value="1" min="1" required>
+              <label for="servings">Cantidad de porciones</label>
+              <input type="number" class="form-control text-danger" id="servings" name="servings" value="1" min="1" required>
             </div>
-          </div>
-          <div class="form-row">
             <div class="col-md-6 mb-3">
               <label for="store_id">Seleccionar Tienda</label>
-              <select class="custom-select" id="store_id" name="store_id" required>
+              <select class="custom-select" id="store_id" name="storeId" required>
                 <option selected disabled value="">Elegir...</option>
                 @foreach($stores as $store)
                   <option value="{{$store->id}}">{{$store->name}}</option>
@@ -37,50 +35,13 @@
               </select>
             </div>
           </div>
+         <div id="product-row">
+         {{-- INGREDIENTES --}}
 
-          <div class="form-row text-center">
-            <div class="col-md-2 mb-3">
-              <label for="product_code"><br>Cod.</label>
-              <input type="text" id="product_code" name="product_code[]" class="form-control form-control-line">
-            </div>
-            <div class="col-md-5 mb-3">
-              <label for="producto_name">Nombre<br>producto</label>
-
-              <select class="custom-select text-danger" id="producto_name" name="producto_name[]" required>
-                <option selected disabled value="">Elegir...</option>
-              @foreach($products as $product)
-                <option value="{{$product->id}}">{{$product->name}}</option>
-              @endforeach
-              </select>
-
-            </div>
-            <div class="col-md-2 mb-3">
-              <label for="product_quantity">Cant. porción</label>
-              <input type="number" class="form-control text-danger" id="product_quantity" name="product_quantity[]" value="1" min="1" required>
-            </div>
-            <div class="col-md-2 mb-3">
-              <label for="product_unit">Unidad Medida</label>
-              <select class="custom-select" id="product_unit" name="product_unit[]" required>
-                <option selected disabled value="">?</option>
-                <option value="gm">gm</option>
-                <option value="mg">mg</option>
-              </select>
-            </div>
-            {{-- <div class="col-md-1 mb-3">
-              <label for=""><br>.</label>
-              <button type="button" class="btn btn-light btn-search">O</button>
-            </div> --}}
-            <div class="col-md-1 mb-3">
-              <label for=""><br>.</label>
-              <button type="button" class="btn btn-light btn-delete">X</button>
-            </div>
           </div>
-
-        </div>
 
         <button id="product-add" class="btn btn-primary" type="button">Agregar Producto</button>
         <hr>
-
             <div class="form-group">
                 <label>Descripcion</label>
                 <textarea id="description" name="description" style="resize:none" class="form-control form-control-line text-danger"></textarea>

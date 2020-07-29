@@ -23,7 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
   Route::put('/producto/{id}', 'ProductsController@update')->name('product.update');
   Route::delete('/producto/{id}', 'ProductsController@destroy')->name('product.delete');
 
-  /*AJAX*/ Route::get('productos/recetas', 'ProductsController@indexByRecipe');
+  /*AJAX*/
+  Route::get('productos/recetas', 'ProductsController@indexByRecipe');
 
   //CATEGORIAS
   Route::get('/categorias', 'CategoriesController@index')->name('categories');
@@ -68,6 +69,12 @@ Route::group(['middleware' => ['auth']], function () {
   Route::put('/recetas/{id}', 'RecitesController@update')->name('receta.update');
   Route::delete('/recetas/{id}', 'RecitesController@destroy')->name('receta.delete');
 
-  /*AJAX*/ Route::get('recetas/productos/{id}', 'RecitesController@indexWithProducts');
-});
+  Route::get('/producto/{id}', 'RecitesController@getDataProduct')->name('infoProductos');
+  Route::get('/productos/tienda/{id}', 'RecitesController@getDataProductTienda')->name('productosTienda');
 
+  //INGREDIENTES
+  Route::delete('/recetas/ingrediente/{id}', 'RecitesController@destroyIngredients')->name('ingrediente.delete');
+
+  /*AJAX*/
+  Route::get('recetas/productos/{id}', 'RecitesController@indexWithProducts');
+});

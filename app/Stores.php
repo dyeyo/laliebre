@@ -25,6 +25,11 @@ class Stores extends Model
 
   public function productos()
   {
-    return $this->hasMany(Products::class);
+    return $this->hasMany(Products::class, 'store_id');
+  }
+
+  public function receta()
+  {
+    return $this->hasMany(Recipes::class);
   }
 }

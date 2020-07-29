@@ -6,22 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateHallwaysTable extends Migration
 {
-    public function up()
-    {
-        Schema::create('hallways', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-        });
-    }
+  public function up()
+  {
+    Schema::create('hallways', function (Blueprint $table) {
+      $table->id();
+      $table->string('name');
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('hallways');
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('hallways');
+  }
 }

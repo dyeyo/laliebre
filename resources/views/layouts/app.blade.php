@@ -20,23 +20,22 @@
 </head>
 
 <body class="skin-default-dark fixed-layout">
-{{-- @routes --}}
+@routes
 <style>
   .select2{
     width: 100%;
   }
-.btncelular{
-  display:none !important;
-}
+  #btncelular{
+    display:none !important;
+  }
 @media (max-width: 992px) {
-  .btncelular {
+  #btncelular {
     display: block !important;
   }
   .btngrande{
     display:none;
   }
   .breadcrumb{margin-top: -22px !important;}
-
 }
 </style>
   <div id="main-wrapper">
@@ -66,6 +65,7 @@
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script src="{{ asset('js/validacion.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 
     <script type="text/javascript">
     $(document).ready(function() {

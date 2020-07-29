@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductRecipes extends Model
+class Products_recipe extends Model
 {
-    protected $guarded = [];
+  protected $guarded = [];
 }

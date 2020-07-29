@@ -236,16 +236,10 @@ if ($("#formRecetas").length > 0) {
       store_id: {
         required: true
       },
-      product_code: {
-        required: true
-      },
       producto_name: {
         required: true
       },
       product_quantity: {
-        required: true
-      },
-      product_unit: {
         required: true
       },
       description: {
@@ -273,16 +267,10 @@ if ($("#formRecetas").length > 0) {
       store_id: {
         required: "Este campo es obligatorio"
       },
-      product_code: {
-        required: "Este campo es obligatorio"
-      },
       producto_name: {
         required: "Este campo es obligatorio"
       },
       product_quantity: {
-        required: "Este campo es obligatorio"
-      },
-      product_unit: {
         required: "Este campo es obligatorio"
       },
       description: {
@@ -294,6 +282,64 @@ if ($("#formRecetas").length > 0) {
       },
       image: {
         required: "Este campo es obligatorio"
+      },
+    }
+  });
+}
+if ($("#formRecetasEditar").length > 0) {
+  $("#formRecetasEditar").validate({
+    rules: {
+      code: {
+        required: true
+      },
+      name: {
+        required: true
+      },
+      quantity: {
+        required: true
+      },
+      store_id: {
+        required: true
+      },
+      producto_name: {
+        required: true
+      },
+      product_quantity: {
+        required: true
+      },
+      description: {
+        required: true
+      },
+      link: {
+        required: true,
+        url: true
+      },
+    },
+    messages: {
+      code: {
+        required: "Este campo es obligatorio"
+      },
+      name: {
+        required: "Este campo es obligatorio"
+      },
+      quantity: {
+        required: "Este campo es obligatorio"
+      },
+      store_id: {
+        required: "Este campo es obligatorio"
+      },
+      producto_name: {
+        required: "Este campo es obligatorio"
+      },
+      product_quantity: {
+        required: "Este campo es obligatorio"
+      },
+      description: {
+        required: "Este campo es obligatorio"
+      },
+      link: {
+        required: "Este campo es obligatorio",
+        url: 'Este campo debe ser una url valida'
       },
     }
   });

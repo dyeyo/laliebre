@@ -20,7 +20,7 @@
             <div class="card-body">
                 <h4 class="card-title">Editar producto {{$product->name}}</h4>
                 <div class="table-responsive">
-                    <form action="{{ route('product.update',$product->id) }}"  id="formProductos" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('product.update',$product->id) }}"  id="formProductosEditar" method="post" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('put') }}
                         <div class="form-group">
@@ -51,18 +51,44 @@
                             <label>Nombre</label>
                             <input type="text" id="name" name="name" value="{{$product->name}}" class="form-control form-control-line">
                         </div>
-                        <div class="form-group">
-                          <label>Codigo</label>
-                          <input type="text" id="code"id="description" name="code" value="{{$product->code}}" class="form-control form-control-line">
-                        </div>
+
                         <div class="form-group">
                             <label>Descripcion</label>
-                            <textarea  id="code" name="description" id="description" class="form-control form-control-line" style="resize: none;">{{$product->description}}</textarea>
+                            <textarea  name="description" id="description" class="form-control form-control-line" style="resize: none;">{{$product->description}}</textarea>
                         </div>
                         <div class="form-group">
                           <label>Precio</label>
                           <input type="text" id="price"id="price" name="price" value="{{$product->price}}" class="form-control form-control-line">
-                      </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Codigo</label>
+                              <input type="text" id="code" name="code" class="form-control form-control-line">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Catidad</label>
+                              <input type="text" id="quantity" name="quantity" class="form-control form-control-line">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Unidad de Medida</label>
+                              <select id="um" name="um" style="width:100%" class="form-control form-control-line">
+                                <option disabled="disabled" value="">Seleccionar una opcion</option>
+                                @if($product->um == "Gm")
+                                  <option value="Gm">Gm</option>
+                                  <option value="Ml">Ml</option>
+                                @else
+                                  <option value="Ml">Ml</option>
+                                  <option value="Gm">Gm</option>
+                                @endif
+                            </select>
+                            </div>
+                          </div>
+                        </div>
                         <div class="form-group">
                             <img src="{{url('img/typeStore/'.$product->image)}}" class="img-responsive img-fluid" style="width: 20%;"  alt="">
                         </div>
