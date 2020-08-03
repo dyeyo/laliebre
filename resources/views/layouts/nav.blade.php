@@ -52,34 +52,43 @@
       <nav class="sidebar-nav">
         <ul id="sidebarnav">
           <li class="nav-small-cap  ">--- ADMINISTRACIÓN</li>
-          <li>
+          @if(Auth::user()->role_id == 1)
+            <li>
               <a class="waves-effect waves-dark" href="/home"><i class="fas fa-home"></i><span class="hide-menu">Inicio</span></a>
-          </li>
-          <li>
+            </li>
+            <li>
               <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-store"></i><span class="hide-menu">Gestion de Tiendas</span></a>
               <ul aria-expanded="false" class="collapse">
-                  <li><a href="{{ route('typeStore') }}">Tipo de Tiendas</a></li>
-                  <li><a href="{{ route('stores') }}">Tiendas</a></li>
+                <li><a href="{{ route('typeStore') }}">Tipo de Tiendas</a></li>
+                <li><a href="{{ route('stores') }}">Tiendas</a></li>
               </ul>
-          </li>
-          <li>
+            </li>
+            <li>
               <a class="waves-effect waves-dark" href="{{route('categories')}}"><i class="fas fa-boxes"></i><span class="hide-menu">Gestion de Categorias</span></a>
-          </li>
-          <li>
+            </li>
+            <li>
               <a class="waves-effect waves-dark" href="{{route('proveedores')}}"><i class="fas fa-users"></i><span class="hide-menu">Gestion de Proveedores</span></a>
-          </li>
-          <li>
-          <a class="waves-effect waves-dark" href="{{route('products')}}"><i class="fas fa-shopping-basket"></i><span class="hide-menu">Gestion de Productos</span></a>
-          </li>
-          <li>
-              <a class="waves-effect waves-dark" href="{{route('distritos')}}"><i class="fas fa-map-marked"></i><span class="hide-menu">Gestion de Distritos</span></a>
-          </li>
-          <li>
-              <a class="waves-effect waves-dark" href="{{route('pasillos')}}"><i class="fas fa-tags"></i><span class="hide-menu">Gestion de Pasillos</span></a>
-          </li>
-          <li>
-              <a class="waves-effect waves-dark" href="{{route('recetas')}}"><i class="fas fa-clipboard"></i><span class="hide-menu">Gestion de Recetas</span></a>
-          </li>
+            </li>
+            <li>
+            <a class="waves-effect waves-dark" href="{{route('products')}}"><i class="fas fa-shopping-basket"></i><span class="hide-menu">Gestion de Productos</span></a>
+            </li>
+            <li>
+                <a class="waves-effect waves-dark" href="{{route('distritos')}}"><i class="fas fa-map-marked"></i><span class="hide-menu">Gestion de Distritos</span></a>
+            </li>
+            <li>
+                <a class="waves-effect waves-dark" href="{{route('pasillos')}}"><i class="fas fa-tags"></i><span class="hide-menu">Gestion de Pasillos</span></a>
+            </li>
+            <li>
+                <a class="waves-effect waves-dark" href="{{route('recetas')}}"><i class="fas fa-clipboard"></i><span class="hide-menu">Gestion de Recetas</span></a>
+            </li>
+          @else
+            <li>
+              <a class="waves-effect waves-dark" href="/home"><i class="fas fa-home"></i><span class="hide-menu">Mi tienda</span></a>
+            </li>
+            <li>
+              <a class="waves-effect waves-dark" href="{{route('products')}}"><i class="fas fa-shopping-basket"></i><span class="hide-menu">Gestion de Productos</span></a>
+            </li>
+          @endif
         </ul>
       </nav>
       <!-- End Sidebar navigation -->

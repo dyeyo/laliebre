@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\CategoriesStore;
 use App\Districts;
 use App\Stores;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 class StoreController extends Controller
 {
@@ -22,15 +24,35 @@ class StoreController extends Controller
   public function store(Request $request)
   {
 
-    $store = new Stores($request->all());
+    $store = new Stores();
+    $store->name = $request->name;
+    $store->description = $request->description;
+    $store->district_id = $request->district_id;
+    $store->store_id = $request->store_id;
     if ($request->hasFile('logo')) {
       $file = $request->file('logo');
       $name1 = $file->getClientOriginalName();
       $file->move(public_path() . '/img/stores/', $name1);
       $store->logo = $name1;
     }
+
+    // $this->validate($request(), [
+    //   'email' => 'required|email|unique:users',
+    //   'password' => 'required',
+    // ]);
+
+    $user = new User();
+    $user->email = $request->emailUser;
+    $user->password = Hash::make($request->password);
+    $user->role_id = 2;
+    $user->save();
+
+    $store->user_id = $user->id;
     $store->save();
-    Session::flash('message', 'Categoria creado con exito');
+
+//    dd($user->id);
+
+    Session::flash('message', 'Tienda y usuario creado con exito');
     return redirect()->route('stores');
   }
 
@@ -48,8 +70,6 @@ class StoreController extends Controller
     $store = Stores::find($id);
     $store->name = $request->name;
     $store->description = $request->description;
-    $store->user_id = $request->user_id;
-    $store->store_id = $request->store_id;
     $store->district_id = $request->district_id;
     if ($request->hasFile('logo')) {
       $file = $request->file('logo');

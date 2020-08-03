@@ -24,14 +24,6 @@
                         @csrf
                         {{ method_field('put') }}
                         <div class="form-group">
-                            <label>Tienda perteneciente</label>
-                            <select id="store_id" name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
-                                @foreach($typeStores as $item)
-                                  <option @if($store->typeStore->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label>Distrito perteneciente</label>
                             <select id="district_id" name="district_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($distritos as $item)

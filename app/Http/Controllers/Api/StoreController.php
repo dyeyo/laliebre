@@ -48,8 +48,6 @@ class StoreController extends Controller
       $store = Stores::find($id);
       $store->name = $request->name;
       $store->description = $request->description;
-      $store->user_id = $request->user_id;
-      $store->store_id = $request->store_id;
       $store->district_id = $request->district_id;
       if ($request->hasFile('logo')) {
         $file = $request->file('logo');

@@ -3,16 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 //autentificacion
 Route::group([
   'prefix' => 'auth',
@@ -45,6 +35,7 @@ Route::get('/tienda/productos/{id}', 'Api\StoreController@tiendaProductos');
 
 //PRODUCTOS
 Route::get('/productos', 'Api\ProductsController@index');
+Route::get('/producto/tienda/{id}', 'Api\ProductsController@productStore');
 Route::post('/producto/create', 'Api\ProductsController@store');
 Route::get('/producto/show/{id}', 'Api\ProductsController@show');
 Route::put('/producto/{id}', 'Api\ProductsController@update');
@@ -67,6 +58,7 @@ Route::delete('/distrito/{id}', 'Api\DistrictsController@destroy')->name('distri
 
 //PASILLOS
 Route::get('/pasillos', 'Api\HallwaysController@index')->name('pasillos');
+Route::get('/pasillo/{id}', 'Api\HallwaysController@getPasillo')->name('pasillo');
 Route::post('/pasillo/create', 'Api\HallwaysController@store')->name('pasillo.store');
 Route::put('/pasillo/{id}', 'Api\HallwaysController@update')->name('pasillo.update');
 Route::delete('/pasillo/{id}', 'Api\HallwaysController@destroy')->name('pasillo.delete');

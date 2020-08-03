@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Roles extends Model
 {
-    protected $guarded = [];
+  protected $guarded = [];
+
+  public function roles()
+  {
+    return $this->hasMany(User::class);
+  }
 }

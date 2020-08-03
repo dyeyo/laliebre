@@ -94,15 +94,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
-              <label>Tienda perteneciente</label>
-              <select  name="store_id" style="width:100%" class="select2 form-control form-control-line" onchange="proveedores()" id="store_id">
-                <option value=""></option>
-                  @foreach($stores as $item)
-                    <option value="{{$item->id}}">{{$item->name}}</option>
-                  @endforeach
-              </select>
-            </div>
+            <input type="hidden" name="store_id"  value="{{$onlyID}}" id="">
             <div class="form-group">
               <label>Pasillo perteneciente</label>
               <select  name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">

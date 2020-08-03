@@ -102,13 +102,21 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" id="name" name="name" class="form-control form-control-line">
-                <input type="hidden" id="user_id" name="user_id" value={{Auth::user()->id}}>
+              <label>Nombre</label>
+              <input type="text" id="name" name="name" class="form-control form-control-line">
+              <input type="hidden" id="user_id" name="user_id" value={{Auth::user()->id}}>
             </div>
             <div class="form-group">
-                <label>Descripcion</label>
-                <textarea  id="description" name="description" id="description" class="form-control form-control-line" style="resize: none;"></textarea>
+              <label>Correo Usuario</label>
+              <input type="text" id="name" name="emailUser" class="form-control form-control-line">
+            </div>
+            <div class="form-group">
+              <label>Contraseña</label>
+              <input type="password" id="password" name="password" class="form-control form-control-line">
+            </div>
+            <div class="form-group">
+              <label>Descripcion</label>
+              <textarea  id="description" name="description" id="description" class="form-control form-control-line" style="resize: none;"></textarea>
             </div>
 
             <div class="form-group">

@@ -57,4 +57,13 @@ class HallwaysController extends Controller
   {
     return response()->json(['categoriasPasillos' => CategoriesProducts::where('hallway_id', $id)->get()]);
   }
+
+  public function getPasillo($id)
+  {
+    // if (!auth('api')->check()) {
+    //   return response()->json(['error' => 'Unauthorized'], 401);
+    // } else {
+    return  Hallways::with('categorias.productos')->find($id);
+    // }
+  }
 }

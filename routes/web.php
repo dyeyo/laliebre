@@ -14,74 +14,91 @@ Route::get('/', function () {
   }
 });
 Route::group(['middleware' => ['auth']], function () {
+
   Route::get('/home', 'HomeController@index')->name('home');
   Route::get('/logout',  'Auth\LoginController@logout')->name('logout');
+
   //PRODUCTOS
   Route::get('/productos', 'ProductsController@index')->name('products');
   Route::post('/producto/create', 'ProductsController@store')->name('product.store');
   Route::get('/producto/editar/{id}', 'ProductsController@edit')->name('product.edit');
   Route::put('/producto/{id}', 'ProductsController@update')->name('product.update');
   Route::delete('/producto/{id}', 'ProductsController@destroy')->name('product.delete');
-
   /*AJAX*/
   Route::get('productos/recetas', 'ProductsController@indexByRecipe');
 
-  //CATEGORIAS
-  Route::get('/categorias', 'CategoriesController@index')->name('categories');
-  Route::post('/categoria/create', 'CategoriesController@store')->name('category.store');
-  Route::get('/categoria/editar/{id}', 'CategoriesController@edit')->name('category.edit');
-  Route::put('/categoria/{id}', 'CategoriesController@update')->name('category.update');
-  Route::delete('/categoria/{id}', 'CategoriesController@destroy')->name('category.delete');
-
-  //TIENEDAS
-  Route::get('/tiendas', 'StoreController@index')->name('stores');
-  Route::post('/tienda/create', 'StoreController@store')->name('store.store');
   Route::get('/tienda/editar/{id}', 'StoreController@edit')->name('store.edit');
   Route::put('/tienda/{id}', 'StoreController@update')->name('store.update');
-  Route::delete('/tienda/{id}', 'StoreController@destroy')->name('store.delete');
 
-  //CATEGORIAS TIENDAS
-  Route::get('/tipoTienda', 'CategorieStoreController@index')->name('typeStore');
-  Route::post('/tipoTienda/create', 'CategorieStoreController@store')->name('typeStore.store');
-  Route::get('/tipoTienda/editar/{id}', 'CategorieStoreController@edit')->name('typeStore.edit');
-  Route::put('/tipoTienda/{id}', 'CategorieStoreController@update')->name('typeStore.update');
-  Route::delete('/tipoTienda/{id}', 'CategorieStoreController@destroy')->name('typeStore.delete');
+  Route::group(['middleware' => 'admin'], function () {
 
-  //DISTRITOS
-  Route::get('/distritos', 'DistrictsController@index')->name('distritos');
-  Route::post('/distritos/create', 'DistrictsController@store')->name('distritos.store');
-  Route::get('/distritos/editar/{id}', 'DistrictsController@edit')->name('distritos.edit');
-  Route::put('/distritos/{id}', 'DistrictsController@update')->name('distritos.update');
-  Route::delete('/distritos/{id}', 'DistrictsController@destroy')->name('distritos.delete');
+    //CATEGORIAS
+    Route::get('/categorias', 'CategoriesController@index')->name('categories');
+    Route::post('/categoria/create', 'CategoriesController@store')->name('category.store');
+    Route::get('/categoria/editar/{id}', 'CategoriesController@edit')->name('category.edit');
+    Route::put('/categoria/{id}', 'CategoriesController@update')->name('category.update');
+    Route::delete('/categoria/{id}', 'CategoriesController@destroy')->name('category.delete');
 
-  //PASILLOS
-  Route::get('/pasillos', 'HallwaysController@index')->name('pasillos');
-  Route::post('/pasillo/create', 'HallwaysController@store')->name('pasillo.store');
-  Route::get('/pasillo/editar/{id}', 'HallwaysController@edit')->name('pasillo.edit');
-  Route::put('/pasillo/{id}', 'HallwaysController@update')->name('pasillo.update');
-  Route::delete('/pasillo/{id}', 'HallwaysController@destroy')->name('pasillo.delete');
+    //TIENEDAS
+    Route::get('/tiendas', 'StoreController@index')->name('stores');
+    Route::post('/tienda/create', 'StoreController@store')->name('store.store');
+    Route::delete('/tienda/{id}', 'StoreController@destroy')->name('store.delete');
 
-  //RECETAS
-  Route::get('/recetas', 'RecitesController@index')->name('recetas');
-  Route::get('/recetas/show/{id}', 'RecitesController@show')->name('receta.show');
-  Route::post('/recetas/create', 'RecitesController@store')->name('receta.store');
-  Route::get('/recetas/editar/{id}', 'RecitesController@edit')->name('receta.edit');
-  Route::put('/recetas/{id}', 'RecitesController@update')->name('receta.update');
-  Route::delete('/recetas/{id}', 'RecitesController@destroy')->name('receta.delete');
+    //CATEGORIAS TIENDAS
+    Route::get('/tipoTienda', 'CategorieStoreController@index')->name('typeStore');
+    Route::post('/tipoTienda/create', 'CategorieStoreController@store')->name('typeStore.store');
+    Route::get('/tipoTienda/editar/{id}', 'CategorieStoreController@edit')->name('typeStore.edit');
+    Route::put('/tipoTienda/{id}', 'CategorieStoreController@update')->name('typeStore.update');
+    Route::delete('/tipoTienda/{id}', 'CategorieStoreController@destroy')->name('typeStore.delete');
 
-  Route::get('/producto/{id}', 'RecitesController@getDataProduct')->name('infoProductos');
-  Route::get('/productos/tienda/{id}', 'RecitesController@getDataProductTienda')->name('productosTienda');
+    //DISTRITOS
+    Route::get('/distritos', 'DistrictsController@index')->name('distritos');
+    Route::post('/distritos/create', 'DistrictsController@store')->name('distritos.store');
+    Route::get('/distritos/editar/{id}', 'DistrictsController@edit')->name('distritos.edit');
+    Route::put('/distritos/{id}', 'DistrictsController@update')->name('distritos.update');
+    Route::delete('/distritos/{id}', 'DistrictsController@destroy')->name('distritos.delete');
 
-  //INGREDIENTES
-  Route::delete('/recetas/ingrediente/{id}', 'RecitesController@destroyIngredients')->name('ingrediente.delete');
+    //PASILLOS
+    Route::get('/pasillos', 'HallwaysController@index')->name('pasillos');
+    Route::post('/pasillo/create', 'HallwaysController@store')->name('pasillo.store');
+    Route::get('/pasillo/editar/{id}', 'HallwaysController@edit')->name('pasillo.edit');
+    Route::put('/pasillo/{id}', 'HallwaysController@update')->name('pasillo.update');
+    Route::delete('/pasillo/{id}', 'HallwaysController@destroy')->name('pasillo.delete');
 
-  //PROVEEDORES
-  Route::get('/proveedores', 'ProvidersController@index')->name('proveedores');
-  Route::post('/proveedores/create', 'ProvidersController@store')->name('proveedor.store');
-  Route::get('/proveedores/editar/{id}', 'ProvidersController@edit')->name('proveedor.edit');
-  Route::put('/proveedores/{id}', 'ProvidersController@update')->name('proveedor.update');
-  Route::delete('/proveedores/{id}', 'ProvidersController@destroy')->name('proveedor.delete');
+    //RECETAS
+    Route::get('/recetas', 'RecitesController@index')->name('recetas');
+    Route::get('/recetas/show/{id}', 'RecitesController@show')->name('receta.show');
+    Route::post('/recetas/create', 'RecitesController@store')->name('receta.store');
+    Route::get('/recetas/editar/{id}', 'RecitesController@edit')->name('receta.edit');
+    Route::put('/recetas/{id}', 'RecitesController@update')->name('receta.update');
+    Route::delete('/recetas/{id}', 'RecitesController@destroy')->name('receta.delete');
 
-  /*AJAX*/
-  Route::get('recetas/productos/{id}', 'RecitesController@indexWithProducts');
+    Route::get('/producto/{id}', 'RecitesController@getDataProduct')->name('infoProductos');
+    Route::get('/productos/tienda/{id}', 'RecitesController@getDataProductTienda')->name('productosTienda');
+
+    //INGREDIENTES
+    Route::delete('/recetas/ingrediente/{id}', 'RecitesController@destroyIngredients')->name('ingrediente.delete');
+
+    //PROVEEDORES
+    Route::get('/proveedores', 'ProvidersController@index')->name('proveedores');
+    Route::post('/proveedores/create', 'ProvidersController@store')->name('proveedor.store');
+    Route::get('/proveedores/editar/{id}', 'ProvidersController@edit')->name('proveedor.edit');
+    Route::put('/proveedores/{id}', 'ProvidersController@update')->name('proveedor.update');
+    Route::delete('/proveedores/{id}', 'ProvidersController@destroy')->name('proveedor.delete');
+
+    //USUARIOS
+    Route::get('/usuarios', 'UsersController@index')->name('usuarios');
+    Route::post('/usuario/create', 'UsersController@store')->name('usuario.store');
+    Route::get('/usuario/editar/{id}', 'UsersController@edit')->name('usuario.edit');
+    Route::put('/usuario/{id}', 'UsersController@update')->name('usuario.update');
+    Route::delete('/usuario/{id}', 'UsersController@destroy')->name('usuario.delete');
+
+    /*AJAX*/
+    Route::get('recetas/productos/{id}', 'RecitesController@indexWithProducts');
+  });
+
+  Route::group(['middleware' => 'store'], function () {
+
+    //TIENEDAS
+  });
 });

@@ -12,29 +12,24 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
   public function index()
   {
     $products = Products_recipes::all();
-    //$categories = CategoriesProducts::all();
-    //$stores = Stores::all();
-    //$hallways = Hallways::all();
 
     return response()->json([
       'status' => 'success',
       'productos' => $products,
-      //'categories' => $categories,
-      //'stores' => $stores,
-      //"hallways" => $hallways
-
     ], 200);
-    //}
   }
 
+  public function productStore($id)
+  {
+    $products = Products_recipes::where('store_id', $id)->get();
+    return response()->json([
+      'status' => 'success',
+      'productos' => $products,
+    ], 200);
+  }
 
   public function store(Request $request)
   {
