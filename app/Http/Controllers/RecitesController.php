@@ -17,7 +17,6 @@ class RecitesController extends Controller
     $recipes = Recipes::with('productos')->get();
     $products = Products_recipes::all();
     $stores = Stores::all();
-
     return view('recites.index', compact('recipes', 'products', 'stores'));
   }
 
@@ -37,6 +36,7 @@ class RecitesController extends Controller
     $recipe->description = $request->description;
     $recipe->servings = $request->servings;
     $recipe->link = $request->link;
+    $recipe->type = $request->type;
     if ($request->hasFile('image')) {
       $file = $request->file('image');
       $name1 = $file->getClientOriginalName();
@@ -49,7 +49,7 @@ class RecitesController extends Controller
       $recetaId = Recipes::findOrFail($recipe->id);
       $recetaId->productos()->attach(
         $value,
-        ['quantity' => $request->quantity[$key]],
+        ['quantity' => $request->quantity[$key]]
       );
     }
     $recipe->save();
@@ -76,6 +76,7 @@ class RecitesController extends Controller
     $recipe->description = $request->description;
     $recipe->servings = $request->servings;
     $recipe->link = $request->link;
+    $recipe->type = $request->type;
     if ($request->hasFile('image')) {
       $file = $request->file('image');
       $name1 = $file->getClientOriginalName();
@@ -88,7 +89,7 @@ class RecitesController extends Controller
       $recetaId = Recipes::findOrFail($recipe->id);
       $recetaId->productos()->attach(
         $value,
-        ['quantity' => $request->quantity[$key]],
+        ['quantity' => $request->quantity[$key]]
       );
     }
     $recipe->save();

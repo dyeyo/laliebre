@@ -23,6 +23,11 @@ class Products_recipes extends Model
     return $this->belongsTo(Hallways::class, 'hallway_id');
   }
 
+  public function proveedores()
+  {
+    return $this->belongsTo(Providers::class, 'provider_id');
+  }
+
   public function receta()
   {
     return $this->belongsToMany(Products_recipe::class);

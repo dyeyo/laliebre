@@ -6,6 +6,7 @@ use App\CategoriesProducts;
 use App\Hallways;
 use App\Products;
 use App\Products_recipes;
+use App\Providers;
 use App\Stores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -17,8 +18,9 @@ class ProductsController extends Controller
     $products = Products_recipes::all();
     $categories = CategoriesProducts::all();
     $stores = Stores::all();
+    $proveedor = Providers::all();
     $hallways = Hallways::all();
-    return view('products.index', compact('products', 'hallways', 'categories', 'stores'));
+    return view('products.index', compact('products', 'hallways', 'categories', 'stores', 'proveedor'));
   }
 
 
@@ -38,11 +40,13 @@ class ProductsController extends Controller
 
   public function edit(Request $request, $id)
   {
-    $product = Products_recipes::with('categories', 'stores', 'hallways')->find($id);
+    $product = Products_recipes::with('categories', 'stores', 'hallways', 'proveedores')->find($id);
     $categories = CategoriesProducts::all();
     $hallways = Hallways::all();
     $stores = Stores::all();
-    return view('products.edit', compact('product', 'categories', 'stores', 'hallways'));
+    $proveedor = Providers::all();
+
+    return view('products.edit', compact('product', 'categories', 'stores', 'hallways', 'proveedor'));
   }
 
   public function update(Request $request, $id)
@@ -62,7 +66,7 @@ class ProductsController extends Controller
 
   public function destroy($id)
   {
-    Products::find($id)->delete();
+    Products_recipes::find($id)->delete();
     Session::flash('message', 'Producto eliminado con exito');
     return redirect()->route('products');
   }

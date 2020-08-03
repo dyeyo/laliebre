@@ -75,6 +75,13 @@ Route::group(['middleware' => ['auth']], function () {
   //INGREDIENTES
   Route::delete('/recetas/ingrediente/{id}', 'RecitesController@destroyIngredients')->name('ingrediente.delete');
 
+  //PROVEEDORES
+  Route::get('/proveedores', 'ProvidersController@index')->name('proveedores');
+  Route::post('/proveedores/create', 'ProvidersController@store')->name('proveedor.store');
+  Route::get('/proveedores/editar/{id}', 'ProvidersController@edit')->name('proveedor.edit');
+  Route::put('/proveedores/{id}', 'ProvidersController@update')->name('proveedor.update');
+  Route::delete('/proveedores/{id}', 'ProvidersController@destroy')->name('proveedor.delete');
+
   /*AJAX*/
   Route::get('recetas/productos/{id}', 'RecitesController@indexWithProducts');
 });

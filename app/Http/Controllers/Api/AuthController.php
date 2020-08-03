@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -15,12 +16,17 @@ class AuthController extends Controller
     //$this->middleware('auth:api', ['except' => ['login']]);
   }
 
-  public function login()
+  public function login(Request $request)
   {
+    $request->validate([
+      'email'       => 'required|string|email',
+      'password'    => 'required|string',
+      'remember_me' => 'boolean',
+    ]);
     $credentials = request(['email', 'password']);
 
     if (!$token = auth('api')->attempt($credentials)) {
-      return response()->json(['error' => 'Unauthorized'], 401);
+      return response()->json(['error' => 'Error en los datos, intentelo nuevamente'], 401);
     }
 
     return $this->respondWithToken($token);
@@ -58,6 +64,16 @@ class AuthController extends Controller
 
   public function register(Request $request)
   {
+    $validator = \Validator::make($request->all(), [
+      'name' => 'required',
+      'email' => 'required|email|unique:users',
+      'password' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(['error' => $validator->errors()], 422);
+    }
+
     $user = new User();
     $user->name = $request->name;
     $user->lastname = $request->lastname;
@@ -71,7 +87,9 @@ class AuthController extends Controller
       $file->move(public_path() . '/img/users/', $name1);
       $user->picture = $name1;
     }
+
     $user->save();
-    return response()->json(['status' => 'Usuario registrado con exito'], 200);
+    $token = JWTAuth::fromUser($user);
+    return response()->json(compact('user', 'token'), 201);
   }
 }

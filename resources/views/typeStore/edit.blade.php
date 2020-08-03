@@ -36,7 +36,7 @@
                             <input type="file" id="image" name="logo" class="form-control form-control-line">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Actualziar</button>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
                             <a href="{{ route('typeStore') }}" class="btn btn-warning">Cancelar</a>
                         </div>
                     </form>

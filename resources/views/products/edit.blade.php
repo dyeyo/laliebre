@@ -20,7 +20,7 @@
             <div class="card-body">
                 <h4 class="card-title">Editar producto {{$product->name}}</h4>
                 <div class="table-responsive">
-                    <form action="{{ route('product.update',$product->id) }}"  id="formProductosEditar" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('product.update',$product->id) }}"  id="formProductosEdit" method="post" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('put') }}
                         <div class="form-group">
@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <label>Tienda perteneciente</label>
-                            <select id="store_id" name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                            <select id="store_id" name="store_id" style="width:100%" onchange="proveedores()" class="select2 form-control form-control-line" id="">
                                 @foreach($stores as $item)
                                 <option @if($product->stores->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -47,6 +47,26 @@
                                 @endforeach
                             </select>
                         </div>
+                        @if($product->provider_id != null)
+                          <div class="form-group" id="proveedor">
+                            <label>Proveedor</label>
+                            <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                              <option value=""></option>
+                                @foreach($proveedor as $item)
+                                <option @if($product->proveedores->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                          </div>
+                        @else
+                          <div class="form-group" id="proveedor" style="display:none">
+                            <label>Proveedor</label>
+                            <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                                @foreach($proveedor as $item)
+                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                          </div>
+                        @endif
                         <div class="form-group">
                             <label>Nombre</label>
                             <input type="text" id="name" name="name" value="{{$product->name}}" class="form-control form-control-line">
@@ -64,13 +84,13 @@
                           <div class="col-md-4">
                             <div class="form-group">
                               <label>Codigo</label>
-                              <input type="text" id="code" name="code" class="form-control form-control-line">
+                              <input type="text" id="code" value="{{$product->code}}" name="code" class="form-control form-control-line">
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
                               <label>Catidad</label>
-                              <input type="text" id="quantity" name="quantity" class="form-control form-control-line">
+                              <input type="text" id="quantity" value="{{$product->quantity}}" name="quantity" class="form-control form-control-line">
                             </div>
                           </div>
                           <div class="col-md-4">
@@ -90,14 +110,14 @@
                           </div>
                         </div>
                         <div class="form-group">
-                            <img src="{{url('img/typeStore/'.$product->image)}}" class="img-responsive img-fluid" style="width: 20%;"  alt="">
+                            <img src="{{url('img/products/'.$product->image)}}" class="img-responsive img-fluid" style="width: 20%;"  alt="">
                         </div>
                         <div class="form-group">
                             <label>Imagen</label>
                             <input type="file" id="image" name="image" class="form-control form-control-line">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Actualziar</button>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
                             <a href="{{ route('products') }}" class="btn btn-warning">Cancelar</a>
                         </div>
                     </form>
@@ -106,4 +126,20 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+<script>
+  function proveedores(){
+    let store = $('#store_id').val();
+    console.log(store);
+    if(store === '1'){
+      console.log('sada');
+      $('#proveedor').show();
+    }else{
+      console.log('eqwew');
+      $('#proveedor').hide();
+      $('#proveedor').val('');
+    }
+  }
+</script>
 @endsection

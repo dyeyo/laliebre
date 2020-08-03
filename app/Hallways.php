@@ -12,4 +12,9 @@ class Hallways extends Model
   {
     return $this->hasMany(Products::class);
   }
+
+  public function categorias()
+  {
+    return $this->hasMany(CategoriesProducts::class, 'hallway_id');
+  }
 }

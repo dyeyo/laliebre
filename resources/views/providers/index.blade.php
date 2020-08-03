@@ -2,23 +2,23 @@
 @section('content')
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor"> Categorias</h4>
+        <h4 class="text-themecolor">Pasillos</h4>
     </div>
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-              <li class="breadcrumb-item active">Categorias</li>
-              <li class="breadcrumb-item" >
-                <button type="button" id="btncelular" style="display:none" class="btn btn-info " data-toggle="modal" data-target="#exampleModal">
-                  <i class="fa fa-plus-circle"></i>
-                  Agregar
-                </button>
-              </li>
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+                <li class="breadcrumb-item active">Pasillos</li>
+                <li class="breadcrumb-item" >
+                  <button type="button" id="btncelular" style="display:none" class="btn btn-info " data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-plus-circle"></i>
+                    Agregar
+                  </button>
+                </li>
             </ol>
             <button type="button" class="btn btn-info d-none d-lg-block m-l-15" data-toggle="modal" data-target="#exampleModal">
               <i class="fa fa-plus-circle"></i>
-              Agregar Categoria
+              Agregar Proveedor
             </button>
         </div>
     </div>
@@ -27,33 +27,31 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Listado de Categorias</h4>
+                <h4 class="card-title">Listado de Proveedores</h4>
                 @if(Session::has('message'))
-                <div class="alert alert-success">
-                  {!! Session::get('message') !!}
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                </div>
-              @endif
+              <div class="alert alert-success">
+                {!! Session::get('message') !!}
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              </div>
+            @endif
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
-                                <th>Descripcion</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($categories as $item)
+                            @foreach($providers as $item)
                             <tr>
                                 <td>{{ $item->id}}</td>
                                 <td>{{ $item->name}}</td>
-                                <td>{{ $item->description}}</td>
-                                <td><a href="{{route('category.edit',$item->id)}}">Editar</a> </td>
+                                <td><a href="{{ route('proveedor.edit',$item->id)}}">Editar</a> </td>
                                 <td>
-                                    <form class="user"  action="{{route('category.delete', $item->id)}}" method="post">
+                                    <form class="user"  action="{{route('proveedor.delete', $item->id)}}" method="post">
                                         {{ method_field('delete') }}
                                         {{csrf_field()}}
                                         <button class="btn btn-btn-outline-light"  onclick="return confirm('¿Esta seguro de eliminar este registro?')"  type="submit">ELIMINAR</button>
@@ -73,35 +71,22 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar Categoria</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Proveedor</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('category.store') }}" method="post" id="formCategorias">
+          <form action="{{ route('proveedor.store') }}" id="formPasillos" method="post">
             @csrf
             <div class="form-group">
-              <label>Nombre</label>
-              <input type="text" name="name" id="name" class="form-control form-control-line">
-            </div>
-            <div class="form-group">
-              <label>Descripcion</label>
-              <textarea name="description" id="description" style="resize:none" class="form-control form-control-line"></textarea>
-            </div>
-            <div class="form-group">
-              <label>Pasillo perteneciente</label>
-              <select  name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
-                <option value=""></option>
-                  @foreach($hallways as $item)
-                  <option value="{{$item->id}}">{{$item->name}}</option>
-                  @endforeach
-              </select>
+                <label>Nombre</label>
+                <input type="text" name="name" id="name" class="form-control form-control-line">
             </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-primary">Guardar Categorias</button>
+          <button type="submit" class="btn btn-primary">Guardar Proveedor</button>
         </form>
 
         </div>

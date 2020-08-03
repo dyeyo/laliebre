@@ -252,7 +252,9 @@ if ($("#formRecetas").length > 0) {
       image: {
         required: true
       },
-
+      type: {
+        required: true
+      }
     },
     messages: {
       code: {
@@ -281,6 +283,9 @@ if ($("#formRecetas").length > 0) {
         url: 'Este campo debe ser una url valida'
       },
       image: {
+        required: "Este campo es obligatorio"
+      },
+      type: {
         required: "Este campo es obligatorio"
       },
     }
@@ -314,6 +319,9 @@ if ($("#formRecetasEditar").length > 0) {
         required: true,
         url: true
       },
+      type: {
+        required: true,
+      }
     },
     messages: {
       code: {
@@ -323,6 +331,9 @@ if ($("#formRecetasEditar").length > 0) {
         required: "Este campo es obligatorio"
       },
       quantity: {
+        required: "Este campo es obligatorio"
+      },
+      type: {
         required: "Este campo es obligatorio"
       },
       store_id: {

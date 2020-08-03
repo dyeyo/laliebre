@@ -88,6 +88,7 @@
             <div class="form-group">
                 <label>Categoria perteneciente</label>
                 <select id="" name="categorie_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                  <option value=""></option>
                     @foreach($categories as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
@@ -95,16 +96,27 @@
             </div>
             <div class="form-group">
               <label>Tienda perteneciente</label>
-              <select id="" name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+              <select  name="store_id" style="width:100%" class="select2 form-control form-control-line" onchange="proveedores()" id="store_id">
+                <option value=""></option>
                   @foreach($stores as $item)
-                  <option value="{{$item->id}}">{{$item->name}}</option>
+                    <option value="{{$item->id}}">{{$item->name}}</option>
                   @endforeach
               </select>
             </div>
             <div class="form-group">
               <label>Pasillo perteneciente</label>
-              <select id="" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
+              <select  name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                <option value=""></option>
                   @foreach($hallways as $item)
+                  <option value="{{$item->id}}">{{$item->name}}</option>
+                  @endforeach
+              </select>
+            </div>
+            <div class="form-group" id="proveedor" style="display: none;">
+              <label>Proveedor</label>
+              <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                <option value=""></option>
+                  @foreach($proveedor as $item)
                   <option value="{{$item->id}}">{{$item->name}}</option>
                   @endforeach
               </select>
@@ -159,4 +171,20 @@
       </div>
     </div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+  <script>
+    function proveedores(){
+      let store = $('#store_id').val();
+      console.log(store);
+      if(store === '1'){
+        console.log('sada');
+        $('#proveedor').show();
+      }else{
+        console.log('eqwew');
+        $('#proveedor').hide();
+        $('#proveedor').val('');
+      }
+    }
+  </script>
 @endsection

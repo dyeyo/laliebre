@@ -64,12 +64,22 @@ Route::post('/distrito/create', 'Api\DistrictsController@store')->name('distrito
 Route::put('/distrito/{id}', 'Api\DistrictsController@update')->name('distritos.update');
 Route::delete('/distrito/{id}', 'Api\DistrictsController@destroy')->name('distritos.delete');
 //listo
+
 //PASILLOS
 Route::get('/pasillos', 'Api\HallwaysController@index')->name('pasillos');
 Route::post('/pasillo/create', 'Api\HallwaysController@store')->name('pasillo.store');
 Route::put('/pasillo/{id}', 'Api\HallwaysController@update')->name('pasillo.update');
 Route::delete('/pasillo/{id}', 'Api\HallwaysController@destroy')->name('pasillo.delete');
-Route::get('/pasillos/productos/{id}', 'Api\HallwaysController@pasillosProductos')->name('pasillos.productos');
+Route::get('/pasillos/categorias/{id}', 'Api\HallwaysController@pasillosCategoria')->name('pasillos.productos');
 
 
-//listo
+//RECETAS
+Route::get('/recetas', 'Api\RecipesController@index')->name('recetas');
+Route::get('/receta/{id}', 'Api\RecipesController@show')->name('receta');
+Route::get('/receta/filtro/{type}', 'Api\RecipesController@getType');
+
+//PROVEEDORES
+Route::get('/proveedores', 'Api\ProvidersController@index');
+Route::post('/proveedor/create', 'Api\ProvidersController@store');
+Route::put('/proveedor/{id}', 'Api\ProvidersController@update');
+Route::delete('/proveedor/{id}', 'Api\ProvidersController@destroy');

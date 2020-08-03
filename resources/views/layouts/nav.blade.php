@@ -66,6 +66,9 @@
               <a class="waves-effect waves-dark" href="{{route('categories')}}"><i class="fas fa-boxes"></i><span class="hide-menu">Gestion de Categorias</span></a>
           </li>
           <li>
+              <a class="waves-effect waves-dark" href="{{route('proveedores')}}"><i class="fas fa-users"></i><span class="hide-menu">Gestion de Proveedores</span></a>
+          </li>
+          <li>
           <a class="waves-effect waves-dark" href="{{route('products')}}"><i class="fas fa-shopping-basket"></i><span class="hide-menu">Gestion de Productos</span></a>
           </li>
           <li>

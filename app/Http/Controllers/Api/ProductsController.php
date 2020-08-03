@@ -20,16 +20,16 @@ class ProductsController extends Controller
   public function index()
   {
     $products = Products_recipes::all();
-    $categories = CategoriesProducts::all();
-    $stores = Stores::all();
-    $hallways = Hallways::all();
+    //$categories = CategoriesProducts::all();
+    //$stores = Stores::all();
+    //$hallways = Hallways::all();
 
     return response()->json([
       'status' => 'success',
       'productos' => $products,
-      'categories' => $categories,
-      'stores' => $stores,
-      "hallways" => $hallways
+      //'categories' => $categories,
+      //'stores' => $stores,
+      //"hallways" => $hallways
 
     ], 200);
     //}

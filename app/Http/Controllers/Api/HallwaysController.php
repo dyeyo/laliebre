@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\CategoriesProducts;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Hallways;
@@ -14,7 +15,7 @@ class HallwaysController extends Controller
     // if (!auth('api')->check()) {
     //   return response()->json(['error' => 'Unauthorized'], 401);
     // } else {
-    return   $hallways = Hallways::all();
+    return  Hallways::with('categorias.productos')->get();
     // }
   }
 
@@ -52,8 +53,8 @@ class HallwaysController extends Controller
     }
   }
 
-  public function pasillosProductos($id)
+  public function pasillosCategoria($id)
   {
-    return response()->json(['productosPasillos' => Products_recipes::where('hallway_id', $id)->get()]);
+    return response()->json(['categoriasPasillos' => CategoriesProducts::where('hallway_id', $id)->get()]);
   }
 }

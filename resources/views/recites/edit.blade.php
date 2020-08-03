@@ -59,8 +59,26 @@
             <input type="text" value="{{$receta->code}}" id="code" name="code" class="form-control form-control-line">
           </div>
           <div class="form-group">
-              <label>Nombre</label>
-              <input type="text" value="{{$receta->name}}" id="name" name="name" class="form-control form-control-line">
+            <label>Nombre</label>
+            <input type="text" value="{{$receta->name}}" id="name" name="name" class="form-control form-control-line">
+          </div>
+          <div class="form-group">
+            <label>Tipo de receta</label>
+            <select id="type" name="type" style="width:100%" class="select2 form-control form-control-line">
+              @if($receta->type === 1)
+                <option value="1">Desayuno</option>
+                <option value="2">Almuerzo</option>
+                <option value="3">Antojo</option>
+              @elseif($receta->type === 2)
+                <option value="2">Almuerzo</option>
+                <option value="1">Desayuno</option>
+                <option value="3">Antojo</option>
+              @else
+                <option value="3">Antojo</option>
+                <option value="2">Almuerzo</option>
+                <option value="1">Desayuno</option>
+              @endif
+            </select>
           </div>
           <div id="product-row">
             <div class="form-row">
@@ -97,7 +115,7 @@
             <input id="image" type="file" class="form-control-file" name="image">
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Actualziar Receta</button>
+            <button type="submit" class="btn btn-primary">Actualizar Receta</button>
               <a href="{{ route('recetas') }}" class="btn btn-warning">Cancelar</a>
           </div>
         </form>
