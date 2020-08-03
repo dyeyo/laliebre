@@ -104,7 +104,8 @@
                   @endforeach
               </select>
             </div>
-            <div class="form-group" id="proveedor" style="display: none;">
+            @if($onlyID == 2)
+            <div class="form-group" id="proveedor">
               <label>Proveedor</label>
               <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">
                 <option value=""></option>
@@ -113,6 +114,7 @@
                   @endforeach
               </select>
             </div>
+            @endif
             <div class="form-group">
                 <label>Nombre</label>
                 <input type="text" id="" name="name" class="form-control form-control-line">
@@ -163,20 +165,4 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-
-  <script>
-    function proveedores(){
-      let store = $('#store_id').val();
-      console.log(store);
-      if(store === '1'){
-        console.log('sada');
-        $('#proveedor').show();
-      }else{
-        console.log('eqwew');
-        $('#proveedor').hide();
-        $('#proveedor').val('');
-      }
-    }
-  </script>
 @endsection

@@ -31,14 +31,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Tienda perteneciente</label>
-                            <select id="store_id" name="store_id" style="width:100%" onchange="proveedores()" class="select2 form-control form-control-line" id="">
-                                @foreach($stores as $item)
-                                <option @if($product->stores->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <input type="hidden" name="store_id" value="{{$product->stores->id}}">
                         <div class="form-group">
                             <label>Pasillo perteneciente</label>
                             <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
@@ -126,20 +119,4 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-
-<script>
-  function proveedores(){
-    let store = $('#store_id').val();
-    console.log(store);
-    if(store === '1'){
-      console.log('sada');
-      $('#proveedor').show();
-    }else{
-      console.log('eqwew');
-      $('#proveedor').hide();
-      $('#proveedor').val('');
-    }
-  }
-</script>
 @endsection

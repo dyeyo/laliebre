@@ -17,7 +17,7 @@ class Products_recipes extends Model
   {
     return $this->belongsTo(Stores::class, 'store_id');
   }
-
+ 
   public function hallways()
   {
     return $this->belongsTo(Hallways::class, 'hallway_id');

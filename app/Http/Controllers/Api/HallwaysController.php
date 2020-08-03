@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Hallways;
 use App\Products_recipes;
-
+use Illuminate\Support\Arr;
 class HallwaysController extends Controller
 {
   public function index()
@@ -60,10 +60,9 @@ class HallwaysController extends Controller
 
   public function getPasillo($id)
   {
-    // if (!auth('api')->check()) {
-    //   return response()->json(['error' => 'Unauthorized'], 401);
-    // } else {
-    return  Hallways::with('categorias.productos')->find($id);
-    // }
+    $dataPasillo = Hallways::with('categorias.productos')->find($id);
+    $countProductos = Products_recipes::where('hallway_id',$id)->count();
+    $data = Arr::add($dataPasillo,'totalProdutos',$countProductos);
+    return response()->json(['data'=>$data], 200);
   }
 }
