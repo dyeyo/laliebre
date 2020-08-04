@@ -2,13 +2,13 @@
 
 @section('login')
 
-<section id="wrapper" class="login-register login-sidebar" style="background-image:url({{asset('images/login.jpg')}});">
+<section id="wrapper" class="login-register login-sidebar" style="background-image:url({{asset('images/logisn.jpg')}});">
   <div class="login-box card">
       <div class="card-body">
         <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('login') }}">
           @csrf
               <a href="/" class="text-center db">
-                <img src="{{asset('images/logso.png')}}" width="50%" alt="La Liebre" />
+                <img src="{{asset('images/logo.png')}}" width="50%" alt="La Liebre" />
               </a>
               <div class="form-group m-t-40">
                   <div class="col-xs-12">
