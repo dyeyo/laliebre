@@ -10,6 +10,6 @@ class CategoriesStore extends Model
 
   public function store()
   {
-    return $this->hasMany(Stores::class);
+    return $this->hasMany(Stores::class,'store_id');
   }
 }

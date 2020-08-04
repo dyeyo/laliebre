@@ -16,7 +16,7 @@ class CategorieStoreController extends Controller
 
   public function asociatisStores($id)
   {
-    $typeStores = Stores::where('store_id',$id)->get();
+    $typeStores = CategoriesStore::with('store')->find($id);
     return response()->json(['tiendas' => $typeStores], 200);
   }
 
