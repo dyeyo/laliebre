@@ -5,16 +5,19 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\CategoriesStore;
+use App\Stores;
 
 class CategorieStoreController extends Controller
 {
   public function index()
   {
-    // if (!auth('api')->check()) {
-    //   return response()->json(['error' => 'Unauthorized'], 401);
-    // } else {
     return $typeStores = CategoriesStore::all();
-    //}
+  }
+
+  public function asociatisStores($id)
+  {
+    $typeStores = Stores::where('store_id',$id)->get();
+    return response()->json(['tiendas' => $typeStores], 200);
   }
 
   public function store(Request $request)
@@ -34,8 +37,6 @@ class CategorieStoreController extends Controller
       return response()->json(['status' => 'Categoria store creada con exito'], 200);
     }
   }
-
-
 
   public function update(Request $request, $id)
   {

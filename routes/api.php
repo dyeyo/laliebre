@@ -26,7 +26,7 @@ Route::delete('/categoria/{id}', 'Api\CategoriesController@destroy');
 //TIENEDAS
 Route::get('/tiendas', 'Api\StoreController@index');
 Route::post('/tienda/create', 'Api\StoreController@store');
-Route::get('/tienda/editar/{id}', 'Api\StoreController@edit');
+Route::get('/tienda/detalle/{id}', 'Api\StoreController@show');
 Route::put('/tienda/{id}', 'Api\StoreController@update');
 Route::delete('/tienda/{id}', 'Api\StoreController@destroy');
 Route::get('/tienda/productos/{id}', 'Api\StoreController@tiendaProductos');
@@ -44,6 +44,7 @@ Route::delete('/producto/{id}', 'Api\ProductsController@destroy');
 
 //CATEGORIAS TIENDAS
 Route::get('/tipoTienda', 'Api\CategorieStoreController@index')->name('typeStore');
+Route::get('/tipoTienda/tienda/{id}', 'Api\CategorieStoreController@asociatisStores');
 Route::post('/tipoTienda/create', 'Api\CategorieStoreController@store')->name('typeStore.store');
 Route::put('/tipoTienda/{id}', 'Api\CategorieStoreController@update')->name('typeStore.update');
 Route::delete('/tipoTienda/{id}', 'Api\CategorieStoreController@destroy')->name('typeStore.delete');

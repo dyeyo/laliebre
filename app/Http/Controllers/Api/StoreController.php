@@ -11,13 +11,18 @@ class StoreController extends Controller
 {
   public function index()
   {
-    // if (!auth('api')->check()) {
-    //   return response()->json(['error' => 'Unauthorized'], 401);
-    // } else {
     $stores = Stores::all();
     return  $stores;
-    //}
   }
+
+  public function show($id)
+  {
+    $store = Stores::find($id);
+    return response()->json([
+      'tienda' => $store,
+    ], 200);
+  }
+
   public function store(Request $request)
   {
 
