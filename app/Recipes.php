@@ -17,4 +17,9 @@ class Recipes extends Model
   {
     return $this->belongsToMany(Products_recipe::class);
   }
+
+  public function shipingCart()
+  {
+    return $this->hasMany(ShoppingCarts::class);
+  }
 }

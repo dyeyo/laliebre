@@ -76,3 +76,8 @@ Route::get('/proveedores', 'Api\ProvidersController@index');
 Route::post('/proveedor/create', 'Api\ProvidersController@store');
 Route::put('/proveedor/{id}', 'Api\ProvidersController@update');
 Route::delete('/proveedor/{id}', 'Api\ProvidersController@destroy');
+
+//CARITO DE COMPRAS
+Route::get('/mi_carrito/{id}', 'Api\ShopingCartController@getShopingCart');
+Route::post('/carrito_compras/add', 'Api\ShopingCartController@addRecipe');
+Route::delete('/quitar/carrito_compras/{id}', 'Api\ShopingCartController@removeShopingCart');

@@ -30,6 +30,10 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/tienda/editar/{id}', 'StoreController@edit')->name('store.edit');
   Route::put('/tienda/{id}', 'StoreController@update')->name('store.update');
 
+  //TODO: ESTA RUTA ES DEL CARRITO DE COMPRAS
+  Route::get('/carrito_compras', 'ShopingCartController@index')->name('stshopping_cartsore');
+  Route::put('/carrito_compras/{id}', 'ShopingCartController@changeState')->name('shopping_carts.update');
+
   Route::group(['middleware' => 'admin'], function () {
 
     //CATEGORIAS
@@ -98,7 +102,6 @@ Route::group(['middleware' => ['auth']], function () {
   });
 
   Route::group(['middleware' => 'store'], function () {
-
     //TIENEDAS
   });
 });
