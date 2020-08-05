@@ -76,6 +76,10 @@ if ($("#formProductos").length > 0) {
       },
       image: {
         required: true,
+      },
+      quantity: {
+        required: true,
+        digits: true
       }
     },
     messages: {
@@ -85,7 +89,7 @@ if ($("#formProductos").length > 0) {
       store_id: {
         required: "Este campo es obligatorio"
       },
-      store_id: {
+      hallway_id: {
         required: "Este campo es obligatorio"
       },
       name: {
@@ -103,6 +107,10 @@ if ($("#formProductos").length > 0) {
       },
       image: {
         required: "Este campo es obligatorio",
+      },
+      quantity: {
+        required: "Este campo es obligatorio",
+        digits: "Este campo solo recibe numero"
       }
     }
   });
@@ -131,6 +139,10 @@ if ($("#formProductosEdit").length > 0) {
       },
       price: {
         required: true,
+      },
+      quantity: {
+        required: true,
+        digits: true
       }
     },
     messages: {
@@ -150,6 +162,10 @@ if ($("#formProductosEdit").length > 0) {
         required: "Este campo es obligatorio"
       },
       code: {
+        required: "Este campo es obligatorio",
+        digits: "Este campo solo recibe numero"
+      },
+      quantity: {
         required: "Este campo es obligatorio",
         digits: "Este campo solo recibe numero"
       },

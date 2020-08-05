@@ -97,7 +97,7 @@
             <input type="hidden" name="store_id"  value="{{$onlyID}}" id="">
             <div class="form-group">
               <label>Pasillo perteneciente</label>
-              <select  name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
+              <select  name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="hallway_id">
                 <option value=""></option>
                   @foreach($hallways as $item)
                   <option value="{{$item->id}}">{{$item->name}}</option>

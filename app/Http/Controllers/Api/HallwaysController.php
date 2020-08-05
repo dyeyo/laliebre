@@ -12,11 +12,7 @@ class HallwaysController extends Controller
 {
   public function index()
   {
-    // if (!auth('api')->check()) {
-    //   return response()->json(['error' => 'Unauthorized'], 401);
-    // } else {
     return  Hallways::with('categorias.productos')->get();
-    // }
   }
 
 
