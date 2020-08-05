@@ -29,7 +29,13 @@ class AuthController extends Controller
       return response()->json(['error' => 'Error en los datos, intentelo nuevamente'], 401);
     }
 
-    return $this->respondWithToken($token);
+    $user = User::select('name', 'lastname', 'phone', 'email', 'picture')
+      ->where('email', $request->email)
+      ->first();
+    return response()->json([
+      $this->respondWithToken($token),
+      'usuario' => $user
+    ]);
   }
 
   public function me()

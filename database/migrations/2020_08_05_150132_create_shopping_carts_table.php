@@ -11,10 +11,13 @@ class CreateShoppingCartsTable extends Migration
     Schema::create('shopping_carts', function (Blueprint $table) {
       $table->id();
 
-      $table->integer('state')->nullable();
+      $table->integer('state')->nullable()->default(1);
+
       $table->bigInteger('recipes_id')->unsigned()->nullable();
+      $table->bigInteger('user_id')->unsigned()->nullable();
 
       $table->foreign('recipes_id')->references('id')->on('recipes');
+      $table->foreign('user_id')->references('id')->on('users');
 
       $table->timestamps();
     });

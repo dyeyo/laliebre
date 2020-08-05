@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\ShoppingCart;
+use Illuminate\Support\Facades\Auth;
 
 class ShopingCartController extends Controller
 {
   public function getShopingCart($id)
   {
-    $shopingCart = ShopingCart::with('recetas.productos.stores')->findOrFail($id);
+    $shopingCart = ShoppingCart::with('recetas.productos')
+      ->where('user_id', Auth::user()->id)
+      ->findOrFail($id);
     return response()->json([
       'carrito' => $shopingCart,
     ], 200);
@@ -17,9 +21,9 @@ class ShopingCartController extends Controller
 
   public function addRecipe(Request $request)
   {
-    $cart = new ShopingCart;
+    $cart = new ShoppingCart();
     $cart->recipes_id = $request->recipes_id;
-    $cart->state = 1;
+    $cart->user_id = Auth::user()->id;
     $cart->save();
     return response()->json([
       'status' => 'Pedido agregada con exito',
@@ -28,7 +32,7 @@ class ShopingCartController extends Controller
 
   public function removeShopingCart($id)
   {
-    $shopingCart = ShopingCart::findOrFail($id);
+    $shopingCart = ShoppingCart::findOrFail($id);
     $shopingCart->delete();
     return response()->json([
       'msg' => 'Item eliminado del carrito',
