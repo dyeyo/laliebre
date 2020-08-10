@@ -51,7 +51,7 @@ class ProductsController extends Controller
 
   public function show($id)
   {
-    return response()->json(['producto' => Products_recipes::with('stores', 'hallways')->find($id)]);
+    return response()->json(Products_recipes::find($id));
   }
 
   public function update(Request $request, $id)

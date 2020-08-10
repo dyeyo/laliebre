@@ -30,9 +30,19 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/tienda/editar/{id}', 'StoreController@edit')->name('store.edit');
   Route::put('/tienda/{id}', 'StoreController@update')->name('store.update');
 
-  //TODO: ESTA RUTA ES DEL CARRITO DE COMPRAS
-  Route::get('/carrito_compras', 'ShopingCartController@index')->name('stshopping_cartsore');
+  //ESTA RUTA ES DEL CARRITO DE COMPRAS PARA RECETAS
+  Route::get('/pedidos_recetas', 'ShopingCartController@index')->name('shopping_cart');
+  Route::get('/pedido/{id}', 'ShopingCartController@show')->name('shopping_cart.show');
   Route::put('/carrito_compras/{id}', 'ShopingCartController@changeState')->name('shopping_carts.update');
+
+  //ESTA RUTA ES DEL CARRITO DE COMPRAS PARA PRODUCTOS
+  Route::get('/pedidos_productos', 'ShopingCartProductosController@index')->name('shopping_cart_prod');
+  Route::get('/pedido/{id}', 'ShopingCartProductosController@show')->name('shopping_cart_prod.show');
+  Route::put('/carrito_compras_producto/{id}', 'ShopingCartProductosController@changeState')->name('shopping_cart_prod.update');
+  Route::put('/carrito_compras_producto/admin/{id}', 'ShopingCartProductosController@changeStateAdmin')->name('shopping_cart_prod_admin.update');
+
+  Route::get('/mis_pedidos_productos', 'ShopingCartProductosController@pedidosStore')->name('mi_shopping_cart_prod');
+
 
   Route::group(['middleware' => 'admin'], function () {
 

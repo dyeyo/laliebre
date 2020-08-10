@@ -11,8 +11,7 @@ class StoreController extends Controller
 {
   public function index()
   {
-    $stores = Stores::all();
-    return  $stores;
+    return Stores::all();
   }
 
   public function show($id)

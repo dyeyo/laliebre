@@ -53,12 +53,13 @@
     <script src="{{ asset ('dist/js/perfect-scrollbar.jquery.min.js') }}"></script>
     <script src="{{ asset('dist/js/waves.js') }}"></script>
     <script src="{{ asset('dist/js/sidebarmenu.js') }}"></script>
-    <script src="{{ asset('dist/js/custom.min.js') }}"></script>
     <script src="{{ asset('node_modules/popper/popper.min.js') }}"></script>
     <script src="{{ asset('node_modules/flot/jquery.flot.js') }}"></script>
     <script src="{{ asset('node_modules/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
     <script src="{{ asset('node_modules/sparkline/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('node_modules/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('node_modules/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
@@ -66,7 +67,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script src="{{ asset('js/validacion.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-
+    <script src="{{ asset('dist/js/custom.min.js') }}"></script>
+    <script>
+      // This is for the sticky sidebar
+      $(".stickyside").stick_in_parent({
+          offset_top: 100
+      });
+      $('.stickyside a').click(function() {
+          $('html, body').animate({
+              scrollTop: $($(this).attr('href')).offset().top - 100
+          }, 500);
+          return false;
+      });
+      var lastId,
+      topMenu = $(".stickyside"),
+      topMenuHeight = topMenu.outerHeight(),
+      // All list items
+      menuItems = topMenu.find("a"),
+      // Anchors corresponding to menu items
+      scrollItems = menuItems.map(function() {
+          var item = $($(this).attr("href"));
+          if (item.length) {
+              return item;
+          }
+      });
+    </script>
     <script type="text/javascript">
     $(document).ready(function() {
       $('.select2').select2({
@@ -109,6 +134,7 @@
         }, 3000);
       }
     });
+
   </script>
 
 

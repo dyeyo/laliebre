@@ -270,6 +270,9 @@ if ($("#formRecetas").length > 0) {
       },
       type: {
         required: true
+      },
+      price: {
+        required: true
       }
     },
     messages: {
@@ -292,6 +295,9 @@ if ($("#formRecetas").length > 0) {
         required: "Este campo es obligatorio"
       },
       description: {
+        required: "Este campo es obligatorio"
+      },
+      price: {
         required: "Este campo es obligatorio"
       },
       link: {
@@ -331,6 +337,9 @@ if ($("#formRecetasEditar").length > 0) {
       description: {
         required: true
       },
+      price: {
+        required: true
+      },
       link: {
         required: true,
         url: true
@@ -350,6 +359,9 @@ if ($("#formRecetasEditar").length > 0) {
         required: "Este campo es obligatorio"
       },
       type: {
+        required: "Este campo es obligatorio"
+      },
+      price: {
         required: "Este campo es obligatorio"
       },
       store_id: {

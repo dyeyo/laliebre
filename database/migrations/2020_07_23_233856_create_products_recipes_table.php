@@ -19,8 +19,8 @@ class CreateProductsRecipesTable extends Migration
       $table->string('name');
       $table->string('description');
       $table->string('image');
-      $table->integer('price');
-      $table->string('quantity');
+      $table->double('price');
+      $table->integer('quantity');
       $table->string('um');
 
       $table->bigInteger('store_id')->unsigned();

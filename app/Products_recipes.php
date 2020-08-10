@@ -17,7 +17,7 @@ class Products_recipes extends Model
   {
     return $this->belongsTo(Stores::class, 'store_id');
   }
- 
+
   public function hallways()
   {
     return $this->belongsTo(Hallways::class, 'hallway_id');
@@ -31,5 +31,10 @@ class Products_recipes extends Model
   public function receta()
   {
     return $this->belongsToMany(Products_recipe::class);
+  }
+
+  public function carrito_compras()
+  {
+    return $this->hasMany(ShoppingCardProducts::class);
   }
 }

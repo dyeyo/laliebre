@@ -12,4 +12,9 @@ class ShoppingCart extends Model
   {
     return $this->belongsTo(Recipes::class, 'recipes_id');
   }
+
+  public function user()
+  {
+    return $this->belongsTo(User::class, 'user_id');
+  }
 }

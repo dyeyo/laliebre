@@ -23,6 +23,7 @@ class CreateRecipesTable extends Migration
       $table->string('type')->nullable();
       $table->string('image')->nullable();
       $table->integer('servings')->default(1);
+      $table->double('price');
       $table->bigInteger('storeId')->unsigned();
 
       $table->foreign('storeId')->references('id')->on('stores');

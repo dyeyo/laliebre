@@ -20,7 +20,6 @@ Route::get('/categorias/productos/{id}', 'Api\CategoriesController@categoriaProd
 Route::post('/categoria/create', 'Api\CategoriesController@store');
 Route::put('/categoria/{id}', 'Api\CategoriesController@update');
 Route::delete('/categoria/{id}', 'Api\CategoriesController@destroy');
-//listo
 
 //TIENEDAS
 Route::get('/tiendas', 'Api\StoreController@index');
@@ -30,8 +29,6 @@ Route::put('/tienda/{id}', 'Api\StoreController@update');
 Route::delete('/tienda/{id}', 'Api\StoreController@destroy');
 Route::get('/tienda/productos/{id}', 'Api\StoreController@tiendaProductos');
 
-//listo
-
 //PRODUCTOS
 Route::get('/productos', 'Api\ProductsController@index');
 Route::get('/producto/tienda/{id}', 'Api\ProductsController@productStore');
@@ -39,7 +36,6 @@ Route::post('/producto/create', 'Api\ProductsController@store');
 Route::get('/producto/show/{id}', 'Api\ProductsController@show');
 Route::put('/producto/{id}', 'Api\ProductsController@update');
 Route::delete('/producto/{id}', 'Api\ProductsController@destroy');
-//listo
 
 //CATEGORIAS TIENDAS
 Route::get('/tipoTienda', 'Api\CategorieStoreController@index')->name('typeStore');
@@ -47,14 +43,12 @@ Route::get('/tipoTienda/tienda/{id}', 'Api\CategorieStoreController@asociatisSto
 Route::post('/tipoTienda/create', 'Api\CategorieStoreController@store')->name('typeStore.store');
 Route::put('/tipoTienda/{id}', 'Api\CategorieStoreController@update')->name('typeStore.update');
 Route::delete('/tipoTienda/{id}', 'Api\CategorieStoreController@destroy')->name('typeStore.delete');
-//listo
 
 //DISTRITOS
 Route::get('/distritos', 'Api\DistrictsController@index')->name('distritos');
 Route::post('/distrito/create', 'Api\DistrictsController@store')->name('distritos.store');
 Route::put('/distrito/{id}', 'Api\DistrictsController@update')->name('distritos.update');
 Route::delete('/distrito/{id}', 'Api\DistrictsController@destroy')->name('distritos.delete');
-//listo
 
 //PASILLOS
 Route::get('/pasillos', 'Api\HallwaysController@index')->name('pasillos');
@@ -63,7 +57,6 @@ Route::post('/pasillo/create', 'Api\HallwaysController@store')->name('pasillo.st
 Route::put('/pasillo/{id}', 'Api\HallwaysController@update')->name('pasillo.update');
 Route::delete('/pasillo/{id}', 'Api\HallwaysController@destroy')->name('pasillo.delete');
 Route::get('/pasillos/categorias/{id}', 'Api\HallwaysController@pasillosCategoria')->name('pasillos.productos');
-
 
 //RECETAS
 Route::get('/recetas', 'Api\RecipesController@index')->name('recetas');
@@ -78,5 +71,14 @@ Route::delete('/proveedor/{id}', 'Api\ProvidersController@destroy');
 
 //CARITO DE COMPRAS
 Route::get('/mi_carrito/{id}', 'Api\ShopingCartController@getShopingCart');
+Route::get('/mi_carrito/historial', 'Api\ShopingCartController@shoppingCartConfirmed');
+Route::put('/mi_carrito/confirmar/{id}', 'Api\ShopingCartController@confirmCartRecipe');
 Route::post('/carrito_compras/add', 'Api\ShopingCartController@addRecipe');
-Route::delete('/quitar/carrito_compras/{id}', 'Api\ShopingCartController@removeShopingCart');
+Route::delete('/quitar_receta_carrito/{id}', 'Api\ShopingCartController@removeShopingCart');
+
+//CARRITO DE COMPRAS PATA PRODUCTOS
+Route::get('/mi_carrito_productos/{id}', 'Api\ShopingCartController@shoppingCartProd');
+Route::get('/mi_carrito_productos/historial', 'Api\ShopingCartController@shoppingCartProdConfirmed');
+Route::put('/mi_carrito_productos/confirmar/{id}', 'Api\ShopingCartController@confirmCartProd');
+Route::post('/pedido_productos/add', 'Api\ShopingCartController@addShoppingCartProd');
+Route::delete('/quitar_producto_carrito/{id}', 'Api\ShopingCartController@removeShopingCartProd');

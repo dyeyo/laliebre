@@ -53,7 +53,7 @@
                                 <td>{{ $item->name}}</td>
                                 <td>{{ $item->description}}</td>
                                 <td  style="width: 20%" >
-                                    <img src="{{url('img/products/'.$item->image)}}" class="img-responsive img-fluid" style="width: 76%;"  alt="">
+                                  <img src="{{url('img/products/'.$item->image)}}" class="img-responsive img-fluid" style="width: 76%;"  alt="">
                                 </td>
                                 <td><a href="{{ route('product.edit',$item->id) }}">Editar</a> </td>
                                 <td>

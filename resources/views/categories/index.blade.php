@@ -29,11 +29,11 @@
             <div class="card-body">
                 <h4 class="card-title">Listado de Categorias</h4>
                 @if(Session::has('message'))
-                <div class="alert alert-success">
-                  {!! Session::get('message') !!}
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                </div>
-              @endif
+                  <div class="alert alert-success">
+                    {!! Session::get('message') !!}
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  </div>
+                @endif
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -94,7 +94,7 @@
               <select  name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
                 <option value=""></option>
                   @foreach($hallways as $item)
-                  <option value="{{$item->id}}">{{$item->name}}</option>
+                    <option value="{{$item->id}}">{{$item->name}}</option>
                   @endforeach
               </select>
             </div>

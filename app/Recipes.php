@@ -18,8 +18,8 @@ class Recipes extends Model
     return $this->belongsToMany(Products_recipe::class);
   }
 
-  public function shipingCart()
+  public function shoppingCart()
   {
-    return $this->hasMany(ShoppingCarts::class);
+    return $this->hasMany(ShoppingCart::class);
   }
 }

@@ -43,6 +43,7 @@ class StoreController extends Controller
 
     $user = new User();
     $user->email = $request->emailUser;
+    $user->name = $store->name;
     $user->password = Hash::make($request->password);
     $user->role_id = 2;
     $user->save();
@@ -50,7 +51,7 @@ class StoreController extends Controller
     $store->user_id = $user->id;
     $store->save();
 
-//    dd($user->id);
+    //    dd($user->id);
 
     Session::flash('message', 'Tienda y usuario creado con exito');
     return redirect()->route('stores');

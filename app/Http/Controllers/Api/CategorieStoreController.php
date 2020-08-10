@@ -11,7 +11,7 @@ class CategorieStoreController extends Controller
 {
   public function index()
   {
-    return $typeStores = CategoriesStore::all();
+    return  CategoriesStore::all();
   }
 
   public function asociatisStores($id)

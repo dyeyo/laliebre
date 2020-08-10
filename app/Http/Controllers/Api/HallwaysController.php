@@ -8,13 +8,15 @@ use Illuminate\Http\Request;
 use App\Hallways;
 use App\Products_recipes;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+
 class HallwaysController extends Controller
 {
   public function index()
   {
-    return  Hallways::with('categorias.productos')->get();
+    $pasillos = Hallways::with('categorias.productos')->get();
+    return response()->json($pasillos);
   }
-
 
   public function store(Request $request)
   {
@@ -56,9 +58,11 @@ class HallwaysController extends Controller
 
   public function getPasillo($id)
   {
-    $dataPasillo = Hallways::with('categorias.productos')->find($id);
-    $countProductos = Products_recipes::where('hallway_id',$id)->count();
-    $data = Arr::add($dataPasillo,'totalProdutos',$countProductos);
-    return response()->json(['data'=>$data], 200);
+    //$dataPasillo = Hallways::with('categorias.productos')->find($id);
+    $dataPasillo = CategoriesProducts::with('productos')->where('hallway_id', $id)->get();
+    //$dataPasillo = Products_recipes::where('hallway_id', $id)->get();
+    //$countProductos = Products_recipes::where('hallway_id', $id)->count();
+    //$data = Arr::add($dataPasillo, 'totalProdutos', $countProductos);
+    return response()->json($dataPasillo);
   }
 }

@@ -19,42 +19,41 @@
             <div class="card-body">
                 <h4 class="card-title">Listado de Pedidos</h4>
                 @if(Session::has('message'))
-                  <div class="alert alert-success">
+                    <div class="alert alert-success">
                     {!! Session::get('message') !!}
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  </div>
+                    </div>
                 @endif
+                <div class="table-responsive">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Receta</th>
-                                <th>Tipo</th>
-                                <th>Ingredientes</th>
-                                <th>Ver detalles</th>
+                                <th>#</th>
+                                <th>A nombre de</th>
+                                <th>Nombre Producto</th>
+                                <th>Imagen</th>
                                 <th>Despachado</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($shopping_carts as $item)
+                          @foreach($shopping_carts as $item)
                             <tr>
-                              <td>{{ $item->recetas->name}}</td>
-                              <td>{{ $item->recetas->type == 1 ? 'Desayuno' : 'Almuerzo' }}</td>
-                              <td>
-                                @foreach($item->recetas->productos as $ingredientes)
-                                <span>{{$ingredientes->name}} / </span>
-                                @endforeach
+                              <td>{{ $item->code}}</td>
+                              <td>{{ $item->name}} {{ $item->lastname}}</td>
+                              <td>{{ $item->nombreProducto}}</td>
+                              <td  style="width: 20%" >
+                                  <img src="{{url('img/products/'.$item->image)}}" class="img-responsive img-fluid" style="width: 76%;"  alt="">
                               </td>
-                              <td><a href="{{ route('shopping_cart.show',$item->id) }}">Ver detalles</a> </td>
                               <td>
-                                <form class="user"  action="{{route('shopping_carts.update', $item->id)}}" method="post">
+                                <form class="user"  action="{{route('shopping_cart_prod.update', $item->idCarrito)}}" method="post">
                                     {{ method_field('put') }}
                                     {{csrf_field()}}
                                     <button class="btn btn-btn-outline-light" type="submit">Despachado</button>
                                 </form>
                               </td>
                             </tr>
-                            @endforeach
+                          @endforeach
                         </tbody>
                     </table>
                 </div>

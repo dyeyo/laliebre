@@ -10,18 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
   public function index()
   {
-    // if (!auth('api')->check()) {
-    //   return response()->json(['error' => 'Unauthorized'], 401);
-    // } else {
-    return  $categories = CategoriesProducts::all();
-    //}
+    $categories = CategoriesProducts::all();
+    return response()->json($categories);
   }
 
 

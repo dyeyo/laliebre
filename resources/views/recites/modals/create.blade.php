@@ -18,16 +18,25 @@
               <label>Nombre</label>
               <input type="text" id="name" name="name" class="form-control form-control-line">
             </div>
-            <div class="form-group">
-              <label>Tipo de receta</label>
-              <select id="type" name="type" style="width:100%" class="select2 form-control form-control-line">
-                <option value=""></option>
-                <option value="1">Desayuno</option>
-                <option value="2">Almuerzo</option>
-                <option value="3">Antojo</option>
-              </select>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <div class="form-group">
+                  <label>Precio</label>
+                  <input type="text" id="price" name="price" class="form-control form-control-line">
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="form-group">
+                  <label>Tipo de receta</label>
+                  <select id="type" name="type" style="width:100%" class="select2 form-control form-control-line">
+                    <option value=""></option>
+                    <option value="1">Desayuno</option>
+                    <option value="2">Almuerzo</option>
+                    <option value="3">Antojo</option>
+                  </select>
+                </div>
+              </div>
             </div>
-
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label for="servings">Cantidad de porciones</label>

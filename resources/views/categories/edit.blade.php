@@ -33,11 +33,20 @@
                         </div>
                         <div class="form-group">
                           <label>Pasillo perteneciente</label>
-                          <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                          @if($category->hallway_id == 0)
+                            <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                              <option value=""></option>
+                              @foreach($hallways as $item)
+                                <option value="{{$item->id}}">{{$item->name}}</option>
+                              @endforeach
+                            </select>
+                          @else
+                            <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
                               @foreach($hallways as $item)
                               <option @if($category->hallways->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
                               @endforeach
-                          </select>
+                            </select>
+                          @endif
                       </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Actualizar</button>

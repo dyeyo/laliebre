@@ -9,7 +9,8 @@ class RecipesController extends Controller
 {
   public function index()
   {
-    return response()->json(['success' => Recipes::with('store', 'productos', 'productos.sotre')->get()]);
+    // return response()->json(['success' => Recipes::with('store', 'productos', 'productos.sotre')->get()]);
+    return response()->json(['success' => Recipes::with('productos')->get()]);
   }
 
   public function show($id)

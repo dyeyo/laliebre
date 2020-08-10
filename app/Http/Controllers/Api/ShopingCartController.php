@@ -3,27 +3,76 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Products_recipes;
+use App\ShoppingCardProducts;
 use Illuminate\Http\Request;
 use App\ShoppingCart;
+use ErrorException;
 use Illuminate\Support\Facades\Auth;
 
 class ShopingCartController extends Controller
 {
+  //MI CARRITO SIN CONFIRMAR
   public function getShopingCart($id)
   {
     $shopingCart = ShoppingCart::with('recetas.productos')
-      ->where('user_id', Auth::user()->id)
-      ->findOrFail($id);
-    return response()->json([
-      'carrito' => $shopingCart,
-    ], 200);
+      ->where('user_id', $id)
+      ->where('state', 3)
+      ->get();
+    if ($shopingCart) {
+      return response()->json([
+        'carrito' => $shopingCart,
+      ], 200);
+    } else {
+      return response()->json([
+        'error' => 'No existen datos',
+      ], 404);
+    }
+  }
+
+  //HISTORIAL DE RECETAS CONFIRMADOS Y DESPACHADOS
+  public function shoppingCartConfirmed()
+  {
+    if (!auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    } else {
+      $shopingCart = ShoppingCart::with('recetas.productos')
+        ->where('user_id', Auth::user()->id)
+        ->where('state', 1)
+        ->get();
+      if ($shopingCart) {
+        return response()->json([
+          'carrito' => $shopingCart,
+        ], 200);
+      } else {
+        return response()->json([
+          'error' => 'No existen datos',
+        ], 404);
+      }
+    }
+  }
+
+  public function confirmCartRecipe($id)
+  {
+    if (!auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    } else {
+      ShoppingCart::where('state', 3)->where('user_id', $id)->update(['state' => 2]);
+      return response()->json([
+        'msj' => "Estado en aprobado",
+      ], 200);
+    }
   }
 
   public function addRecipe(Request $request)
   {
     $cart = new ShoppingCart();
     $cart->recipes_id = $request->recipes_id;
-    $cart->user_id = Auth::user()->id;
+    $cart->quantity = $request->quantity;
+    $cart->state = 3;
+    $cart->total = $request->total;
+    // $cart->user_id = Auth::user()->id;
+    $cart->user_id = $request->user_id;
     $cart->save();
     return response()->json([
       'status' => 'Pedido agregada con exito',
@@ -32,10 +81,113 @@ class ShopingCartController extends Controller
 
   public function removeShopingCart($id)
   {
-    $shopingCart = ShoppingCart::findOrFail($id);
-    $shopingCart->delete();
-    return response()->json([
-      'msg' => 'Item eliminado del carrito',
-    ], 200);
+    $shopingCart = ShoppingCart::find($id);
+    if ($shopingCart) {
+      $shopingCart->delete();
+      return response()->json([
+        'status' => 'Item eliminado del carrito',
+      ], 200);
+    } else {
+      return response()->json([
+        'status' => 'ID no existe',
+      ], 404);
+    }
+  }
+
+  /**CARRITO PARA PRODUCTOS */
+
+  //MI CARRITO SIN CONFIRMAR
+  public function shoppingCartProd($id)
+  {
+    $shopingCart = ShoppingCardProducts::with('productos.stores')
+      ->where('user_id', $id)
+      ->where('state', 3)
+      ->get();
+    if ($shopingCart) {
+      return response()->json([
+        'carrito' => $shopingCart,
+      ], 200);
+    } else {
+      return response()->json([
+        'error' => 'No existen datos',
+      ], 404);
+    }
+  }
+
+  //HISTORIAL DE PEDIDOS CONFIRMADOS Y DESPACHADOS
+  public function shoppingCartProdConfirmed()
+  {
+    if (!auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    } else {
+      $shopingCart = ShoppingCardProducts::with('productos.stores', 'user')
+        ->where('user_id', Auth::user()->id)
+        ->where('state', 1)
+        ->get();
+      if ($shopingCart) {
+        return response()->json([
+          'carrito' => $shopingCart,
+        ], 200);
+      } else {
+        return response()->json([
+          'error' => 'No existen datos',
+        ], 404);
+      }
+    }
+  }
+
+  public function confirmCartProd($id)
+  {
+    if (!auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    } else {
+      ShoppingCardProducts::where('state', 3)->where('user_id', $id)->update(['state' => 2]);
+      return response()->json([
+        'estado' => 'Pedido confirmado',
+      ], 200);
+    }
+  }
+
+  public function addShoppingCartProd(Request $request)
+  {
+    if (!auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    } else {
+      $cart = new ShoppingCardProducts();
+      $cart->product_id = $request->product_id;
+      $cart->quantity = $request->quantity;
+      $cart->state = 3;
+      $cart->total = $request->total;
+      $cart->user_id = $request->user_id;
+      $storeID =  Products_recipes::select('store_id')->where('id',$cart->product_id)->get();
+      foreach ($storeID as $tienda) {
+        $store_id = $tienda->store_id;
+      }
+      $cart->store_id = $store_id;
+      $cart->save();
+
+      return response()->json([
+        'status' => 'Pedido agregado con exito',
+      ], 200);
+    }
+  }
+
+  public function removeShopingCartProd($id)
+  {
+    if (!auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    } else {
+      $shopingCart = ShoppingCardProducts::find($id);
+      if ($shopingCart) {
+        $shopingCart->delete();
+        return response()->json([
+          'status' => 'Item eliminado del carrito',
+        ], 200);
+      } else {
+        return response()->json([
+          'status' => 'ID no existe',
+        ], 404);
+      }
+    }
   }
 }

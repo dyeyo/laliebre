@@ -32,4 +32,9 @@ class Stores extends Model
   {
     return $this->hasMany(Recipes::class);
   }
+
+  public function carritoProductos()
+  {
+    return $this->hasMany(ShoppingCardProducts::class);
+  }
 }

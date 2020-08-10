@@ -62,23 +62,34 @@
             <label>Nombre</label>
             <input type="text" value="{{$receta->name}}" id="name" name="name" class="form-control form-control-line">
           </div>
-          <div class="form-group">
-            <label>Tipo de receta</label>
-            <select id="type" name="type" style="width:100%" class="select2 form-control form-control-line">
-              @if($receta->type === 1)
-                <option value="1">Desayuno</option>
-                <option value="2">Almuerzo</option>
-                <option value="3">Antojo</option>
-              @elseif($receta->type === 2)
-                <option value="2">Almuerzo</option>
-                <option value="1">Desayuno</option>
-                <option value="3">Antojo</option>
-              @else
-                <option value="3">Antojo</option>
-                <option value="2">Almuerzo</option>
-                <option value="1">Desayuno</option>
-              @endif
-            </select>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <div class="form-group">
+                <label>Precio</label>
+                <input type="text" id="price" name="price" value="{{$receta->price}}" class="form-control form-control-line">
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="form-group">
+                <label>Tipo de receta</label>
+                <label>Tipo de receta</label>
+                  <select id="type" name="type" style="width:100%" class="select2 form-control form-control-line">
+                    @if($receta->type === 1)
+                      <option value="1">Desayuno</option>
+                      <option value="2">Almuerzo</option>
+                      <option value="3">Antojo</option>
+                    @elseif($receta->type === 2)
+                      <option value="2">Almuerzo</option>
+                      <option value="1">Desayuno</option>
+                      <option value="3">Antojo</option>
+                    @else
+                      <option value="3">Antojo</option>
+                      <option value="2">Almuerzo</option>
+                      <option value="1">Desayuno</option>
+                    @endif
+                  </select>
+              </div>
+            </div>
           </div>
           <div id="product-row">
             <div class="form-row">

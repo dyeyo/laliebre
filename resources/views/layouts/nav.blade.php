@@ -70,6 +70,16 @@
               <a class="waves-effect waves-dark" href="{{route('proveedores')}}"><i class="fas fa-users"></i><span class="hide-menu">Gestion de Proveedores</span></a>
             </li>
             <li>
+              <a class="waves-effect waves-dark" href="{{route('shopping_cart')}}">
+                <i class="fas fa-shopping-cart"></i><span class="hide-menu">Pedidos Recetas</span>
+              </a>
+            </li>
+            <li>
+              <a class="waves-effect waves-dark" href="{{route('shopping_cart_prod')}}">
+                <i class="fas fa-shopping-cart"></i><span class="hide-menu">Pedidos Productos</span>
+              </a>
+            </li>
+            <li>
             <a class="waves-effect waves-dark" href="{{route('products')}}"><i class="fas fa-shopping-basket"></i><span class="hide-menu">Gestion de Productos</span></a>
             </li>
             <li>
@@ -87,6 +97,11 @@
             </li>
             <li>
               <a class="waves-effect waves-dark" href="{{route('products')}}"><i class="fas fa-shopping-basket"></i><span class="hide-menu">Gestion de Productos</span></a>
+            </li>
+            <li>
+              <a class="waves-effect waves-dark" href="{{route('mi_shopping_cart_prod')}}">
+                <i class="fas fa-shopping-cart"></i><span class="hide-menu">Pedidos</span>
+              </a>
             </li>
           @endif
         </ul>

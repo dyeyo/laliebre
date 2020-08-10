@@ -35,6 +35,7 @@ class RecitesController extends Controller
     $recipe->storeId = $request->storeId;
     $recipe->description = $request->description;
     $recipe->servings = $request->servings;
+    $recipe->price = $request->price;
     $recipe->link = $request->link;
     $recipe->type = $request->type;
     if ($request->hasFile('image')) {
@@ -77,6 +78,8 @@ class RecitesController extends Controller
     $recipe->servings = $request->servings;
     $recipe->link = $request->link;
     $recipe->type = $request->type;
+    $recipe->price = $request->price;
+
     if ($request->hasFile('image')) {
       $file = $request->file('image');
       $name1 = $file->getClientOriginalName();
