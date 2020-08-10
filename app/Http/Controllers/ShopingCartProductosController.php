@@ -70,7 +70,7 @@ class ShopingCartProductosController extends Controller
       'usuarios.id as userID',
       'usuarios.name as userName',
       'usuarios.lastname as userLastName',
-      'usuarios.phone',
+      'usuarios.phone'
     )
       ->join('stores as tienda', 'shopping_card_products.store_id', '=', 'tienda.id')
       ->join('products_recipes as productos', 'shopping_card_products.product_id', '=', 'productos.id')
