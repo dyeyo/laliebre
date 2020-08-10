@@ -87,7 +87,7 @@ class ShopingCartProductosController extends Controller
         'users.id',
         'users.name',
         'users.lastname',
-        'users.phone',
+        'users.phone'
       )
         ->join('users', 'shopping_card_products.user_id', '=', 'users.id')
         ->where('shopping_card_products.user_id', $id)
