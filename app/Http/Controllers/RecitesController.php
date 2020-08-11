@@ -63,7 +63,22 @@ class RecitesController extends Controller
   {
     $receta =  Recipes::with('productos', 'store')->find($id);
     $products = Products_recipes::all();
-    $ingredientes = Recipes::with('productos')->find($id);
+    //$ingredientes = Recipes::with('productos')->find($id);
+
+
+    $ingredientes = DB::table('products_recipe_recipes')
+      ->select(
+        'products_recipe_recipes.id as recetaID',
+        'products_recipe_recipes.quantity',
+        'products_recipe_recipes.products_recipe_id',
+        'products_recipe_recipes.recipes_id',
+        'products_recipes.name',
+        'products_recipes.image'
+      )
+      ->join('products_recipes', 'products_recipe_recipes.products_recipe_id', '=', 'products_recipes.id')
+      ->where('products_recipe_recipes.recipes_id', $id)
+      ->get();
+    // dd($ingredientes);
     $stores = Stores::all();
     return view('recites.edit', compact('receta', 'products', 'stores', 'ingredientes'));
   }
@@ -110,9 +125,7 @@ class RecitesController extends Controller
 
   public function destroyIngredients($id)
   {
-    //Products_recipe::find($id)->delete();
-    $f = Recipes::with('productos')->find($id);
-    dd($f);
+    $ingrediete = DB::table('products_recipe_recipes')->where('id', $id)->delete();
     Session::flash('message', 'Ingrediente eliminado con exito');
     return redirect()->back();
   }

@@ -132,7 +132,7 @@
         </form>
       </div>
     </div>
-    {{-- <div class="card">
+    <div class="card">
       <div class="card-body">
         <h4 class="card-title">Gestion de Ingredientes</h4>
         <div class="table-responsive">
@@ -145,14 +145,14 @@
                   </tr>
               </thead>
               <tbody>
-                @foreach($ingredientes->productos as $ingrediete)
+                @foreach($ingredientes as $ingrediete)
                   </tr>
                       <td>{{$ingrediete->name}}</td>
                       <td style="width: 20%" >
                         <img src="{{asset('img/recetas/'.$ingrediete->image)}}" class="img-responsive img-fluid" style="width: 76%;" alt="">
                       </td>
                       <td>
-                        <form class="user"  action="{{route('ingrediente.delete', $ingrediete->id)}}" method="post">
+                        <form class="user"  action="{{route('ingrediente.delete', $ingrediete->recetaID)}}" method="post">
                             {{ method_field('delete') }}
                             {{csrf_field()}}
                             <button class="btn btn-btn-outline-light"  onclick="return confirm('¿Esta seguro de eliminar este registro?')"  type="submit">ELIMINAR</button>
@@ -164,7 +164,7 @@
           </table>
         </div>
       </div>
-    </div> --}}
+    </div>
   </div>
 </div>
 

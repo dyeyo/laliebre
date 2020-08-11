@@ -36,7 +36,7 @@ class ShopingCartController extends Controller
     } else {
       $shopingCart = ShoppingCart::with('recetas.productos')
         ->where('user_id', $id)
-        ->where('state', 1)
+        ->where('state', '!=', 3)
         ->get();
       if ($shopingCart) {
         return response()->json([
@@ -120,9 +120,9 @@ class ShopingCartController extends Controller
     if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
     } else {
-      $shopingCart = ShoppingCardProducts::with('productos.stores', 'user')
+      $shopingCart = ShoppingCardProducts::with('productos')
         ->where('user_id', $id)
-        ->where('state', 1)
+        ->where('state', '!=', 3)
         ->get();
       if ($shopingCart) {
         return response()->json([
