@@ -29,7 +29,7 @@ class AuthController extends Controller
       return response()->json(['error' => 'Error en los datos, intentelo nuevamente'], 401);
     }
 
-    $user = User::select('name', 'lastname', 'phone', 'email', 'picture')
+    $user = User::select('name', 'lastname', 'phone', 'email', 'picture', 'address')
       ->where('email', $request->email)
       ->first();
     return response()->json([
