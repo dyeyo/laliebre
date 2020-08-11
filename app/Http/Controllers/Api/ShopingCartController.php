@@ -7,8 +7,6 @@ use App\Products_recipes;
 use App\ShoppingCardProducts;
 use Illuminate\Http\Request;
 use App\ShoppingCart;
-use ErrorException;
-use Illuminate\Support\Facades\Auth;
 
 class ShopingCartController extends Controller
 {
@@ -52,12 +50,15 @@ class ShopingCartController extends Controller
     }
   }
 
-  public function confirmCartRecipe($id)
+  public function confirmCartRecipe(Request $request, $id)
   {
     if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
     } else {
-      ShoppingCart::where('state', 3)->where('user_id', $id)->update(['state' => 2]);
+      ShoppingCart::where('state', 3)->where('user_id', $id)->update([
+        'state' => 2,
+        'address' => $request->address
+      ]);
       return response()->json([
         'msj' => "Estado en aprobado",
       ], 200);
@@ -71,7 +72,6 @@ class ShopingCartController extends Controller
     $cart->quantity = $request->quantity;
     $cart->state = 3;
     $cart->total = $request->total;
-    $cart->address = $request->address;
     $cart->user_id = $request->user_id;
     $cart->save();
     return response()->json([
@@ -136,12 +136,15 @@ class ShopingCartController extends Controller
     }
   }
 
-  public function confirmCartProd($id)
+  public function confirmCartProd(Request $request, $id)
   {
     if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
     } else {
-      ShoppingCardProducts::where('state', 3)->where('user_id', $id)->update(['state' => 2]);
+      ShoppingCardProducts::where('state', 3)->where('user_id', $id)->update([
+        'state' => 2,
+        'address' => $request->address
+      ]);
       return response()->json([
         'estado' => 'Pedido confirmado',
       ], 200);
@@ -158,7 +161,6 @@ class ShopingCartController extends Controller
       $cart->quantity = $request->quantity;
       $cart->state = 3;
       $cart->total = $request->total;
-      $cart->address = $request->address;
       $cart->user_id = $request->user_id;
       $storeID =  Products_recipes::select('store_id')->where('id', $cart->product_id)->get();
       foreach ($storeID as $tienda) {
