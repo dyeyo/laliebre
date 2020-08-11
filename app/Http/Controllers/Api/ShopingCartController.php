@@ -99,7 +99,7 @@ class ShopingCartController extends Controller
   //MI CARRITO SIN CONFIRMAR
   public function shoppingCartProd($id)
   {
-    $shopingCart = ShoppingCardProducts::with('productos.stores')
+    $shopingCart = ShoppingCardProducts::with('productos')
       ->where('user_id', $id)
       ->where('state', 3)
       ->get();
