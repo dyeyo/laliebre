@@ -71,14 +71,17 @@ Route::delete('/proveedor/{id}', 'Api\ProvidersController@destroy');
 
 //CARITO DE COMPRAS
 Route::get('/mi_carrito/{id}', 'Api\ShopingCartController@getShopingCart');
-Route::get('/mi_carrito/historial', 'Api\ShopingCartController@shoppingCartConfirmed');
+Route::get('/mi_carrito/historial/{id}', 'Api\ShopingCartController@shoppingCartConfirmed');
 Route::put('/mi_carrito/confirmar/{id}', 'Api\ShopingCartController@confirmCartRecipe');
 Route::post('/carrito_compras/add', 'Api\ShopingCartController@addRecipe');
 Route::delete('/quitar_receta_carrito/{id}', 'Api\ShopingCartController@removeShopingCart');
 
 //CARRITO DE COMPRAS PATA PRODUCTOS
 Route::get('/mi_carrito_productos/{id}', 'Api\ShopingCartController@shoppingCartProd');
-Route::get('/mi_carrito_productos/historial', 'Api\ShopingCartController@shoppingCartProdConfirmed');
+Route::get('/mi_carrito_productos/historial/{id}', 'Api\ShopingCartController@shoppingCartProdConfirmed');
 Route::put('/mi_carrito_productos/confirmar/{id}', 'Api\ShopingCartController@confirmCartProd');
 Route::post('/pedido_productos/add', 'Api\ShopingCartController@addShoppingCartProd');
 Route::delete('/quitar_producto_carrito/{id}', 'Api\ShopingCartController@removeShopingCartProd');
+
+Route::get('mi_perfil/{id}', 'Api\UsersController@show');
+Route::put('usuario/actualiza/{id}', 'Api\UsersController@update');

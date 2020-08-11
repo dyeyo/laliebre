@@ -14,6 +14,7 @@ class CreateShoppingCartsTable extends Migration
       $table->integer('state')->nullable()->default(1);
       $table->integer('quantity')->default(1);
       $table->double('total');
+      $table->string('address', 200)->nullable();
 
       $table->bigInteger('recipes_id')->unsigned()->nullable();
       $table->bigInteger('user_id')->unsigned()->nullable();

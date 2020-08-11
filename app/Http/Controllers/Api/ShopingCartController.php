@@ -31,13 +31,13 @@ class ShopingCartController extends Controller
   }
 
   //HISTORIAL DE RECETAS CONFIRMADOS Y DESPACHADOS
-  public function shoppingCartConfirmed()
+  public function shoppingCartConfirmed($id)
   {
     if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
     } else {
       $shopingCart = ShoppingCart::with('recetas.productos')
-        ->where('user_id', Auth::user()->id)
+        ->where('user_id', $id)
         ->where('state', 1)
         ->get();
       if ($shopingCart) {
@@ -71,7 +71,7 @@ class ShopingCartController extends Controller
     $cart->quantity = $request->quantity;
     $cart->state = 3;
     $cart->total = $request->total;
-    // $cart->user_id = Auth::user()->id;
+    $cart->address = $request->address;
     $cart->user_id = $request->user_id;
     $cart->save();
     return response()->json([
@@ -115,13 +115,13 @@ class ShopingCartController extends Controller
   }
 
   //HISTORIAL DE PEDIDOS CONFIRMADOS Y DESPACHADOS
-  public function shoppingCartProdConfirmed()
+  public function shoppingCartProdConfirmed($id)
   {
     if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
     } else {
       $shopingCart = ShoppingCardProducts::with('productos.stores', 'user')
-        ->where('user_id', Auth::user()->id)
+        ->where('user_id', $id)
         ->where('state', 1)
         ->get();
       if ($shopingCart) {
@@ -158,8 +158,9 @@ class ShopingCartController extends Controller
       $cart->quantity = $request->quantity;
       $cart->state = 3;
       $cart->total = $request->total;
+      $cart->address = $request->address;
       $cart->user_id = $request->user_id;
-      $storeID =  Products_recipes::select('store_id')->where('id',$cart->product_id)->get();
+      $storeID =  Products_recipes::select('store_id')->where('id', $cart->product_id)->get();
       foreach ($storeID as $tienda) {
         $store_id = $tienda->store_id;
       }

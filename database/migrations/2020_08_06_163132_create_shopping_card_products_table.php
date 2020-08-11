@@ -15,6 +15,7 @@ class CreateShoppingCardProductsTable extends Migration
       $table->integer('state')->nullable()->default(1);
       $table->integer('quantity')->default(1);
       $table->double('total');
+      $table->string('address', 200)->nullable();
 
       $table->bigInteger('product_id')->unsigned()->nullable();
       $table->bigInteger('user_id')->unsigned()->nullable();
