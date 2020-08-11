@@ -16,21 +16,20 @@ class ShopingCartProductosController extends Controller
   public function index()
   {
     $shopping_carts = ShoppingCardProducts::with('productos.stores', 'user')->where('state', 2)->get();
-    // dd($shopping_carts);
     return view('shopping_carts_productos.index', compact('shopping_carts'));
   }
 
   //INFO FUNCION PARA PEDIDOS X TIENDA
   public function pedidosStore()
   {
-    $tiendaUser = Stores::where('id',Auth::user()->id)->get();
-    foreach($tiendaUser as $item)
-    {
-      $idTienda=$item->id;
+    $tiendaUser = Stores::where('id', Auth::user()->id)->get();
+    foreach ($tiendaUser as $item) {
+      $idTienda = $item->id;
     }
     $shopping_carts = ShoppingCardProducts::select(
       'shopping_card_products.id as idCarrito',
       'shopping_card_products.state',
+      'shopping_card_products.addrees',
       'productos.code',
       'productos.name as nombreProducto',
       'productos.um',
@@ -45,7 +44,7 @@ class ShopingCartProductosController extends Controller
       ->join('products_recipes as productos', 'shopping_card_products.product_id', '=', 'productos.id')
       ->join('users as usuarios', 'shopping_card_products.user_id', '=', 'usuarios.id')
       ->where('shopping_card_products.store_id', $idTienda)
-      ->where('shopping_card_products.state',2)
+      ->where('shopping_card_products.state', 2)
       ->get();
     return view('shopping_carts_productos.misPedidos', compact('shopping_carts'));
   }
@@ -79,21 +78,22 @@ class ShopingCartProductosController extends Controller
       ->where('shopping_card_products.state', 2)
       ->get();
 
-      $usuarioPedido = ShoppingCardProducts::select(
-        'shopping_card_products.id as carritoID',
-        'shopping_card_products.user_id',
-        'shopping_card_products.total',
-        'shopping_card_products.quantity',
-        'users.id',
-        'users.name',
-        'users.lastname',
-        'users.phone'
-      )
-        ->join('users', 'shopping_card_products.user_id', '=', 'users.id')
-        ->where('shopping_card_products.user_id', $id)
-        ->where('shopping_card_products.state', 2)
-        ->first();  
-    return view('shopping_carts_productos.details', compact('pedido','usuarioPedido'));
+    $usuarioPedido = ShoppingCardProducts::select(
+      'shopping_card_products.id as carritoID',
+      'shopping_card_products.user_id',
+      'shopping_card_products.total',
+      'shopping_card_products.address',
+      'shopping_card_products.quantity',
+      'users.id',
+      'users.name',
+      'users.lastname',
+      'users.phone'
+    )
+      ->join('users', 'shopping_card_products.user_id', '=', 'users.id')
+      ->where('shopping_card_products.user_id', $id)
+      ->where('shopping_card_products.state', 2)
+      ->first();
+    return view('shopping_carts_productos.details', compact('pedido', 'usuarioPedido'));
   }
 
   public function changeState($id)
@@ -101,6 +101,15 @@ class ShopingCartProductosController extends Controller
     $cart = ShoppingCardProducts::findOrFail($id);
     $cart->state = 1;
     $cart->update();
+    return redirect()->route('shopping_cart_prod');
+  }
+
+  public function changeStateGeneral($id)
+  {
+    ShoppingCardProducts::where('user_id', $id)->where('state', 2)->update([
+      'state' => 1
+    ]);
+    Session::flash('message', 'Los productos se Despacharon con exito');
     return redirect()->route('shopping_cart_prod');
   }
 

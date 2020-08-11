@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/pedido/{id}', 'ShopingCartProductosController@show')->name('shopping_cart_prod.show');
   Route::put('/carrito_compras_producto/{id}', 'ShopingCartProductosController@changeState')->name('shopping_cart_prod.update');
   Route::put('/carrito_compras_producto/admin/{id}', 'ShopingCartProductosController@changeStateAdmin')->name('shopping_cart_prod_admin.update');
+  Route::put('/carrito_compras_producto_general/admin/{id}', 'ShopingCartProductosController@changeStateGeneral')->name('shopping_cart_prod_general.update');
 
   Route::get('/mis_pedidos_productos', 'ShopingCartProductosController@pedidosStore')->name('mi_shopping_cart_prod');
 

@@ -16,11 +16,20 @@
 <div class="row">
   <div class="col-lg-4 col-xlg-3 col-md-5">
       <div class="card">
-          <div class="card-body"> <small class="text-muted">A nombre de </small>
-            <h6>{{$usuarioPedido->name}} {{$usuarioPedido->lastname}}</h6>
-            <small class="text-muted p-t-30 db">Telefóno</small>
-            <h6>{{$usuarioPedido->phone}} </h6>
-          </div>
+        <div class="card-body"> <small class="text-muted">A nombre de </small>
+          <h4>{{$usuarioPedido->name}} {{$usuarioPedido->lastname}}</h4>
+          <small class="text-muted p-t-30 db">Telefóno</small>
+          <h4>{{$usuarioPedido->phone}} </h4>
+          <small class="text-muted p-t-30 db">Dirección de envio</small>
+          <h4>{{$usuarioPedido->address}} </h4>
+        </div>
+        <div class="card-body">
+          <form class="user"  action="{{route('shopping_cart_prod_general.update', $usuarioPedido->user_id)}}" method="post">
+            {{ method_field('put') }}
+            {{csrf_field()}}
+            <button class="btn btn-success btn-block" type="submit">DESPACHADO</button>
+        </form>
+        </div>
       </div>
   </div>
   <div class="col-lg-8 col-xlg-9 col-md-7">
@@ -35,8 +44,8 @@
               @foreach($pedido as $item)
                 <div class="card-body">
                   <div class="profiletimeline">
-                    <div class="sl-item"> 
-                      <div class="sl-left"> 
+                    <div class="sl-item">
+                      <div class="sl-left">
                         <img src="{{url('img/products/'.$item->image)}}" class="img-responsive img-fluid" style="width: 76%;"  alt="">
                         <div class="sl-right">
                           <div>
@@ -72,7 +81,7 @@
             </div>
           @endforeach
         </div>
-      </div> 
+      </div>
   </div>
 </div> --}}
 

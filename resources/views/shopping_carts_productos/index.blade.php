@@ -32,6 +32,7 @@
                                 <th>#</th>
                                 <th>Nombre</th>
                                 <th>Cliente</th>
+                                <th>Dirección de envio</th>
                                 <th>Tienda</th>
                                 <th>Imagen</th>
                                 <th>Ver detalles</th>
@@ -44,6 +45,7 @@
                               <td>{{ $item->productos->code}}</td>
                               <td>{{ $item->productos->name}}</td>
                               <td>{{ $item->user->name }} {{ $item->user->lastname }}</td>
+                              <td>{{ $item->address }}</td>
                               <td>{{ $item->productos->stores->name}}</td>
                               <td  style="width: 20%" >
                                   <img src="{{url('img/products/'.$item->productos->image)}}" class="img-responsive img-fluid" style="width: 76%;"  alt="">
