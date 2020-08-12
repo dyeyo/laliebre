@@ -15,16 +15,15 @@ class ProductsController extends Controller
 {
   public function index()
   {
-    $products = Products_recipes::whereHas('stores', function($query)
-    {
-      return $query->where('stores.user_id',auth()->user()->id);
+    $products = Products_recipes::whereHas('stores', function ($query) {
+      return $query->where('stores.user_id', auth()->user()->id);
     })->get();
-
-    $categories = CategoriesProducts::all();
     $store = Stores::where('user_id', auth()->user()->id)->get();
     $onlyID = $store[0]->id;
     $proveedor = Providers::all();
+    $categories = CategoriesProducts::all();
     $hallways = Hallways::all();
+    // return view('products.index', compact('products', 'hallways', 'categories', 'onlyID', 'proveedor'));
     return view('products.index', compact('products', 'hallways', 'categories', 'onlyID', 'proveedor'));
   }
 

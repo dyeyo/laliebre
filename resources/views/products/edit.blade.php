@@ -32,15 +32,15 @@
                             </select>
                         </div>
                         <input type="hidden" name="store_id" value="{{$product->stores->id}}">
-                        <div class="form-group">
-                            <label>Pasillo perteneciente</label>
-                            <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
-                                @foreach($hallways as $item)
-                                <option @if($product->hallways->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
                         @if($product->provider_id != null)
+                          <div class="form-group">
+                              <label>Pasillo perteneciente</label>
+                              <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                                  @foreach($hallways as $item)
+                                  <option @if($product->hallways->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
+                                  @endforeach
+                              </select>
+                          </div>
                           <div class="form-group" id="proveedor">
                             <label>Proveedor</label>
                             <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">
@@ -50,7 +50,15 @@
                                 @endforeach
                             </select>
                           </div>
-                        @else
+                        {{-- @else
+                          <div class="form-group">
+                            <label>Pasillo perteneciente</label>
+                            <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                                @foreach($hallways as $item)
+                                <option @if($product->hallways->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                          </div>
                           <div class="form-group" id="proveedor" style="display:none">
                             <label>Proveedor</label>
                             <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">
@@ -58,7 +66,7 @@
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
-                          </div>
+                          </div> --}}
                         @endif
                         <div class="form-group">
                             <label>Nombre</label>

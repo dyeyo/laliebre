@@ -22,14 +22,14 @@ class ShopingCartProductosController extends Controller
   //INFO FUNCION PARA PEDIDOS X TIENDA
   public function pedidosStore()
   {
-    $tiendaUser = Stores::where('id', Auth::user()->id)->get();
+    $tiendaUser = Stores::where('user_id', Auth::user()->id)->get();
     foreach ($tiendaUser as $item) {
       $idTienda = $item->id;
     }
     $shopping_carts = ShoppingCardProducts::select(
       'shopping_card_products.id as idCarrito',
       'shopping_card_products.state',
-      'shopping_card_products.addrees',
+      'shopping_card_products.address',
       'productos.code',
       'productos.name as nombreProducto',
       'productos.um',

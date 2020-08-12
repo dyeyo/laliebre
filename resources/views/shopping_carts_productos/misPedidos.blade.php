@@ -42,7 +42,7 @@
                             <tr>
                               <td>{{ $item->code}}</td>
                               <td>{{ $item->name}} {{ $item->lastname}}</td>
-                              <td>{{ $item->addrees}}</td>
+                              <td>{{ $item->address}}</td>
                               <td>{{ $item->nombreProducto}}</td>
                               <td  style="width: 20%" >
                                   <img src="{{url('img/products/'.$item->image)}}" class="img-responsive img-fluid" style="width: 76%;"  alt="">
