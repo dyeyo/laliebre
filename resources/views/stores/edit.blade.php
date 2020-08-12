@@ -51,7 +51,7 @@
                       </div>
                       <div class="form-group">
                           <button type="submit" class="btn btn-primary">Actualizar</button>
-                          <a href="{{ route('typeStore') }}" class="btn btn-warning">Cancelar</a>
+                          <a href="{{ route('stores') }}" class="btn btn-warning">Cancelar</a>
                       </div>
                   </form>
               </div>
