@@ -28,9 +28,9 @@ class CreateProductsRecipesTable extends Migration
       $table->bigInteger('provider_id')->unsigned()->nullable();
       $table->bigInteger('hallway_id')->unsigned();
 
-      $table->foreign('store_id')->references('id')->on('stores');
+      $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
       $table->foreign('categorie_id')->references('id')->on('categories_products');
-      $table->foreign('provider_id')->references('id')->on('providers');
+      $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade');
       $table->foreign('hallway_id')->references('id')->on('hallways')->onDelete('cascade');
 
       $table->timestamps();

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\CategoriesStore;
 use App\Districts;
+use App\DistritosStore;
 use App\Stores;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
@@ -60,8 +62,18 @@ class StoreController extends Controller
     $store = Stores::with('typeStore')->find($id);
     $typeStores = CategoriesStore::all();
     $distritos = Districts::all();
-
-    return view('stores.edit', compact('store', 'typeStores', 'distritos'));
+    $storeDistritos = DB::table('districts')
+      ->select(
+        'districts.id',
+        'districts.name',
+        'distritos_store_stores.id as distritos_store_stores_id',
+        'distritos_store_stores.distritos_store_id',
+        'distritos_store_stores.stores_id',
+      )
+      ->join('distritos_store_stores', 'districts.id', '=', 'distritos_store_stores.distritos_store_id')
+      ->where('distritos_store_stores.stores_id', $id)
+      ->get();
+    return view('stores.edit', compact('store', 'typeStores', 'distritos', 'storeDistritos'));
   }
 
   public function update(Request $request, $id)
@@ -69,7 +81,6 @@ class StoreController extends Controller
     $store = Stores::find($id);
     $store->name = $request->name;
     $store->description = $request->description;
-    $store->district_id = $request->district_id;
     if ($request->hasFile('logo')) {
       $file = $request->file('logo');
       $name1 = $file->getClientOriginalName();
@@ -93,5 +104,12 @@ class StoreController extends Controller
     Stores::find($id)->delete();
     Session::flash('message', 'Tienda eliminado con exito');
     return redirect()->route('stores');
+  }
+
+  public function destroyDistrito($id)
+  {
+    DB::table('distritos_store_stores')->where('id', $id)->delete();
+    Session::flash('message', 'Distrito eliminado con exito');
+    return redirect()->back();
   }
 }

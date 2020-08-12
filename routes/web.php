@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tiendas', 'StoreController@index')->name('stores');
     Route::post('/tienda/create', 'StoreController@store')->name('store.store');
     Route::delete('/tienda/{id}', 'StoreController@destroy')->name('store.delete');
+    Route::delete('/tienda/distrito/{id}', 'StoreController@destroyDistrito')->name('distrito_store.delete');
 
     //CATEGORIAS TIENDAS
     Route::get('/tipoTienda', 'CategorieStoreController@index')->name('typeStore');
