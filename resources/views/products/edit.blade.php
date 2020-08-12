@@ -111,6 +111,10 @@
                           </div>
                         </div>
                         <div class="form-group">
+                          <label>Medida general</label>
+                          <input type="text" id="" value="{{$product->umGeneral}}" name="umGeneral" class="form-control form-control-line">
+                        </div>
+                        <div class="form-group">
                             <img src="{{url('img/products/'.$product->image)}}" class="img-responsive img-fluid" style="width: 20%;"  alt="">
                         </div>
                         <div class="form-group">

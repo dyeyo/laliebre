@@ -148,10 +148,13 @@
               </div>
             </div>
             <div class="form-group">
-                <label>Precio</label>
-                <input type="text" id="" name="price" class="form-control form-control-line">
+              <label>Precio</label>
+              <input type="text" id="" name="price" class="form-control form-control-line">
             </div>
-
+            <div class="form-group">
+              <label>Medida general</label>
+              <input type="text" id="" name="umGeneral" class="form-control form-control-line">
+            </div>
             <div class="form-group">
                 <label>Imagen</label>
                 <input type="file" id="" name="image" class="form-control form-control-line">
