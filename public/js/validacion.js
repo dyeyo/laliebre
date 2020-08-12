@@ -80,6 +80,9 @@ if ($("#formProductos").length > 0) {
       quantity: {
         required: true,
         digits: true
+      },
+      umGeneral: {
+        required: true
       }
     },
     messages: {
@@ -87,6 +90,9 @@ if ($("#formProductos").length > 0) {
         required: "Este campo es obligatorio"
       },
       store_id: {
+        required: "Este campo es obligatorio"
+      },
+      umGeneral: {
         required: "Este campo es obligatorio"
       },
       hallway_id: {
@@ -124,6 +130,9 @@ if ($("#formProductosEdit").length > 0) {
       store_id: {
         required: true
       },
+      umGeneral: {
+        required: true
+      },
       hallway_id: {
         required: true
       },
@@ -153,6 +162,9 @@ if ($("#formProductosEdit").length > 0) {
         required: "Este campo es obligatorio"
       },
       store_id: {
+        required: "Este campo es obligatorio"
+      },
+      umGeneral: {
         required: "Este campo es obligatorio"
       },
       name: {
