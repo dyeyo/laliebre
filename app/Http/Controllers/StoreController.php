@@ -23,11 +23,9 @@ class StoreController extends Controller
 
   public function store(Request $request)
   {
-
     $store = new Stores();
     $store->name = $request->name;
     $store->description = $request->description;
-    $store->district_id = $request->district_id;
     $store->store_id = $request->store_id;
     if ($request->hasFile('logo')) {
       $file = $request->file('logo');
@@ -35,11 +33,6 @@ class StoreController extends Controller
       $file->move(public_path() . '/img/stores/', $name1);
       $store->logo = $name1;
     }
-
-    // $this->validate($request(), [
-    //   'email' => 'required|email|unique:users',
-    //   'password' => 'required',
-    // ]);
 
     $user = new User();
     $user->email = $request->emailUser;
@@ -51,6 +44,11 @@ class StoreController extends Controller
     $store->user_id = $user->id;
     $store->save();
 
+    foreach ($request->district_id as $key => $value) {
+      $distritoId = Stores::findOrFail($store->id);
+      $distritoId->store()->attach($value);
+    }
+    $store->save();
     //    dd($user->id);
 
     Session::flash('message', 'Tienda y usuario creado con exito');
@@ -78,15 +76,22 @@ class StoreController extends Controller
       $file->move(public_path() . '/img/stores/', $name1);
       $store->logo = $name1;
     }
+    $store->user_id = $store->user_id;
     $store->update();
-    Session::flash('message', 'Categoria editado con exito');
+
+    foreach ($request->district_id as $key => $value) {
+      $distritoId = Stores::findOrFail($store->id);
+      $distritoId->store()->attach($value);
+    }
+    $store->save();
+    Session::flash('message', 'Tienda editado con exito');
     return redirect()->route('stores');
   }
 
   public function destroy($id)
   {
     Stores::find($id)->delete();
-    Session::flash('message', 'Categoria eliminado con exito');
+    Session::flash('message', 'Tienda eliminado con exito');
     return redirect()->route('stores');
   }
 }

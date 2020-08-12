@@ -20,13 +20,12 @@ class CreateStoresTable extends Migration
       $table->string('logo');
       $table->integer('state')->default(1);
 
-      $table->bigInteger('district_id')->unsigned();
       $table->bigInteger('store_id')->unsigned();
       $table->bigInteger('user_id')->unsigned();
 
-      $table->foreign('district_id')->references('id')->on('districts');
-      $table->foreign('store_id')->references('id')->on('categories_stores');
-      $table->foreign('user_id')->references('id')->on('users');
+      $table->foreign('store_id')->references('id')->on('categories_stores')->onDelete('cascade');
+      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
       $table->timestamps();
     });
   }

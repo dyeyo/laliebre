@@ -10,6 +10,6 @@ class Districts extends Model
 
   public function store()
   {
-    return $this->hasMany(Stores::class);
+    return $this->hasMany(DistritosStore::class);
   }
 }

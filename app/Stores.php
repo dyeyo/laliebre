@@ -13,9 +13,9 @@ class Stores extends Model
     return $this->belongsTo(CategoriesStore::class, 'store_id');
   }
 
-  public function distritos()
+  public function store()
   {
-    return $this->belongsTo(Districts::class, 'district_id');
+    return $this->belongsToMany(DistritosStore::class);
   }
 
   public function user()

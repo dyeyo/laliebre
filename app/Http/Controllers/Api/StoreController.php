@@ -28,12 +28,22 @@ class StoreController extends Controller
     if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
     } else {
-      $store = new Stores($request->all());
+      $store = new Stores();
+      $store->name = $request->name;
+      $store->description = $request->description;
+      $store->store_id = $request->store_id;
       if ($request->hasFile('logo')) {
         $file = $request->file('logo');
         $name1 = $file->getClientOriginalName();
         $file->move(public_path() . '/img/stores/', $name1);
         $store->logo = $name1;
+      }
+      $store->user_id = $user->id;
+      $store->save();
+
+      foreach ($request->district_id as $key => $value) {
+        $distritoId = Stores::findOrFail($store->id);
+        $distritoId->store()->attach($value);
       }
       $store->save();
       return response()->json([
