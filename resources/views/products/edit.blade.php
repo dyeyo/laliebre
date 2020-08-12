@@ -41,6 +41,7 @@
                                   @endforeach
                               </select>
                           </div>
+                        @endif
                           <div class="form-group" id="proveedor">
                             <label>Proveedor</label>
                             <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">
@@ -67,7 +68,6 @@
                                 @endforeach
                             </select>
                           </div> --}}
-                        @endif
                         <div class="form-group">
                             <label>Nombre</label>
                             <input type="text" id="name" name="name" value="{{$product->name}}" class="form-control form-control-line">

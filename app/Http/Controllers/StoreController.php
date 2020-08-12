@@ -68,7 +68,7 @@ class StoreController extends Controller
         'districts.name',
         'distritos_store_stores.id as distritos_store_stores_id',
         'distritos_store_stores.distritos_store_id',
-        'distritos_store_stores.stores_id',
+        'distritos_store_stores.stores_id'
       )
       ->join('distritos_store_stores', 'districts.id', '=', 'distritos_store_stores.distritos_store_id')
       ->where('distritos_store_stores.stores_id', $id)
