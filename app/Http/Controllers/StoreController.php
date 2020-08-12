@@ -57,7 +57,7 @@ class StoreController extends Controller
 
   public function edit(Request $request, $id)
   {
-    $store = Stores::with('typeStore', 'distritos')->find($id);
+    $store = Stores::with('typeStore')->find($id);
     $typeStores = CategoriesStore::all();
     $distritos = Districts::all();
 

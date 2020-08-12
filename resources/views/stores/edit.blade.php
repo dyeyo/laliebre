@@ -25,11 +25,12 @@
                         {{ method_field('put') }}
                         <div class="form-group">
                             <label>Distrito perteneciente</label>
-                            <select id="district_id" name="district_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                            <select id="district_id" name="district_id[]"  multiple="multiple" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($distritos as $item)
-                                <option @if($store->distritos->id === $item->id) selected='selected' @endif  value="{{$item->id}}">{{$item->name}}</option>
+                                  <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
+                        </div>
                         </div>
                         <div class="form-group">
                             <label>Nombre</label>
