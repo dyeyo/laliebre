@@ -59,7 +59,13 @@ class HallwaysController extends Controller
   public function getPasillo($id)
   {
     //$dataPasillo = Hallways::with('categorias.productos')->find($id);
-    $dataPasillo = CategoriesProducts::with('productos')->where('hallway_id', $id)->get();
+    $dataPasillo = CategoriesProducts::with(['productos' => function ($query) use ($id) {
+      $query->where('hallway_id', $id);
+    }])->get();
+    // $dataPasillo = CategoriesProducts::with('productos', function ($query, $id) {
+    //   return $query->where('hallway_id', 1);
+    // })->get();
+    //$dataPasillo = CategoriesProducts::with('productos')->where('hallway_id', $id)->get();
     //$dataPasillo = Products_recipes::where('hallway_id', $id)->get();
     //$countProductos = Products_recipes::where('hallway_id', $id)->count();
     //$data = Arr::add($dataPasillo, 'totalProdutos', $countProductos);
