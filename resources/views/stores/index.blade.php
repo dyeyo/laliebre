@@ -95,7 +95,7 @@
             </div>
             <div class="form-group">
                 <label>Distrito perteneciente</label>
-                <select id="district_id" name="district_id[]"  multiple="multiple" style="width:100%" class="select2 form-control form-control-line" id="">
+                <select id="district_id" name="district_id[]" required="true" multiple="multiple" style="width:100%" class="select2 form-control form-control-line" id="">
                     @foreach($distritos as $item)
                       <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
@@ -108,7 +108,7 @@
             </div>
             <div class="form-group">
               <label>Correo Usuario</label>
-              <input type="text" id="name" name="emailUser" class="form-control form-control-line">
+              <input type="text" id="emailUser" name="emailUser" class="form-control form-control-line">
             </div>
             <div class="form-group">
               <label>Contraseña</label>

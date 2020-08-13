@@ -23,23 +23,32 @@ class StoreController extends Controller
     ], 200);
   }
 
-  /*public function storeDistricts($id)
+  public function storeDistricts($id)
   {
     $storeDistritos = DB::table('districts')
       ->select(
-        'districts.id',
-        'districts.name',
-        'distritos_store_stores.id as distritos_store_stores_id',
-        'distritos_store_stores.distritos_store_id',
-        'distritos_store_stores.stores_id'
+        'stores.id',
+        'stores.name',
+        'stores.logo',
+        'distritos_store_stores.distritos_store_id'
       )
       ->join('distritos_store_stores', 'districts.id', '=', 'distritos_store_stores.distritos_store_id')
-      ->where('distritos_store_stores.stores_id', $id)
+      ->join('stores', 'distritos_store_stores.stores_id', '=', 'stores.id')
+      ->where('distritos_store_stores.distritos_store_id', $id)
       ->get();
+    /*$storeDistritos = DB::table('stores')
+      ->select(
+        'stores.id',
+        'stores.name',
+        'distritos_store_stores.distritos_store_id'
+      )
+      ->join('distritos_store_stores', 'stores.id', '=', 'distritos_store_stores.distritos_store_id')
+      ->where('distritos_store_stores.stores_id', $id)
+      ->get();*/
     return response()->json([
       "tiendas" => $storeDistritos,
     ], 200);
-  }*/
+  }
 
   public function store(Request $request)
   {

@@ -121,6 +121,7 @@ if ($("#formProductos").length > 0) {
     }
   });
 }
+
 if ($("#formProductosEdit").length > 0) {
   $("#formProductosEdit").validate({
     rules: {
@@ -205,6 +206,13 @@ if ($("#formStore").length > 0) {
       },
       logo: {
         required: true,
+      },
+      emailUser: {
+        required: true,
+        email: true,
+      },
+      password: {
+        required: true,
       }
     },
     messages: {
@@ -213,6 +221,13 @@ if ($("#formStore").length > 0) {
       },
       district_id: {
         required: "Este campo es obligatorio"
+      },
+      emailUser: {
+        required: "Este campo es obligatorio",
+        email: "Este campo debe ser un correo valido",
+      },
+      password: {
+        required: "Este campo es obligatorio",
       },
       name: {
         required: "Este campo es obligatorio"
