@@ -23,7 +23,7 @@ class StoreController extends Controller
     ], 200);
   }
 
-  public function storeDistricts($id)
+  /*public function storeDistricts($id)
   {
     $storeDistritos = DB::table('districts')
       ->select(
@@ -39,7 +39,7 @@ class StoreController extends Controller
     return response()->json([
       "tiendas" => $storeDistritos,
     ], 200);
-  }
+  }*/
 
   public function store(Request $request)
   {

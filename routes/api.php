@@ -28,7 +28,7 @@ Route::get('/tienda/detalle/{id}', 'Api\StoreController@show');
 Route::put('/tienda/{id}', 'Api\StoreController@update');
 Route::delete('/tienda/{id}', 'Api\StoreController@destroy');
 Route::get('/tienda/productos/{id}', 'Api\StoreController@tiendaProductos');
-Route::get('/tiendas/distrito/{id}', 'Api\StoreController@storeDistricts');
+//Route::get('/tiendas/distrito/{id}', 'Api\StoreController@storeDistricts');
 
 //PRODUCTOS
 Route::get('/productos', 'Api\ProductsController@index');
