@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Products_recipes;
 use Illuminate\Http\Request;
 use App\Stores;
+use Illuminate\Support\Facades\DB;
 
 class StoreController extends Controller
 {
@@ -19,6 +20,24 @@ class StoreController extends Controller
     $store = Stores::find($id);
     return response()->json([
       'tienda' => $store,
+    ], 200);
+  }
+
+  public function storeDistricts($id)
+  {
+    $storeDistritos = DB::table('districts')
+      ->select(
+        'districts.id',
+        'districts.name',
+        'distritos_store_stores.id as distritos_store_stores_id',
+        'distritos_store_stores.distritos_store_id',
+        'distritos_store_stores.stores_id'
+      )
+      ->join('distritos_store_stores', 'districts.id', '=', 'distritos_store_stores.distritos_store_id')
+      ->where('distritos_store_stores.stores_id', $id)
+      ->get();
+    return response()->json([
+      "tiendas" => $storeDistritos,
     ], 200);
   }
 
@@ -38,7 +57,7 @@ class StoreController extends Controller
         $file->move(public_path() . '/img/stores/', $name1);
         $store->logo = $name1;
       }
-      $store->user_id = $user->id;
+      $store->user_id = $request->user_id;
       $store->save();
 
       foreach ($request->district_id as $key => $value) {
