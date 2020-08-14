@@ -38,7 +38,13 @@
               <div class="dropdown-menu dropdown-menu-right animated flipInY">
                   <!-- text-->
                   <div class="dropdown-divider"></div>
-                  <a href="{{ route('logout') }}" class="dropdown-item"><i class="fa fa-power-off"></i> Salir</a>
+                  <a href="{{ route('miperfil',Auth::user()->id) }}" class="dropdown-item">
+                    <i class="fa fa-user"></i> Mi Perfil
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="{{ route('logout') }}" class="dropdown-item">
+                    <i class="fa fa-power-off"></i> Salir
+                  </a>
                   <!-- text-->
               </div>
             </li>
@@ -80,6 +86,10 @@
               </a>
             </li>
             <li>
+              <a class="waves-effect waves-dark" href="{{route('bannerLiebre')}}">
+                <i class="fas fa-image"></i><span class="hide-menu">Gestion de Banners</span></a>
+            </li>
+            <li>
             <a class="waves-effect waves-dark" href="{{route('products')}}"><i class="fas fa-shopping-basket"></i><span class="hide-menu">Gestion de Productos</span></a>
             </li>
             <li>
@@ -97,6 +107,10 @@
             </li>
             <li>
               <a class="waves-effect waves-dark" href="{{route('products')}}"><i class="fas fa-shopping-basket"></i><span class="hide-menu">Gestion de Productos</span></a>
+            </li>
+            <li>
+              <a class="waves-effect waves-dark" href="{{route('bannerAliado')}}">
+                <i class="fas fa-image"></i><span class="hide-menu">Gestion de Banners</span></a>
             </li>
             <li>
               <a class="waves-effect waves-dark" href="{{route('mi_shopping_cart_prod')}}">

@@ -93,14 +93,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
-                <label>Distrito perteneciente</label>
-                <select id="district_id" name="district_id[]" required="true" multiple="multiple" style="width:100%" class="select2 form-control form-control-line" id="">
-                    @foreach($distritos as $item)
-                      <option value="{{$item->id}}">{{$item->name}}</option>
-                    @endforeach
-                </select>
-            </div>
+
             <div class="form-group">
               <label>Nombre</label>
               <input type="text" id="name" name="name" class="form-control form-control-line">

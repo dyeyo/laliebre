@@ -11,6 +11,7 @@ Route::group([
   Route::post('logout', 'Api\AuthController@logout');
   Route::post('refresh', 'Api\AuthController@refresh');
   Route::post('register', 'Api\AuthController@register');
+  Route::post('update/{id}', 'Api\AuthController@update');
   Route::post('me', 'Api\AuthController@me');
 });
 
@@ -28,7 +29,6 @@ Route::get('/tienda/detalle/{id}', 'Api\StoreController@show');
 Route::put('/tienda/{id}', 'Api\StoreController@update');
 Route::delete('/tienda/{id}', 'Api\StoreController@destroy');
 Route::get('/tienda/productos/{id}', 'Api\StoreController@tiendaProductos');
-Route::get('/tiendas/distrito/{id}', 'Api\StoreController@storeDistricts');
 
 //PRODUCTOS
 Route::get('/productos', 'Api\ProductsController@index');
@@ -44,6 +44,7 @@ Route::get('/tipoTienda/tienda/{id}', 'Api\CategorieStoreController@asociatisSto
 Route::post('/tipoTienda/create', 'Api\CategorieStoreController@store')->name('typeStore.store');
 Route::put('/tipoTienda/{id}', 'Api\CategorieStoreController@update')->name('typeStore.update');
 Route::delete('/tipoTienda/{id}', 'Api\CategorieStoreController@destroy')->name('typeStore.delete');
+Route::get('/tipoTienda/distrito/{id}', 'Api\CategorieStoreController@storeDistricts');
 
 //DISTRITOS
 Route::get('/distritos', 'Api\DistrictsController@index')->name('distritos');
@@ -83,6 +84,11 @@ Route::get('/mi_carrito_productos/historial/{id}', 'Api\ShopingCartController@sh
 Route::put('/mi_carrito_productos/confirmar/{id}', 'Api\ShopingCartController@confirmCartProd');
 Route::post('/pedido_productos/add', 'Api\ShopingCartController@addShoppingCartProd');
 Route::delete('/quitar_producto_carrito/{id}', 'Api\ShopingCartController@removeShopingCartProd');
+
+//BANNER LA LIEBRE
+Route::get('/images_banners_liebre', 'Api\BannerLiebreController@index');
+//BANNER ALIADO
+Route::get('/images_banners_aliado/{id}', 'Api\BannerAliadoController@index');
 
 Route::get('mi_perfil/{id}', 'Api\UsersController@show');
 Route::put('usuario/actualiza/{id}', 'Api\UsersController@update');

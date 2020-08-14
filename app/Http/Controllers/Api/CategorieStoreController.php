@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\CategoriesStore;
 use App\Stores;
+use Illuminate\Support\Facades\DB;
 
 class CategorieStoreController extends Controller
 {
@@ -36,6 +37,24 @@ class CategorieStoreController extends Controller
       $typeStores->save();
       return response()->json(['status' => 'Categoria store creada con exito'], 200);
     }
+  }
+
+  public function storeDistricts($id)
+  {
+    $storeDistritos = DB::table('districts')
+      ->select(
+        'categories_stores.id',
+        'categories_stores.name',
+        'categories_stores.image',
+        'categories_store_distritos_store.distritos_store_id'
+      )
+      ->join('categories_store_distritos_store', 'districts.id', '=', 'categories_store_distritos_store.distritos_store_id')
+      ->join('categories_stores', 'categories_store_distritos_store.categories_store_id', '=', 'categories_stores.id')
+      ->where('categories_store_distritos_store.distritos_store_id', $id)
+      ->get();
+    return response()->json([
+      "TipoTiendas" => $storeDistritos,
+    ], 200);
   }
 
   public function update(Request $request, $id)

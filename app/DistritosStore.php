@@ -8,7 +8,7 @@ class DistritosStore extends Model
 {
   public function store()
   {
-    return $this->belongsToMany(Stores::class, 'store_id');
+    return $this->belongsToMany(CategoriesStore::class, 'store_id');
   }
 
   public function distritos()

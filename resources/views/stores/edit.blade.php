@@ -24,15 +24,6 @@
                       @csrf
                       {{ method_field('put') }}
                       <div class="form-group">
-                          <label>Distrito perteneciente</label>
-                          <select id="district_id" name="district_id[]"  multiple="multiple" style="width:100%" class="select2 form-control form-control-line" id="">
-                            @foreach($distritos as $item)
-                              <option value="{{$item->id}}">{{$item->name}}</option>
-                            @endforeach
-                          </select>
-                      </div>
-                      </div>
-                      <div class="form-group">
                           <label>Nombre</label>
                           <input type="text" id="name" name="name" value="{{$store->name}}" class="form-control form-control-line">
                           <input type="hidden" id="user_id" name="user_id" value={{Auth::user()->id}}>
@@ -57,37 +48,6 @@
               </div>
           </div>
       </div>
-  </div>
-  <div class="col-lg-8">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Distritos Inscritos a {{$store->name}}</h4>
-        <div class="table-responsive">
-          <table class="table">
-              <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Eliminar</th>
-                  </tr>
-              </thead>
-              <tbody>
-                @foreach($storeDistritos as $item)
-                  </tr>
-                      <td>{{$item->name}}</td>
-                      <td>
-                        <form class="user"  action="{{route('distrito_store.delete', $item->distritos_store_stores_id)}}" method="post">
-                            {{ method_field('delete') }}
-                            {{csrf_field()}}
-                            <button class="btn btn-btn-outline-light"  onclick="return confirm('¿Esta seguro de eliminar este registro?')"  type="submit">ELIMINAR</button>
-                        </form>
-                      </td>
-                  </tr>
-                @endforeach
-              </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 @endsection

@@ -20,7 +20,6 @@ class CreateProductsRecipesTable extends Migration
       $table->string('description');
       $table->string('image');
       $table->double('price');
-      $table->integer('quantity');
       $table->string('um');
       $table->string('umGeneral');
 

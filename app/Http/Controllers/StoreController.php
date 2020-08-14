@@ -46,13 +46,6 @@ class StoreController extends Controller
     $store->user_id = $user->id;
     $store->save();
 
-    foreach ($request->district_id as $key => $value) {
-      $distritoId = Stores::findOrFail($store->id);
-      $distritoId->store()->attach($value);
-    }
-    $store->save();
-    //    dd($user->id);
-
     Session::flash('message', 'Tienda y usuario creado con exito');
     return redirect()->route('stores');
   }
@@ -61,18 +54,7 @@ class StoreController extends Controller
   {
     $store = Stores::with('typeStore')->find($id);
     $typeStores = CategoriesStore::all();
-    $distritos = Districts::all();
-    $storeDistritos = DB::table('districts')
-      ->select(
-        'districts.id',
-        'districts.name',
-        'distritos_store_stores.id as distritos_store_stores_id',
-        'distritos_store_stores.distritos_store_id',
-        'distritos_store_stores.stores_id'
-      )
-      ->join('distritos_store_stores', 'districts.id', '=', 'distritos_store_stores.distritos_store_id')
-      ->where('distritos_store_stores.stores_id', $id)
-      ->get();
+
     return view('stores.edit', compact('store', 'typeStores', 'distritos', 'storeDistritos'));
   }
 
@@ -90,11 +72,6 @@ class StoreController extends Controller
     $store->user_id = $store->user_id;
     $store->update();
 
-    foreach ($request->district_id as $key => $value) {
-      $distritoId = Stores::findOrFail($store->id);
-      $distritoId->store()->attach($value);
-    }
-    $store->save();
     Session::flash('message', 'Tienda editado con exito');
     return redirect()->route('stores');
   }
@@ -109,12 +86,5 @@ class StoreController extends Controller
     Stores::where('id', $id)->delete();
     Session::flash('message', 'Tienda eliminado con exito');
     return redirect()->route('stores');
-  }
-
-  public function destroyDistrito($id)
-  {
-    DB::table('distritos_store_stores')->where('id', $id)->delete();
-    Session::flash('message', 'Distrito eliminado con exito');
-    return redirect()->back();
   }
 }

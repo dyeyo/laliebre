@@ -8,7 +8,7 @@ class Districts extends Model
 {
   protected $guarded = [];
 
-  public function store()
+  public function stores()
   {
     return $this->hasMany(DistritosStore::class);
   }

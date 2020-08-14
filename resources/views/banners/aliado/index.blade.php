@@ -2,13 +2,13 @@
 @section('content')
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor"> Tipos de Tienda</h4>
+        <h4 class="text-themecolor">Banners App</h4>
     </div>
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-                <li class="breadcrumb-item active">Tipos de Tienda</li>
+                <li class="breadcrumb-item active">Banners</li>
                 <li class="breadcrumb-item" >
                   <button type="button" id="btncelular" style="display:none" class="btn btn-info " data-toggle="modal" data-target="#exampleModal">
                     <i class="fa fa-plus-circle"></i>
@@ -18,9 +18,8 @@
             </ol>
             <button type="button" class="btn btn-info d-none d-lg-block m-l-15" data-toggle="modal" data-target="#exampleModal">
               <i class="fa fa-plus-circle"></i>
-              Agregar Tipo de Tienda
+              Agregar Banner
             </button>
-
         </div>
     </div>
 </div>
@@ -28,35 +27,33 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Listado de Tipo de Tienda</h4>
+                <h4 class="card-title">Listado de Banners</h4>
                 @if(Session::has('message'))
-                <div class="alert alert-success">
-                  {!! Session::get('message') !!}
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                </div>
-              @endif
+              <div class="alert alert-success">
+                {!! Session::get('message') !!}
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              </div>
+            @endif
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nombre</th>
-                                <th>Logo</th>
+                                <th>Imagen</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($typeStores as $item)
+                            @foreach($banners as $item)
                             <tr>
                                 <td>{{ $item->id}}</td>
-                                <td>{{ $item->name}}</td>
-                                <td  style="width: 20%" >
-                                    <img src="{{url('img/typeStore/'.$item->image)}}" class="img-responsive img-fluid" style="width: 76%;"  alt="">
+                                <td style="width: 30%">
+                                  <img src="{{url('img/bannerAliado/'.$item->image)}}" class="img-responsive img-fluid" style="width:30%; height:20%"alt="">
                                 </td>
-                                <td><a href="{{ route('typeStore.edit',$item->id) }}">Editar</a> </td>
+                                <td><a href="{{ route('bannerAliado.edit',$item->id)}}">Editar</a> </td>
                                 <td>
-                                    <form class="user"  action="{{route('typeStore.delete', $item->id)}}" method="post">
+                                    <form class="user"  action="{{route('bannerAliado.delete', $item->id)}}" method="post">
                                         {{ method_field('delete') }}
                                         {{csrf_field()}}
                                         <button class="btn btn-btn-outline-light"  onclick="return confirm('¿Esta seguro de eliminar este registro?')"  type="submit">ELIMINAR</button>
@@ -76,34 +73,22 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar Tipo de Tienda</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Banner</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('typeStore.store') }}" id="formTypeStore" method="post" enctype="multipart/form-data">
+          <form action="{{ route('bannerAliado.store') }}" id="formPasillos" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-              <label>Nombre</label>
-              <input type="text" id="name" name="name" class="form-control form-control-line">
-            </div>
-            <div class="form-group">
-              <label>Distrito perteneciente</label>
-              <select id="district_id" name="district_id[]" required="true" multiple="multiple" style="width:100%" class="select2 form-control form-control-line" id="">
-                  @foreach($distritos as $item)
-                    <option value="{{$item->id}}">{{$item->name}}</option>
-                  @endforeach
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Imagen</label>
-              <input type="file" id="image" name="image" class="form-control form-control-line">
+                <label>Imagen</label>
+                <input type="file" name="image" id="image" class="form-control form-control-line">
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Guardar Tipo de Tienda</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+          <button type="submit" class="btn btn-primary">Guardar Banner</button>
         </form>
 
         </div>
@@ -111,4 +96,3 @@
     </div>
   </div>
 @endsection
-

@@ -57,7 +57,9 @@ class ShopingCartController extends Controller
     } else {
       ShoppingCart::where('state', 3)->where('user_id', $id)->update([
         'state' => 2,
-        'address' => $request->address
+        'address' => $request->address,
+        'delivery_date' => $request->delivery_date,
+        'delivery_hours' => $request->delivery_hours
       ]);
       return response()->json([
         'msj' => "Estado en aprobado",
@@ -143,7 +145,9 @@ class ShopingCartController extends Controller
     } else {
       ShoppingCardProducts::where('state', 3)->where('user_id', $id)->update([
         'state' => 2,
-        'address' => $request->address
+        'address' => $request->address,
+        'delivery_date' => $request->delivery_date,
+        'delivery_hours' => $request->delivery_hours
       ]);
       return response()->json([
         'estado' => 'Pedido confirmado',
@@ -162,6 +166,7 @@ class ShopingCartController extends Controller
       $cart->state = 3;
       $cart->total = $request->total;
       $cart->user_id = $request->user_id;
+      $cart->details = $request->details;
       $storeID =  Products_recipes::select('store_id')->where('id', $cart->product_id)->get();
       foreach ($storeID as $tienda) {
         $store_id = $tienda->store_id;

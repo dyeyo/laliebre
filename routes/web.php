@@ -44,6 +44,23 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::get('/mis_pedidos_productos', 'ShopingCartProductosController@pedidosStore')->name('mi_shopping_cart_prod');
 
+  //BANNERS LIEBRE
+  Route::get('/banners', 'BannerLiebreController@index')->name('bannerLiebre');
+  Route::post('/banner/create', 'BannerLiebreController@store')->name('bannerLiebre.store');
+  Route::get('/banner/editar/{id}', 'BannerLiebreController@edit')->name('bannerLiebre.edit');
+  Route::put('/banner/{id}', 'BannerLiebreController@update')->name('bannerLiebre.update');
+  Route::delete('/banner/{id}', 'BannerLiebreController@destroy')->name('bannerLiebre.delete');
+
+  //BANNERS LIEBRE
+  Route::get('/banners_aliado', 'BannerAliadoController@index')->name('bannerAliado');
+  Route::post('/banner_aliado/create', 'BannerAliadoController@store')->name('bannerAliado.store');
+  Route::get('/banner_aliado/editar/{id}', 'BannerAliadoController@edit')->name('bannerAliado.edit');
+  Route::put('/banner_aliado/{id}', 'BannerAliadoController@update')->name('bannerAliado.update');
+  Route::delete('/banner_aliado/{id}', 'BannerAliadoController@destroy')->name('bannerAliado.delete');
+
+  //EDITAR PERFIL
+  Route::get('/mi_perfil', 'UsersController@show')->name('miperfil');
+  Route::put('/mi_perfil/actualziar/{id}', 'UsersController@update')->name('miperfil.update');
 
   Route::group(['middleware' => 'admin'], function () {
 
@@ -58,7 +75,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tiendas', 'StoreController@index')->name('stores');
     Route::post('/tienda/create', 'StoreController@store')->name('store.store');
     Route::delete('/tienda/{id}', 'StoreController@destroy')->name('store.delete');
-    Route::delete('/tienda/distrito/{id}', 'StoreController@destroyDistrito')->name('distrito_store.delete');
 
     //CATEGORIAS TIENDAS
     Route::get('/tipoTienda', 'CategorieStoreController@index')->name('typeStore');
@@ -66,6 +82,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tipoTienda/editar/{id}', 'CategorieStoreController@edit')->name('typeStore.edit');
     Route::put('/tipoTienda/{id}', 'CategorieStoreController@update')->name('typeStore.update');
     Route::delete('/tipoTienda/{id}', 'CategorieStoreController@destroy')->name('typeStore.delete');
+    Route::delete('/tipoTienda/distrito/{id}', 'CategorieStoreController@destroyDistrito')->name('distrito_store.delete');
 
     //DISTRITOS
     Route::get('/distritos', 'DistrictsController@index')->name('distritos');
@@ -108,6 +125,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/usuario/editar/{id}', 'UsersController@edit')->name('usuario.edit');
     Route::put('/usuario/{id}', 'UsersController@update')->name('usuario.update');
     Route::delete('/usuario/{id}', 'UsersController@destroy')->name('usuario.delete');
+
 
     /*AJAX*/
     Route::get('recetas/productos/{id}', 'RecitesController@indexWithProducts');

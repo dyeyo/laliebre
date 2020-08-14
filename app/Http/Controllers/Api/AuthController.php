@@ -98,4 +98,49 @@ class AuthController extends Controller
     $token = JWTAuth::fromUser($user);
     return response()->json(compact('user', 'token'), 201);
   }
+
+  public function update(Request $request, $id)
+  {
+    $validator = \Validator::make($request->all(), [
+      'name' => 'required',
+      'email' => 'required|email|unique:users',
+      'password' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(['error' => $validator->errors()], 422);
+    }
+
+    $user = User::findOrFail($id);
+    if ($request->password == '') {
+      $user->name = $request->name;
+      $user->lastname = $request->lastname;
+      $user->phone = $request->phone;
+      $user->email = $request->email;
+      $user->address = $request->address;
+      $user->role_id = 3;
+      if ($request->hasFile('picture')) {
+        $file = $request->file('picture');
+        $name1 = $file->getClientOriginalName();
+        $file->move(public_path() . '/img/users/', $name1);
+        $user->picture = $name1;
+      }
+    } else {
+      $user->name = $request->name;
+      $user->lastname = $request->lastname;
+      $user->phone = $request->phone;
+      $user->email = $request->email;
+      $user->address = $request->address;
+      if ($request->hasFile('picture')) {
+        $file = $request->file('picture');
+        $name1 = $file->getClientOriginalName();
+        $file->move(public_path() . '/img/users/', $name1);
+        $user->picture = $name1;
+      }
+      $user->password = Hash::make($request->password);
+    }
+
+    $user->update();
+    return response()->json(['UsuarioActualizado' => $user]);
+  }
 }

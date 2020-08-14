@@ -13,6 +13,12 @@
           </div>
       </div>
   </div>
+  @if(Session::has('message'))
+  <div class="alert alert-success">
+    {!! Session::get('message') !!}
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  </div>
+@endif
   <div class="row">
       <div class="col-12">
           <div class="card">

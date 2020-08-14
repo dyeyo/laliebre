@@ -13,12 +13,12 @@ class CreateDistritoStoresTable extends Migration
    */
   public function up()
   {
-    Schema::create('distritos_store_stores', function (Blueprint $table) {
+    Schema::create('categories_store_distritos_store', function (Blueprint $table) {
       $table->id();
-      $table->bigInteger('stores_id')->unsigned();
+      $table->bigInteger('categories_store_id')->unsigned();
       $table->bigInteger('distritos_store_id')->unsigned();
 
-      $table->foreign('stores_id')->references('id')->on('stores');
+      $table->foreign('categories_store_id')->references('id')->on('categories_stores');
       $table->foreign('distritos_store_id')->references('id')->on('districts');
       $table->timestamps();
     });
@@ -31,6 +31,6 @@ class CreateDistritoStoresTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('distritos_store_stores');
+    Schema::dropIfExists('categories_store_distritos_store');
   }
 }

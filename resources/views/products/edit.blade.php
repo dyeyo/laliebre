@@ -102,12 +102,6 @@
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label>Catidad</label>
-                              <input type="text" id="quantity" value="{{$product->quantity}}" name="quantity" class="form-control form-control-line">
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
                               <label>Unidad de Medida</label>
                               <select id="um" name="um" style="width:100%" class="form-control form-control-line">
                                 <option disabled="disabled" value="">Seleccionar una opcion</option>
@@ -121,10 +115,12 @@
                             </select>
                             </div>
                           </div>
-                        </div>
-                        <div class="form-group">
-                          <label>Medida general</label>
-                          <input type="text" id="umGeneral" value="{{$product->umGeneral}}" name="umGeneral" class="form-control form-control-line">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Medida general</label>
+                              <input type="text" id="umGeneral" value="{{$product->umGeneral}}" name="umGeneral" class="form-control form-control-line">
+                            </div>
+                          </div>
                         </div>
                         <div class="form-group">
                             <img src="{{url('img/products/'.$product->image)}}" class="img-responsive img-fluid" style="width: 20%;"  alt="">
