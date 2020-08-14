@@ -141,8 +141,8 @@
                   <label>Unidad de Medida</label>
                   <select id="um" name="um" style="width:100%" class="form-control form-control-line" id="">
                     <option disabled="disabled" value="">Seleccionar una opcion</option>
-                    <option value="Gm">Gm</option>
-                    <option value="Ml">Ml</option>
+                    <option value="Gr">Gr</option>
+                    <option value="ml">ml</option>
                 </select>
                 </div>
               </div>

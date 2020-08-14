@@ -111,12 +111,12 @@
                               <label>Unidad de Medida</label>
                               <select id="um" name="um" style="width:100%" class="form-control form-control-line">
                                 <option disabled="disabled" value="">Seleccionar una opcion</option>
-                                @if($product->um == "Gm")
-                                  <option value="Gm">Gm</option>
-                                  <option value="Ml">Ml</option>
+                                @if($product->um == "Gr")
+                                  <option value="Gr">Gr</option>
+                                  <option value="ml">ml</option>
                                 @else
-                                  <option value="Ml">Ml</option>
-                                  <option value="Gm">Gm</option>
+                                  <option value="ml">ml</option>
+                                  <option value="Gr">Gr</option>
                                 @endif
                             </select>
                             </div>

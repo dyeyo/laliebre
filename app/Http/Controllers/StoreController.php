@@ -101,7 +101,12 @@ class StoreController extends Controller
 
   public function destroy($id)
   {
-    Stores::find($id)->delete();
+    $store = Stores::find($id);
+    User::select('stores.user_id', 'users.id', 'users.name')
+      ->join('stores', 'users.id', 'stores.user_id')
+      ->where('users.id', $store->user_id)
+      ->delete();
+    Stores::where('id', $id)->delete();
     Session::flash('message', 'Tienda eliminado con exito');
     return redirect()->route('stores');
   }

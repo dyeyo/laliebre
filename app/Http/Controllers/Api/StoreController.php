@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Products_recipes;
 use Illuminate\Http\Request;
 use App\Stores;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 class StoreController extends Controller
