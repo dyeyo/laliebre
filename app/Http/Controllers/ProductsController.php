@@ -20,9 +20,9 @@ class ProductsController extends Controller
     })->get();
     $store = Stores::where('user_id', auth()->user()->id)->get();
     $onlyID = $store[0]->id;
-    //$proveedor = Providers::all();
-    //$categories = CategoriesProducts::all();
-    //$hallways = Hallways::all();
+    $proveedor = Providers::all();
+    $categories = CategoriesProducts::all();
+    $hallways = Hallways::all();
     // return view('products.index', compact('products', 'hallways', 'categories', 'onlyID', 'proveedor'));
     return view('products.index', compact('products', 'hallways', 'categories', 'onlyID', 'proveedor'));
   }

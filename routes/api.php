@@ -23,7 +23,7 @@ Route::put('/categoria/{id}', 'Api\CategoriesController@update');
 Route::delete('/categoria/{id}', 'Api\CategoriesController@destroy');
 
 //TIENEDAS
-Route::get('/tiendass', 'Api\StoreController@index');
+Route::get('/tiendas', 'Api\StoreController@index');
 Route::post('/tienda/create', 'Api\StoreController@store');
 Route::get('/tienda/detalle/{id}', 'Api\StoreController@show');
 Route::put('/tienda/{id}', 'Api\StoreController@update');
@@ -31,7 +31,7 @@ Route::delete('/tienda/{id}', 'Api\StoreController@destroy');
 Route::get('/tienda/productos/{id}', 'Api\StoreController@tiendaProductos');
 
 //PRODUCTOS
-Route::get('/productoss', 'Api\ProductsController@index');
+Route::get('/productos', 'Api\ProductsController@index');
 Route::get('/producto/tienda/{id}', 'Api\ProductsController@productStore');
 Route::post('/producto/create', 'Api\ProductsController@store');
 Route::get('/producto/show/{id}', 'Api\ProductsController@show');
@@ -47,13 +47,13 @@ Route::delete('/tipoTienda/{id}', 'Api\CategorieStoreController@destroy')->name(
 Route::get('/tipoTienda/distrito/{id}', 'Api\CategorieStoreController@storeDistricts');
 
 //DISTRITOS
-Route::get('/distritoss', 'Api\DistrictsController@index')->name('distritos');
+Route::get('/distritos', 'Api\DistrictsController@index')->name('distritos');
 Route::post('/distrito/create', 'Api\DistrictsController@store')->name('distritos.store');
 Route::put('/distrito/{id}', 'Api\DistrictsController@update')->name('distritos.update');
 Route::delete('/distrito/{id}', 'Api\DistrictsController@destroy')->name('distritos.delete');
 
 //PASILLOS
-Route::get('/pasilloss', 'Api\HallwaysController@index')->name('pasillos');
+Route::get('/pasillos', 'Api\HallwaysController@index')->name('pasillos');
 Route::get('/pasillo/{id}', 'Api\HallwaysController@getPasillo')->name('pasillo');
 Route::post('/pasillo/create', 'Api\HallwaysController@store')->name('pasillo.store');
 Route::put('/pasillo/{id}', 'Api\HallwaysController@update')->name('pasillo.update');
@@ -61,7 +61,7 @@ Route::delete('/pasillo/{id}', 'Api\HallwaysController@destroy')->name('pasillo.
 Route::get('/pasillos/categorias/{id}', 'Api\HallwaysController@pasillosCategoria')->name('pasillos.productos');
 
 //RECETAS
-Route::get('/recetass', 'Api\RecipesController@index')->name('recetas');
+Route::get('/recetas', 'Api\RecipesController@index')->name('recetas');
 Route::get('/receta/{id}', 'Api\RecipesController@show')->name('receta');
 Route::get('/receta/filtro/{type}', 'Api\RecipesController@getType');
 
