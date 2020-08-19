@@ -7,12 +7,18 @@ if ($("#formCategorias").length > 0) {
       description: {
         required: true
       },
+      hallway_id: {
+        required: true
+      }
     },
     messages: {
       name: {
         required: "Este campo es obligatorio"
       },
       description: {
+        required: "Este campo es obligatorio"
+      },
+      hallway_id: {
         required: "Este campo es obligatorio"
       },
     }
