@@ -85,7 +85,9 @@
         <div class="modal-body">
           <form action="{{ route('product.store') }}" id="formProductos" method="post" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
+            <input type="hidden" name="store_id"  value="{{$onlyID}}" id="">
+            @if($onlyID == 2)
+              <div class="form-group">
                 <label>Categoria perteneciente</label>
                 <select id="" name="categorie_id" style="width:100%" class="select2 form-control form-control-line" id="">
                   <option value=""></option>
@@ -93,19 +95,17 @@
                     <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
                 </select>
-            </div>
-            <input type="hidden" name="store_id"  value="{{$onlyID}}" id="">
-              @if($onlyID == 2)
-                <div class="form-group">
-                  <label>Pasillo perteneciente</label>
-                  <select  name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="hallway_id">
-                    <option value=""></option>
-                      @foreach($hallways as $item)
-                      <option value="{{$item->id}}">{{$item->name}}</option>
-                      @endforeach
-                  </select>
-                </div>
-              @endif
+              </div>
+              <div class="form-group">
+                <label>Pasillo perteneciente</label>
+                <select  name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="hallway_id">
+                  <option value=""></option>
+                    @foreach($hallways as $item)
+                    <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+                </select>
+              </div>
+
               <div class="form-group" id="proveedor">
                 <label>Proveedor</label>
                 <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">
@@ -115,6 +115,7 @@
                     @endforeach
                 </select>
               </div>
+              @endif
             <div class="form-group">
                 <label>Nombre</label>
                 <input type="text" id="" name="name" class="form-control form-control-line">
@@ -132,7 +133,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label>Unidad de Medida</label>
+                  <label>U Medida</label>
                   <select id="um" name="um" style="width:100%" class="form-control form-control-line" id="">
                     <option disabled="disabled" value="">Seleccionar una opcion</option>
                     <option value="Gr">Gr</option>
@@ -142,15 +143,25 @@
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label>Medida general</label>
-                  <input type="text" id="umGeneral" name="umGeneral" class="form-control form-control-line">
+                  <label>Cantidad</label>
+                  <input type="text" id="quantity" name="quantity" class="form-control form-control-line">
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label>Precio</label>
-              <input type="text" id="price" name="price" class="form-control form-control-line">
-            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Precio</label>
+                  <input type="text" id="price" name="price" class="form-control form-control-line">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Medida General</label>
+                  <input type="text" id="umGeneral" name="umGeneral" class="form-control form-control-line">
+                </div>
+              </div>
+
             <div class="form-group">
                 <label>Imagen</label>
                 <input type="file" id="" name="image" class="form-control form-control-line">

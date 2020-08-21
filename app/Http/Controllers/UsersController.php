@@ -32,6 +32,7 @@ class UsersController extends Controller
     return redirect()->to('/login');
   }
 
+
   public function show()
   {
     $user = User::where('id', Auth::user()->id)->first();
@@ -70,5 +71,22 @@ class UsersController extends Controller
     $user->update();
     Session::flash('message', 'Usuario editado con Exito');
     return redirect('home');
+  }
+
+  public function updateUser(Request $request, $id)
+  {
+    $user = User::find($id);
+    if ($request->password == '') {
+      $user->email = $request->email;
+      $user->role_id = 1;
+    } else {
+      $user->email = $request->email;
+      $user->password = Hash::make($request->password);
+      $user->role_id = 1;
+      $user->address = $request->address;
+    }
+    $user->update();
+    Session::flash('message', 'Usuario editado con Exito');
+    return redirect()->back();
   }
 }

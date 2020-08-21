@@ -16,7 +16,8 @@ class ShopingCartProductosController extends Controller
   public function index()
   {
     $shopping_carts = ShoppingCardProducts::with('productos.stores', 'user')->where('state', 2)->get();
-    return view('shopping_carts_productos.index', compact('shopping_carts'));
+    $shopping_carts_ok = ShoppingCardProducts::with('productos.stores', 'user')->where('state', 1)->get();
+    return view('shopping_carts_productos.index', compact('shopping_carts', 'shopping_carts_ok'));
   }
 
   //INFO FUNCION PARA PEDIDOS X TIENDA

@@ -92,3 +92,4 @@ Route::get('/images_banners_aliado/{id}', 'Api\BannerAliadoController@index');
 
 Route::get('mi_perfil/{id}', 'Api\UsersController@show');
 Route::put('usuario/actualiza/{id}', 'Api\UsersController@update');
+Route::put('update/imagen/{id}', 'Api\UsersController@changeImg');

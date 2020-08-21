@@ -18,10 +18,14 @@
       <div class="card">
         <div class="card-body"> <small class="text-muted">A nombre de </small>
           <h4>{{$usuarioPedido->name}} {{$usuarioPedido->lastname}}</h4>
-          <small class="text-muted p-t-30 db">Telefóno</small>
+          <small class="text-muted p-t-30 db">Telefono</small>
           <h4>{{$usuarioPedido->phone}} </h4>
-          <small class="text-muted p-t-30 db">Dirección de envio</small>
+          <small class="text-muted p-t-30 db">Direccion de envio</small>
           <h4>{{$usuarioPedido->address}} </h4>
+          <small class="text-muted p-t-30 db">Fecha y hora de entrega</small>
+          <h4>{{$usuarioPedido->address}} </h4>
+          <small class="text-muted p-t-30 db">Nota del pedido</small>
+          <h4>{{$usuarioPedido->details}} </h4>
         </div>
         <div class="card-body">
           <form class="user"  action="{{route('shopping_cart_prod_general.update', $usuarioPedido->user_id)}}" method="post">

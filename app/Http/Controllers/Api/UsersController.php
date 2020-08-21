@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -55,5 +56,16 @@ class UsersController extends Controller
       $user->update();
       return response()->json(['status' => 'Usuario actualizado con exito'], 200);
     }
+  }
+
+
+
+  public function changeImg(Request $request, $id)
+  {
+    $user = User::find($id);
+    Storage::delete($user->picture);
+
+    $user->picture = $request->picture->store('');
+    $user->update();
   }
 }

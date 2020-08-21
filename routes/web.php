@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
 
   //ESTA RUTA ES DEL CARRITO DE COMPRAS PARA RECETAS
   Route::get('/pedidos_recetas', 'ShopingCartController@index')->name('shopping_cart');
+  Route::get('/pedidos_recetas/{id}', 'ShopingCartController@detalles')->name('shopping_cart.detalles');
   Route::get('/pedido/{id}', 'ShopingCartController@show')->name('shopping_cart.show');
   Route::put('/carrito_compras/{id}', 'ShopingCartController@changeState')->name('shopping_carts.update');
 
@@ -124,6 +125,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/usuario/create', 'UsersController@store')->name('usuario.store');
     Route::get('/usuario/editar/{id}', 'UsersController@edit')->name('usuario.edit');
     Route::put('/usuario/{id}', 'UsersController@update')->name('usuario.update');
+    Route::put('/tienda/usuario/{id}', 'UsersController@updateUser')->name('storeuser.update');
     Route::delete('/usuario/{id}', 'UsersController@destroy')->name('usuario.delete');
 
 

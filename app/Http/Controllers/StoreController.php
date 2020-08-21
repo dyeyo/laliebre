@@ -53,9 +53,9 @@ class StoreController extends Controller
   public function edit(Request $request, $id)
   {
     $store = Stores::with('typeStore')->find($id);
+    $user = Stores::with('user')->find($id);
     $typeStores = CategoriesStore::all();
-
-    return view('stores.edit', compact('store', 'typeStores', 'distritos', 'storeDistritos'));
+    return view('stores.edit', compact('store', 'user', 'typeStores'));
   }
 
   public function update(Request $request, $id)

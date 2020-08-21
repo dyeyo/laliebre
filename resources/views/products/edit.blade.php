@@ -23,23 +23,24 @@
                     <form action="{{ route('product.update',$product->id) }}"  id="formProductosEdit" method="post" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('put') }}
-                        <div class="form-group">
-                            <label>Categoria perteneciente</label>
-                            <select id="categorie_id" name="store_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                        @if($product->categorie_id != null)
+                          <div class="form-group">
+                            <label>Categoria pertenecientse</label>
+                            <select id="categorie_id" name="categorie_id" style="width:100%" class="select2 form-control form-control-line" id="">
                                 @foreach($categories as $item)
                                 <option @if($product->categories->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        <input type="hidden" name="store_id" value="{{$product->stores->id}}">
+                          </div>
+                        @endif
                         @if($product->hallway_id != null)
                           <div class="form-group">
-                              <label>Pasillo perteneciente</label>
-                              <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
-                                  @foreach($hallways as $item)
-                                  <option @if($product->hallways->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
-                                  @endforeach
-                              </select>
+                            <label>Pasillo perteneciente</label>
+                            <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
+                                @foreach($hallways as $item)
+                                <option @if($product->hallways->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
                           </div>
                         @endif
                         @if($product->provider_id != null)
@@ -52,34 +53,7 @@
                               @endforeach
                           </select>
                         </div>
-                        @else
-                        <div class="form-group" id="proveedor">
-                          <label>Proveedor</label>
-                          <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">
-                            <option value=""></option>
-                              @foreach($proveedor as $item)
-                              <option value="{{$item->id}}">{{$item->name}}</option>
-                              @endforeach
-                          </select>
-                        </div>
                         @endif
-                        {{-- @else
-                          <div class="form-group">
-                            <label>Pasillo perteneciente</label>
-                            <select id="hallway_id" name="hallway_id" style="width:100%" class="select2 form-control form-control-line" id="">
-                                @foreach($hallways as $item)
-                                <option @if($product->hallways->id === $item->id) selected='selected' @endif value="{{$item->id}}">{{$item->name}}</option>
-                                @endforeach
-                            </select>
-                          </div>
-                          <div class="form-group" id="proveedor" style="display:none">
-                            <label>Proveedor</label>
-                            <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">
-                                @foreach($proveedor as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
-                                @endforeach
-                            </select>
-                          </div> --}}
                         <div class="form-group">
                             <label>Nombre</label>
                             <input type="text" id="name" name="name" value="{{$product->name}}" class="form-control form-control-line">
@@ -89,9 +63,19 @@
                             <label>Descripcion</label>
                             <textarea  name="description" id="description" class="form-control form-control-line" style="resize: none;">{{$product->description}}</textarea>
                         </div>
-                        <div class="form-group">
-                          <label>Precio</label>
-                          <input type="text" id="price"id="price" name="price" value="{{$product->price}}" class="form-control form-control-line">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Precio</label>
+                              <input type="text" id="price"id="price" name="price" value="{{$product->price}}" class="form-control form-control-line">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Cantidad</label>
+                              <input type="text" id="quantity" name="quantity"  value="{{$product->quantity}}" class="form-control form-control-line">
+                            </div>
+                          </div>
                         </div>
                         <div class="row">
                           <div class="col-md-4">
