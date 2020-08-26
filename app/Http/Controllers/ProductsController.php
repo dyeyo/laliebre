@@ -80,7 +80,6 @@ class ProductsController extends Controller
   */
   public function indexByRecipe(Request $request)
   {
-    if ($request->ajax())
       return response(Products_recipes::all());
   }
 }
