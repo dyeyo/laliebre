@@ -1,82 +1,192 @@
-<div class="modal fade{{--  show --}}" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"{{--  style="display:block;" --}}>
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar Receta</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="{{ route('receta.store') }}" method="post" id="formRecetas" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-              <label>Codigo</label>
-              <input type="text" id="code" name="code" class="form-control form-control-line">
-            </div>
-            <div class="form-group">
-              <label>Nombre</label>
-              <input type="text" id="name" name="name" class="form-control form-control-line">
-            </div>
-            <div class="form-row">
-              <div class="col-md-6 mb-3">
-                <div class="form-group">
-                  <label>Precio</label>
-                  <input type="text" id="price" name="price" class="form-control form-control-line">
+<div id="app">
+    <v-app>
+        <div class="modal fade{{--  show --}}" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"{{--  style="display:block;" --}}>
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Agregar Receta</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="6" md="12">
+                      <v-text-field
+                      label="Codigo"
+                      v-model="var_codigo"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="12">
+                      <v-text-field
+                      label="Nombre"
+                      v-model="var_nombre"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-text-field
+                      label="Precio"
+                      v-model="var_precio"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-select
+                      :items="items_tipo_receta"
+                      label="tipo receta"
+                      return-object
+                      item-text="text"
+                      v-model="var_tipo_receta_selected"
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-text-field
+                      label="Cantidad de porciones"
+                      v-model="var_cantidad_porciones"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-select
+                      :items="items_stores"
+                      label="Seleccionar Tienda"
+                      return-object
+                      item-text="name"
+                      v-model="var_tienda_selected"
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-select
+                      :items="items_productos_receta"
+                      label="Seleccionar ingrediente"
+                      return-object
+                      item-text="name"
+                      v-model="producto_receta_selected"
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="3">
+                      <v-text-field
+                      label="Cant."
+                      v-model="var_cantidad_ingrediente"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="3">
+                      <v-text-field
+                      label="U.M."
+                      disabled
+                      v-model="producto_receta_selected.um"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="12">
+                      <v-btn color="success" block @click="addIngrediente(producto_receta_selected, var_cantidad_ingrediente)" >Agregar Ingrediente</v-btn>
+                    </v-col>
+                      <v-data-table dense :headers="headers" :items="items_ingrediente" item-key="name" class="elevation-1">
+                      <template v-slot:item.accion="{item}" >
+                      <v-btn color="success" small icon @click="deleteIngrediente(item)"  >X</v-btn>
+                      </template>
+                      </v-data-table>
+                    <v-col cols="12" sm="6" md="12">
+                      <v-file-input
+                      label="Seleccionar imagen"
+                      filled
+                      prepend-icon="mdi-camera"
+                      v-model="var_imagen"
+                      ></v-file-input>
+                    </v-col>
+                  </v-row>
+                </v-container>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                  <button type="submit" class="btn btn-primary" @click="addReceta" >Guardar Receta</button>
                 </div>
               </div>
-              <div class="col-md-6 mb-3">
-                <div class="form-group">
-                  <label>Tipo de receta</label>
-                  <select id="type" name="type" style="width:100%" class="select2 form-control form-control-line">
-                    <option value=""></option>
-                    <option value="1">Desayuno</option>
-                    <option value="2">Almuerzo</option>
-                    <option value="3">Antojo</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="col-md-6 mb-3">
-                <label for="servings">Cantidad de porciones</label>
-                <input type="number" class="form-control text-danger" id="servings" name="servings" value="1" min="1" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="store_id">Seleccionar Tienda</label>
-                <select class="custom-select" id="store_id" name="storeId" required>
-                  <option selected disabled value="">Elegir...</option>
-                  @foreach($stores as $store)
-                    <option value="{{$store->id}}">{{$store->name}}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            <div id="product-row">
-            {{-- INGREDIENTES --}}
-
-              </div>
-
-            <button id="product-add" class="btn btn-primary" type="button">Agregar Producto</button>
-            <hr>
-            <div class="form-group">
-                <label>Descripcion</label>
-                <textarea id="description" name="description" style="resize:none" class="form-control form-control-line text-danger"></textarea>
-            </div>
-            <div class="form-group">
-              <label>Link Video</label>
-              <input id="link" type="url" name="link" class="form-control form-control-line text-danger">
-            </div>
-            <div class="form-group">
-              <label for="">Imagen del plato</label>
-              <input id="image" type="file" class="form-control-file" name="image">
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-            <button type="submit" class="btn btn-primary">Guardar Receta</button>
-          </form>
         </div>
-      </div>
-    </div>
-  </div>
+    </v-app>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" sync>
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" sync>
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" sync>
+
+<script>
+var app = new Vue({
+  el: '#app',
+  vuetify: new Vuetify(),
+  data: {
+    items_stores: {!! $stores !!},
+    items_tipo_receta: [
+      { text: 'Desayuno', value:1 },
+      { text: 'Almuerzo', value:2 },
+      { text: 'Antojo', value:3 }
+    ],
+    items_productos_receta: [],
+    producto_receta_selected: '',
+    items_ingrediente: [],
+    headers: [
+      {
+      text: 'Nombre Ingrediente',
+      align: 'start',
+      sortable: false,
+      value: 'name',
+      },
+      { text: 'Cantidad', value: 'cantidad' },
+      { text: 'Unidad de medida', value: 'um' },
+      { text: 'accion', value: 'accion' },
+    ],
+    var_cantidad_ingrediente: 0,
+    var_imagen: [],
+    var_codigo: '',
+    var_nombre: '',
+    var_precio: '',
+    var_tipo_receta_selected: '',
+    var_cantidad_porciones: '',
+    var_tienda_selected: '',
+  },
+  mounted(){
+    this.getPRoductosReceta()
+  },
+  methods:{
+    async getPRoductosReceta(){
+      try {
+        let {data} = await axios('/productos/recetas')
+        this.items_productos_receta = data
+      } catch(e) {
+        console.log(e);
+      }
+    },
+    async addIngrediente(item, cantidad){
+      this.items_ingrediente.push({ id: item.id, name:item.name, cantidad, um:item.um, quantity: item.quantity })
+      this.var_cantidad_ingrediente = 0
+      this.producto_receta_selected = ''
+    },
+    async deleteIngrediente(ingrediente){
+      let index = this.items_ingrediente.findIndex(item => item.id === ingrediente.id)
+      this.items_ingrediente.splice(index,1)
+
+    },
+    async addReceta(){
+        try {
+          var formData = new  FormData();
+          var model = {
+            code: this.var_codigo,
+            name: this.var_nombre,
+            storeId: this.var_tienda_selected.id,
+            servings: this.var_cantidad_porciones,
+            price: this.var_precio,
+            products_recipe_id: this.items_ingrediente,
+            type: this.var_tipo_receta_selected.value,
+          }
+          formData.append('image', this.var_imagen)
+          formData.append('model', JSON.stringify(model) )
+
+        let {data} = await axios.post('/recetas/create', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+        } catch(e) {
+        console.log(e);
+        }
+    }
+  }
+})
+</script>

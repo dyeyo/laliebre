@@ -149,7 +149,8 @@
 
     function toAll()
     {
-      $('#product-row').append('<div class="form-row text-center">\
+      // bro por lo menos fijate de mi codigo como concateno a esto lo que me refiero cuando te digo que esta mal tu codigo sirve pero no es asi no utilizas los recursos
+      $('#product-row').append( '<div class="form-row text-center">\
         <div class="col-md-8 mb-3">\
           <select name="products_recipe_id[]" id="productosReceta" class="select2 custom-select text-danger" required>\
             <option selected disabled value="">Elegir...</option>'

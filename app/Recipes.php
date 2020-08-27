@@ -22,4 +22,8 @@ class Recipes extends Model
   {
     return $this->hasMany(ShoppingCart::class);
   }
+  public function AE_ingredientes()
+  {
+    return $this->hasMany(agregarEliminarIngrediente::class, 'recipes_id');
+  }
 }

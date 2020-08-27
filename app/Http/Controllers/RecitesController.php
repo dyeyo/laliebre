@@ -28,16 +28,17 @@ class RecitesController extends Controller
 
   public function store(Request $request)
   {
-    ///dd($request->all());
+    $data = json_decode($request['model']);
+    // dd($request->all(), $data->products_recipe_id[0]->id);
     $recipe = new Recipes();
-    $recipe->code = $request->code;
-    $recipe->name = $request->name;
-    $recipe->storeId = $request->storeId;
-    $recipe->description = $request->description;
-    $recipe->servings = $request->servings;
-    $recipe->price = $request->price;
-    $recipe->link = $request->link;
-    $recipe->type = $request->type;
+    $recipe->code = $data->code;
+    $recipe->name = $data->name;
+    $recipe->storeId = $data->storeId;
+    // $recipe->description = $data->description;
+    $recipe->servings = $data->servings;
+    $recipe->price = $data->price;
+    // $recipe->link = $data->link;
+    $recipe->type = $data->type;
     if ($request->hasFile('image')) {
       $file = $request->file('image');
       $name1 = $file->getClientOriginalName();
@@ -46,11 +47,11 @@ class RecitesController extends Controller
     }
     $recipe->save();
 
-    foreach ($request->products_recipe_id as $key => $value) {
+    foreach ($data->products_recipe_id as $key => $value) {
       $recetaId = Recipes::findOrFail($recipe->id);
       $recetaId->productos()->attach(
-        $value,
-        ['quantity' => $request->quantity[$key]]
+        $value->id,
+        ['quantity' => $value->quantity]
       );
     }
     $recipe->save();
