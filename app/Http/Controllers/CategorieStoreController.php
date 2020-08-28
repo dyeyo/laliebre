@@ -66,12 +66,15 @@ class CategorieStoreController extends Controller
       $typeStores->image = $name1;
     }
     $typeStores->update();
-
-    foreach ($request->district_id as $key => $value) {
-      $distritoId = CategoriesStore::findOrFail($typeStores->id);
-      $distritoId->stores()->attach($value);
+    
+    if($request->district_id){
+        foreach ($request->district_id as $key => $value) {
+          $distritoId = CategoriesStore::findOrFail($typeStores->id);
+          $distritoId->stores()->attach($value);
+        }
+        $typeStores->save();
     }
-    $typeStores->save();
+    
 
     Session::flash('message', 'Categoria editado con exito');
     return redirect()->route('typeStore');

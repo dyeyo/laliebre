@@ -60,7 +60,7 @@
                                     <form class="user"  action="{{route('product.delete', $item->id)}}" method="post">
                                         {{ method_field('delete') }}
                                         {{csrf_field()}}
-                                        <button class="btn btn-btn-outline-light"  onclick="return confirm('Â¿Esta seguro de eliminar este registro?')"  type="submit">ELIMINAR</button>
+                                        <button class="btn btn-btn-outline-light"  onclick="return confirm('¢ÄEsta seguro de eliminar este registro?')"  type="submit">ELIMINAR</button>
                                     </form>
                                 </td>
                             </tr>
@@ -105,7 +105,7 @@
                     @endforeach
                 </select>
               </div>
-
+              
               <div class="form-group" id="proveedor">
                 <label>Proveedor</label>
                 <select  name="provider_id" style="width:100%" class="select2 form-control form-control-line" id="">

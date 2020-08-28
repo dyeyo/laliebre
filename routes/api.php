@@ -85,10 +85,6 @@ Route::put('/mi_carrito_productos/confirmar/{id}', 'Api\ShopingCartController@co
 Route::post('/pedido_productos/add', 'Api\ShopingCartController@addShoppingCartProd');
 Route::delete('/quitar_producto_carrito/{id}', 'Api\ShopingCartController@removeShopingCartProd');
 
-//agregar eliminar ingredientes a receta
-Route::post('agregar-eliminar-ingrediente/receta/{receta_id}/producto/{producto_id}', 'Api\Agrega rEliminarIngredienteController@aeliminarIngrediente');
-
-
 //BANNER LA LIEBRE
 Route::get('/images_banners_liebre', 'Api\BannerLiebreController@index');
 //BANNER ALIADO
@@ -96,5 +92,7 @@ Route::get('/images_banners_aliado/{id}', 'Api\BannerAliadoController@index');
 
 Route::get('mi_perfil/{id}', 'Api\UsersController@show');
 Route::put('usuario/actualiza/{id}', 'Api\UsersController@update');
-Route::put('usuario/actualiza_pass/{id}', 'Api\UsersController@updatePass');
-Route::put('update/imagen/{id}', 'Api\UsersController@changeImg');
+
+//agregar eliminar ingredientes a receta
+Route::post('agregar-eliminar-ingrediente/receta/{receta_id}/producto/{producto_id}', 'AgregarEliminarIngredienteController@aeliminarIngrediente');
+

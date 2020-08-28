@@ -23,7 +23,6 @@ class ProductsController extends Controller
     $proveedor = Providers::all();
     $categories = CategoriesProducts::all();
     $hallways = Hallways::all();
-    // return view('products.index', compact('products', 'hallways', 'categories', 'onlyID', 'proveedor'));
     return view('products.index', compact('products', 'hallways', 'categories', 'onlyID', 'proveedor'));
   }
 
@@ -80,6 +79,6 @@ class ProductsController extends Controller
   */
   public function indexByRecipe(Request $request)
   {
-    return response(Products_recipes::all());
+      return response(Products_recipes::all());
   }
 }

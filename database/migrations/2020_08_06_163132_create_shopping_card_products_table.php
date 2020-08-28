@@ -18,7 +18,7 @@ class CreateShoppingCardProductsTable extends Migration
       $table->string('address', 200)->nullable();
       $table->string('delivery_date', 200)->nullable();
       $table->string('delivery_hours', 200)->nullable();
-      $table->string('details', 200)->nullable();
+      $table->string('details')->nullable();
 
       $table->bigInteger('product_id')->unsigned()->nullable();
       $table->bigInteger('user_id')->unsigned()->nullable();

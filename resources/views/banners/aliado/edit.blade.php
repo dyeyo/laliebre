@@ -20,17 +20,18 @@
             <div class="card-body">
                 <h4 class="card-title">Editar Banner</h4>
                 <div class="table-responsive">
-                    <form action="{{ route('bannerLiebre.update',$banner->id) }}" id="" method="post" enctype="multipart/form-data">
-                        @csrf
+                    <form action="{{ route('bannerAliado.update',$banner->id) }}" id="" method="post" enctype="multipart/form-data">
+                        @csrf @csrf
+         
                         {{ method_field('put') }}
                         <div class="row">
                           <div class="col-md-6">
                             <img src="{{url('img/bannerAliado/'.$banner->image)}}" class="img-responsive img-fluid" alt="">
                           </div>
                           <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Imagen</label>
-                              <input type="file" name="image" id="image" class="form-control form-control-line">
+                              <div class="form-group">
+                                <label>Imagen</label>
+                                <input type="file" name="image" id="image" class="form-control form-control-line">
                             </div>
                           </div>
                         </div>

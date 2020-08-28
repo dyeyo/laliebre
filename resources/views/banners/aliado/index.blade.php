@@ -53,7 +53,7 @@
                                 </td>
                                 <td><a href="{{ route('bannerAliado.edit',$item->id)}}">Editar</a> </td>
                                 <td>
-                                    <form class="user"  action="{{route('bannerAliado.delete', $item->id)}}" method="post">
+                                    <form class="user"  action="{{route('bannerAliado.destroy', $item->id)}}" method="post">
                                         {{ method_field('delete') }}
                                         {{csrf_field()}}
                                         <button class="btn btn-btn-outline-light"  onclick="return confirm('¿Esta seguro de eliminar este registro?')"  type="submit">ELIMINAR</button>

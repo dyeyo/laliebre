@@ -51,7 +51,7 @@ class BannerLiebreController extends Controller
     return redirect()->route('bannerLiebre');
   }
 
-  public function delete($id)
+  public function destroy($id)
   {
     BannerLiebre::find($id)->delete();
     Session::flash('message', 'Banner eliminado con exito');

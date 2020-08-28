@@ -10,9 +10,9 @@ class AgregarEliminarIngredienteController extends Controller
 {
   public function aeliminarIngrediente(Request $request, $receta_id, $producto_id)
   {
-    if (!auth('api')->check()) {
+    /*if (!auth('api')->check()) {
       return response()->json(['error' => 'Unauthorized'], 401);
-    } else {
+    } else {*/
       try {
         DB::transaction(function () use ($request, $receta_id, $producto_id) {
           $aeIngredientes = new agregarEliminarIngrediente();
@@ -28,11 +28,14 @@ class AgregarEliminarIngredienteController extends Controller
           $aeIngredientes->recipes_id = $receta_id;
           $aeIngredientes->products_recipes_id = $producto_id;
           $aeIngredientes->save();
-          return ["mensaje" => 'registro agregado con exito'];
-        }, 5);
+            return response()->json([
+            'msj' => "Cantidad editada",
+          ], 200);
+        //}, 5);
+        });
       } catch (Exception $e) {
         throw new Exception("Error Processing Request" . $e, 1);
       }
-    }
+    //}
   }
 }

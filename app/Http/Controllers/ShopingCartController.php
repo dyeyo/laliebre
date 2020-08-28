@@ -12,7 +12,6 @@ class ShopingCartController extends Controller
   public function index()
   {
     $shopping_carts = ShoppingCart::with('recetas.productos.sotre', 'user')->where('state', 2)->get();
-    dd($shopping_carts);
     $shopping_carts_ok = ShoppingCart::with('recetas.productos.sotre', 'user')->where('state', 1)->get();
 
     return view('shopping_carts.index', compact('shopping_carts', 'shopping_carts_ok'));
@@ -21,12 +20,14 @@ class ShopingCartController extends Controller
   public function detalles($id)
   {
     $pedido = ShoppingCart::with('recetas.productos.sotre', 'user', 'a_e_integientes')->find($id);
+    //dd($pedido);
     return view('shopping_carts.details', compact('pedido'));
   }
 
   public function changeState($id)
   {
     $cart = ShoppingCart::findOrFail($id);
+    //dd($cart);
     $cart->state = 1;
     $cart->update();
     Session::flash('message', 'El producto se cambiado a estado Despachado con exito');

@@ -12,8 +12,11 @@ class BannerAliadoController extends Controller
 {
   public function index()
   {
-    $idTienda = Stores::where('user_id', Auth::user()->id)->get();
-    $banners = BannerAliado::where('store_id', $idTienda)->get();
+    $idTienda = Stores::select('id')->where('user_id', Auth::user()->id)->get();
+    // dd($idTienda[0]->id);
+    $d =  (int)($idTienda[0]->id);
+    $banners = BannerAliado::where('store_id',$d)->get();
+    // dd($banners);
     return view('banners.aliado.index', compact('banners'));
   }
 
@@ -53,7 +56,7 @@ class BannerAliadoController extends Controller
     return redirect()->route('bannerAliado');
   }
 
-  public function delete($id)
+  public function destroy($id)
   {
     BannerAliado::find($id)->delete();
     Session::flash('message', 'Banner eliminado con exito');
