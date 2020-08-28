@@ -34,10 +34,10 @@ class RecitesController extends Controller
     $recipe->code = $data->code;
     $recipe->name = $data->name;
     $recipe->storeId = $data->storeId;
-    // $recipe->description = $data->description;
+    $recipe->description = $data->description;
     $recipe->servings = $data->servings;
     $recipe->price = $data->price;
-    // $recipe->link = $data->link;
+    $recipe->link = $data->link;
     $recipe->type = $data->type;
     if ($request->hasFile('image')) {
       $file = $request->file('image');
