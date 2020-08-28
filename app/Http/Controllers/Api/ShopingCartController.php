@@ -59,7 +59,8 @@ class ShopingCartController extends Controller
         'state' => 2,
         'address' => $request->address,
         'delivery_date' => $request->delivery_date,
-        'delivery_hours' => $request->delivery_hours
+        'delivery_hours' => $request->delivery_hours,
+        'details' => $request->details
       ]);
       return response()->json([
         'msj' => "Estado en aprobado",

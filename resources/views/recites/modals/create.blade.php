@@ -85,11 +85,12 @@
                     <v-col cols="12" sm="6" md="12">
                       <v-btn color="success" block @click="addIngrediente(producto_receta_selected, var_cantidad_ingrediente)" >Agregar Ingrediente</v-btn>
                     </v-col>
-                      <v-data-table dense :headers="headers" :items="items_ingrediente" item-key="name" class="elevation-1">
+                    <v-data-table dense :headers="headers" :items="items_ingrediente" item-key="name" class="elevation-1">
                       <template v-slot:item.accion="{item}" >
                       <v-btn color="success" small icon @click="deleteIngrediente(item)"  >X</v-btn>
                       </template>
-                      </v-data-table>
+                    </v-data-table>
+
                     <v-col cols="12" sm="6" md="12">
                       <v-file-input
                       label="Seleccionar imagen"
