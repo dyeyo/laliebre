@@ -99,11 +99,20 @@
                       v-model="var_imagen"
                       ></v-file-input>
                     </v-col>
-                    <v-col cols="12" sm="12" md="12">
+
+                    <v-col cols="12" sm="6" md="12">
                       <v-text-field
-                      label="Video"
-                      v-model="var_video"
+                        label="link"
+                        id="id"
+                        v-model="var_link"
                       ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="12">
+                    <v-textarea
+                      label="Descripcion"
+                      value=""
+                      v-model="description"
+                    ></v-textarea>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -159,6 +168,8 @@ var app = new Vue({
     var_tipo_receta_selected: '',
     var_cantidad_porciones: '',
     var_tienda_selected: '',
+    var_link: '',
+    description: ''
   },
   mounted(){
     this.getPRoductosReceta()
@@ -193,17 +204,15 @@ var app = new Vue({
             price: this.var_precio,
             products_recipe_id: this.items_ingrediente,
             type: this.var_tipo_receta_selected.value,
-            link: this.var_video.value,
-            description: this.var_description.value,
+            link: this.var_link,
+            description: this.description
           }
           formData.append('image', this.var_imagen)
-          formData.append('model', JSON.stringify(model)
-          )
+          formData.append('model', JSON.stringify(model))
+       
+        let {data} = await axios.post('/recetas/create', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+        location.reload()
 
-        let {data} = await axios.post('/recetas/create', formData, {
-          headers: {'Content-Type': 'multipart/form-data'}
-        })
-        location.reload();
         } catch(e) {
         console.log(e);
         }
