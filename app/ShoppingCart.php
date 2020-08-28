@@ -17,4 +17,9 @@ class ShoppingCart extends Model
   {
     return $this->belongsTo(User::class, 'user_id');
   }
+
+  public function a_e_integientes()
+  {
+    return $this->hasMany(agregarEliminarIngrediente::class, 'recipes_id');
+  }
 }

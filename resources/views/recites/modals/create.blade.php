@@ -24,6 +24,12 @@
                       v-model="var_nombre"
                       ></v-text-field>
                     </v-col>
+                    <v-col cols="12" sm="6" md="12">
+                      <v-text-field
+                      label="Descripcion"
+                      v-model="var_description"
+                      ></v-text-field>
+                    </v-col>
                     <v-col cols="12" sm="6" md="6">
                       <v-text-field
                       label="Precio"
@@ -92,6 +98,12 @@
                       v-model="var_imagen"
                       ></v-file-input>
                     </v-col>
+                    <v-col cols="12" sm="12" md="12">
+                      <v-text-field
+                      label="Video"
+                      v-model="var_video"
+                      ></v-text-field>
+                    </v-col>
                   </v-row>
                 </v-container>
                 <div class="modal-footer">
@@ -141,6 +153,8 @@ var app = new Vue({
     var_codigo: '',
     var_nombre: '',
     var_precio: '',
+    var_video:'',
+    var_description:'',
     var_tipo_receta_selected: '',
     var_cantidad_porciones: '',
     var_tienda_selected: '',
@@ -178,11 +192,17 @@ var app = new Vue({
             price: this.var_precio,
             products_recipe_id: this.items_ingrediente,
             type: this.var_tipo_receta_selected.value,
+            link: this.var_video.value,
+            description: this.var_description.value,
           }
           formData.append('image', this.var_imagen)
-          formData.append('model', JSON.stringify(model) )
+          formData.append('model', JSON.stringify(model)
+          )
 
-        let {data} = await axios.post('/recetas/create', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+        let {data} = await axios.post('/recetas/create', formData, {
+          headers: {'Content-Type': 'multipart/form-data'}
+        })
+        location.reload();
         } catch(e) {
         console.log(e);
         }

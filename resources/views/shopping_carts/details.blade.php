@@ -15,13 +15,27 @@
 </div>
 <div class="row">
   <div class="col-lg-3 col-xlg-2 col-md-4">
-      <div class="stickyside" style="">
-          <div class="list-group" id="top-menu">
-            @foreach($pedido->recetas->productos as $ingredientes)
-              <a class="list-group-item ">{{$ingredientes->name}}</a>
-            @endforeach
-          </div>
+    <div class="stickyside" style="">
+      <div class="list-group" id="top-menu">
+        @foreach($pedido->recetas->productos as $ingredientes)
+          <a class="list-group-item ">{{$ingredientes->name}}</a>
+        @endforeach
       </div>
+    </div>
+    <hr>
+    <h3>NOTAS DEL PEDIDO</h3>
+    <div class="stickyside" style="">
+      <div class="list-group" id="top-menu">
+        @foreach($pedido->a_e_integientes as $notas)
+          <a class="list-group-item ">Al producto: {{$notas->nombre_ingrediente}}</a>
+          @if ($notas->agregar_cantidad > 0)
+            <a class="list-group-item ">Añadir: {{$notas->agregar_cantidad}}</a>
+          @else
+            <a class="list-group-item ">Restar: {{$notas->restar_cantidad}}</a>
+          @endif
+        @endforeach
+      </div>
+    </div>
   </div>
   <div class="col-lg-9 col-xlg-10 col-md-8">
       <div class="card">

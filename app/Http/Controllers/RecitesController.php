@@ -34,10 +34,10 @@ class RecitesController extends Controller
     $recipe->code = $data->code;
     $recipe->name = $data->name;
     $recipe->storeId = $data->storeId;
-    // $recipe->description = $data->description;
+    $recipe->description = $data->description;
     $recipe->servings = $data->servings;
     $recipe->price = $data->price;
-    // $recipe->link = $data->link;
+    $recipe->link = $data->link;
     $recipe->type = $data->type;
     if ($request->hasFile('image')) {
       $file = $request->file('image');
@@ -136,30 +136,30 @@ class RecitesController extends Controller
   */
   public function indexWithProducts(Request $request, $id)
   {
-    if ($request->ajax())
-      return response(Recipes::findOrFail($id));
+    // if ($request->ajax())
+    return response(Recipes::findOrFail($id));
   }
 
   public function getDataProduct(Request $request, $id)
   {
-    if ($request->ajax())
-      return response(Products_recipes::findOrFail($id));
+    // if ($request->ajax())
+    return response(Products_recipes::findOrFail($id));
   }
 
   public function getDataProductTienda(Request $request, $id)
   {
-    if ($request->ajax())
-      return response(DB::table('stores')
-        ->join('products_recipes', 'stores.id', '=', 'products_recipes.store_id')
-        ->select(
-          'stores.id',
-          'products_recipes.code',
-          'products_recipes.name',
-          'products_recipes.um',
-          'products_recipes.id',
-          'products_recipes.store_id'
-        )
-        ->where('products_recipes.store_id', $id)
-        ->get());
+    // if ($request->ajax())
+    return response(DB::table('stores')
+      ->join('products_recipes', 'stores.id', '=', 'products_recipes.store_id')
+      ->select(
+        'stores.id',
+        'products_recipes.code',
+        'products_recipes.name',
+        'products_recipes.um',
+        'products_recipes.id',
+        'products_recipes.store_id'
+      )
+      ->where('products_recipes.store_id', $id)
+      ->get());
   }
 }

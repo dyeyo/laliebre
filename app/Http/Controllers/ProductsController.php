@@ -80,6 +80,6 @@ class ProductsController extends Controller
   */
   public function indexByRecipe(Request $request)
   {
-      return response(Products_recipes::all());
+    return response(Products_recipes::all());
   }
 }

@@ -86,7 +86,7 @@ Route::post('/pedido_productos/add', 'Api\ShopingCartController@addShoppingCartP
 Route::delete('/quitar_producto_carrito/{id}', 'Api\ShopingCartController@removeShopingCartProd');
 
 //agregar eliminar ingredientes a receta
-Route::post('Agregar-eliminar-ingrediente/receta/{receta_id}/producto/{producto_id}', 'AgregarEliminarIngredienteController@aeliminarIngrediente');
+Route::post('agregar-eliminar-ingrediente/receta/{receta_id}/producto/{producto_id}', 'Api\Agrega rEliminarIngredienteController@aeliminarIngrediente');
 
 
 //BANNER LA LIEBRE
