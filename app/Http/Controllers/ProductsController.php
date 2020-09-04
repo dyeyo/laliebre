@@ -49,7 +49,9 @@ class ProductsController extends Controller
     $stores = Stores::all();
     $proveedor = Providers::all();
 
-    return view('products.edit', compact('product', 'categories', 'stores', 'hallways', 'proveedor'));
+    dd($product);
+
+    // return view('products.edit', compact('product', 'categories', 'stores', 'hallways', 'proveedor'));
   }
 
   public function update(Request $request, $id)
