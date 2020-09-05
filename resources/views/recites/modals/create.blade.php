@@ -1,4 +1,3 @@
-<div id="app">
     <v-app>
         <div class="modal fade{{--  show --}}" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"{{--  style="display:block;" --}}>
             <div class="modal-dialog" role="document">
@@ -12,6 +11,9 @@
                 <div class="modal-body">
                 <v-container>
                   <v-row>
+                    <v-form ref="createForm" >
+                      
+                    
                     <v-col cols="12" sm="6" md="12">
                       <v-text-field
                       label="Codigo"
@@ -114,6 +116,7 @@
                       v-model="description"
                     ></v-textarea>
                     </v-col>
+                    </v-form>
                   </v-row>
                 </v-container>
                 <div class="modal-footer">
@@ -125,98 +128,3 @@
           </div>
         </div>
     </v-app>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" sync>
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" sync>
-<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" sync>
-
-<script>
-var app = new Vue({
-  el: '#app',
-  vuetify: new Vuetify(),
-  data: {
-    items_stores: {!! $stores !!},
-    items_tipo_receta: [
-      { text: 'Desayuno', value:1 },
-      { text: 'Almuerzo', value:2 },
-      { text: 'Antojo', value:3 }
-    ],
-    items_productos_receta: [],
-    producto_receta_selected: '',
-    items_ingrediente: [],
-    headers: [
-      {
-      text: 'Nombre Ingrediente',
-      align: 'start',
-      sortable: false,
-      value: 'name',
-      },
-      { text: 'Cantidad', value: 'cantidad' },
-      { text: 'Unidad de medida', value: 'um' },
-      { text: 'accion', value: 'accion' },
-    ],
-    var_cantidad_ingrediente: 0,
-    var_imagen: [],
-    var_codigo: '',
-    var_nombre: '',
-    var_precio: '',
-    var_video:'',
-    var_description:'',
-    var_tipo_receta_selected: '',
-    var_cantidad_porciones: '',
-    var_tienda_selected: '',
-    var_link: '',
-    description: ''
-  },
-  mounted(){
-    this.getPRoductosReceta()
-  },
-  methods:{
-    async getPRoductosReceta(){
-      try {
-        let {data} = await axios('/productos/recetas')
-        this.items_productos_receta = data
-      } catch(e) {
-        console.log(e);
-      }
-    },
-    async addIngrediente(item, cantidad){
-      this.items_ingrediente.push({ id: item.id, name:item.name, cantidad, um:item.um, quantity: item.quantity })
-      this.var_cantidad_ingrediente = 0
-      this.producto_receta_selected = ''
-    },
-    async deleteIngrediente(ingrediente){
-      let index = this.items_ingrediente.findIndex(item => item.id === ingrediente.id)
-      this.items_ingrediente.splice(index,1)
-
-    },
-    async addReceta(){
-        try {
-          var formData = new  FormData();
-          var model = {
-            code: this.var_codigo,
-            name: this.var_nombre,
-            storeId: this.var_tienda_selected.id,
-            servings: this.var_cantidad_porciones,
-            price: this.var_precio,
-            products_recipe_id: this.items_ingrediente,
-            type: this.var_tipo_receta_selected.value,
-            link: this.var_link,
-            description: this.description
-          }
-          formData.append('image', this.var_imagen)
-          formData.append('model', JSON.stringify(model))
-       
-        let {data} = await axios.post('/recetas/create', formData, {headers: {'Content-Type': 'multipart/form-data'}})
-        location.reload()
-
-        } catch(e) {
-        console.log(e);
-        }
-    }
-  }
-})
-</script>

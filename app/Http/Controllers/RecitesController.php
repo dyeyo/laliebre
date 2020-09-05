@@ -81,7 +81,8 @@ class RecitesController extends Controller
       ->get();
     // dd($ingredientes);
     $stores = Stores::all();
-    return view('recites.edit', compact('receta', 'products', 'stores', 'ingredientes'));
+    // dd($receta);
+    return response($receta);
   }
 
   public function update(Request $request, $id)
@@ -104,11 +105,12 @@ class RecitesController extends Controller
     }
     $recipe->save();
 
-    foreach ($request->products_recipe_id as $key => $value) {
+    foreach ($request->productos as $key => $value) {
+      dd();
       $recetaId = Recipes::findOrFail($recipe->id);
       $recetaId->productos()->attach(
-        $value,
-        ['quantity' => $request->quantity[$key]]
+        $value['id'],
+        ['quantity' => 1]
       );
     }
     $recipe->save();
