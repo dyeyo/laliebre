@@ -41,7 +41,7 @@
           </div>
       </div>
   </div>
-  <div class="col-lg-8 col-xlg-9 col-md-7">
+  <!-- <div class="col-lg-8 col-xlg-9 col-md-7">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Editar recetas {{$receta->name}}</h4>
@@ -108,7 +108,6 @@
               </div>
             </div>
           </div>
-
           {{-- INGREDIENTES --}}
           <button id="product-add" class="btn btn-primary" type="button">Agregar Producto</button>
           <div class="form-group">
@@ -165,70 +164,143 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+  
 </div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" sync>
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" sync>
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" sync>
 <script>
+var app = new Vue({
+  el: '#app2',
+  vuetify: new Vuetify(),
+  data: {
+    items_stores: {!! $stores !!},
+    items_tipo_receta: [
+      { text: 'Desayuno', value:1 },
+      { text: 'Almuerzo', value:2 },
+      { text: 'Antojo', value:3 }
+    ],
+    items_productos_receta: [],
+    producto_receta_selected: '',
+    items_ingrediente: [],
+    headers: [
+      {
+      text: 'Nombre Ingrediente',
+      align: 'start',
+      sortable: false,
+      value: 'name',
+      },
+      { text: 'Cantidad', value: 'cantidad' },
+      { text: 'Unidad de medida', value: 'um' },
+      { text: 'accion', value: 'accion' },
+    ],
+    var_cantidad_ingrediente: 0,
+    var_imagen: [],
+    var_codigo: '',
+    var_nombre: '',
+    var_precio: '',
+    var_video:'',
+    var_description:'',
+    var_tipo_receta_selected: '',
+    var_cantidad_porciones: '',
+    var_tienda_selected: '',
+    var_link: '',
+    description: ''
+  },
+  mounted(){
+    this.getPRoductosReceta()
+  },
+  methods:{
+    async getPRoductosReceta(){
+      try {
+        let {data} = await axios('/productos/recetas')
+        this.items_productos_receta = data
+      } catch(e) {
+        console.log(e);
+      }
+    },
+    async addIngrediente(item, cantidad){
+      this.items_ingrediente.push({ id: item.id, name:item.name, cantidad, um:item.um, quantity: item.quantity })
+      this.var_cantidad_ingrediente = 0
+      this.producto_receta_selected = ''
+    },
+    async deleteIngrediente(ingrediente){
+      let index = this.items_ingrediente.findIndex(item => item.id === ingrediente.id)
+      this.items_ingrediente.splice(index,1)
+    },
+    async addReceta(){
+        try {
+          var formData = new  FormData();
+          var model = {
+            code: this.var_codigo,
+            name: this.var_nombre,
+            storeId: this.var_tienda_selected.id,
+            servings: this.var_cantidad_porciones,
+            price: this.var_precio,
+            products_recipe_id: this.items_ingrediente,
+            type: this.var_tipo_receta_selected.value,
+            link: this.var_link,
+            description: this.description
+          }
+          formData.append('image', this.var_imagen)
+          formData.append('model', JSON.stringify(model))
+       
+        let {data} = await axios.post('/recetas/create', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+        location.reload()
+        } catch(e) {
+        console.log(e);
+        }
+    }
+  }
+})
+</script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
 
+<!-- <script>
 $(document).ready(function()
 {
   var productName = "";
-
   $.get("/productos/recetas", function(result) {
-
     let max = result.length;
-
     for (var i=0; i<max; i++) {
       productName += '<option value="'+result[i].id+'">'+ result[i].name+ ' x '+ result[i].quantity+' '+result[i].um+ '</option>';
     }
-
   })
   .fail(function(){
     alert('Uff! Algo salio mal (@E0)');
   });
-
   $('.btn-edit').click (function(e) {
     e.preventDefault();
-
     var id = $(this).prev('input').val();
-
     $.get("/recetas/productos/"+id, function(result) {
-
       $("#code").val(result.code);
       $("#name").val(result.name);
       // $("#store_id"   ).val(result.name);
-
       $("#editModal").modal("show");
-
-
       console.log(result);
-
     })
     .fail(function(){
       alert('Uff! Algo salio mal (@E0)');
     });
-
   });
-
   // var x = 2;
   $('#product-add').click (function(e) {
     e.preventDefault();
     toAll();
   });
-
   $('#product-add-2').click (function(e) {
     e.preventDefault();
     toAll();
   });
-
   $('#product-row').on("click",".remove-row",function(e) {
       e.preventDefault();
       $(this).parent('div').parent('div').remove();
       // x--;
   });
-
   function toAll()
   {
     $('#product-row').append('<div class="form-row text-center">\
@@ -256,5 +328,5 @@ $(document).ready(function()
     //PRODUCTOS POR TIENDAS
   }
 });
-</script>
+</script> -->
 @endsection

@@ -92,7 +92,7 @@ Route::get('/images_banners_aliado/{id}', 'Api\BannerAliadoController@index');
 
 Route::get('mi_perfil/{id}', 'Api\UsersController@show');
 Route::put('usuario/actualiza/{id}', 'Api\UsersController@update');
+Route::put('usuario/actualizapass/{id}', 'Api\UsersController@updatePass');
 
 //agregar eliminar ingredientes a receta
 Route::post('agregar-eliminar-ingrediente/receta/{receta_id}/producto/{producto_id}', 'AgregarEliminarIngredienteController@aeliminarIngrediente');
-

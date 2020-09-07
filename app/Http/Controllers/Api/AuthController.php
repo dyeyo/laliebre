@@ -104,7 +104,7 @@ class AuthController extends Controller
   {
     $validator = \Validator::make($request->all(), [
       'name' => 'required',
-      'email' => 'required|email|unique:users',
+      'email' => 'required|email',
       'password' => 'required',
     ]);
 
@@ -113,35 +113,39 @@ class AuthController extends Controller
     }
 
     $user = User::findOrFail($id);
-    if ($request->password == '') {
-      $user->name = $request->name;
-      $user->lastname = $request->lastname;
-      $user->phone = $request->phone;
-      $user->email = $request->email;
-      $user->address = $request->address;
-      $user->role_id = 3;
-      if ($request->hasFile('picture')) {
-        $file = $request->file('picture');
-        $name1 = $file->getClientOriginalName();
-        $file->move(public_path() . '/img/users/', $name1);
-        $user->picture = $name1;
-      }
+    if (!auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
     } else {
-      $user->name = $request->name;
-      $user->lastname = $request->lastname;
-      $user->phone = $request->phone;
-      $user->email = $request->email;
-      $user->address = $request->address;
-      if ($request->hasFile('picture')) {
-        $file = $request->file('picture');
-        $name1 = $file->getClientOriginalName();
-        $file->move(public_path() . '/img/users/', $name1);
-        $user->picture = $name1;
+      $user = User::find($id);
+      if (Hash::check($user->pasillos, $request->password_verificate)) {
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->role_id = 3;
+        $user->password = Hash::make($request->password);
+        $user->update();
+        return response()->json(['status' => 'Usuario actualizado con exito'], 200);
+      } else {
+        return response()->json(['status' => 'Las contraseñas no es correcta '], 400);
       }
-      $user->password = Hash::make($request->password);
     }
+  }
 
-    $user->update();
-    return response()->json(['UsuarioActualizado' => $user]);
+  public function updatePass(Request $request, $id)
+  {
+    if (!auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    } else {
+      $user = User::find($id);
+      if (Hash::check($user->pasillos, $request->password_verificate)) {
+        $user->password = Hash::make($request->password);
+        $user->update();
+        return response()->json(['status' => 'Usuario actualizado con exito'], 200);
+      } else {
+        return response()->json(['status' => 'Las contraseñas no es correcta '], 400);
+      }
+    }
   }
 }

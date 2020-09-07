@@ -132,7 +132,7 @@ class RecitesController extends Controller
   }
 
   /*
-  /* Petici¨®n - AJAX
+  /* Peticiï¿½ï¿½n - AJAX
   */
   public function indexWithProducts(Request $request, $id)
   {

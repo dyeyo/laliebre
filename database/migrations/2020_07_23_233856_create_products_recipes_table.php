@@ -22,11 +22,12 @@ class CreateProductsRecipesTable extends Migration
       $table->double('price');
       $table->string('um');
       $table->string('umGeneral');
+      $table->bigInteger('quantity');
 
-      $table->bigInteger('store_id')->unsigned();
-      $table->bigInteger('categorie_id')->unsigned();
+      $table->bigInteger('store_id')->unsigned()->nullable();;
+      $table->bigInteger('categorie_id')->unsigned()->nullable();;
       $table->bigInteger('provider_id')->unsigned()->nullable();
-      $table->bigInteger('hallway_id')->unsigned();
+      $table->bigInteger('hallway_id')->unsigned()->nullable();;
 
       $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
       $table->foreign('categorie_id')->references('id')->on('categories_products');

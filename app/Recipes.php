@@ -15,7 +15,7 @@ class Recipes extends Model
 
   public function productos()
   {
-    return $this->belongsToMany(Products_recipe::class);
+    return $this->belongsToMany(Products_recipe::class)->select(array('name', 'description', 'image', 'price', 'um', 'umGeneral', 'quantity_producto', 'recipes_id', 'products_recipe_id'));
   }
 
   public function shoppingCart()

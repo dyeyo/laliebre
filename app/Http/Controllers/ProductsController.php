@@ -19,6 +19,7 @@ class ProductsController extends Controller
       return $query->where('stores.user_id', auth()->user()->id);
     })->get();
     $store = Stores::where('user_id', auth()->user()->id)->get();
+
     $onlyID = $store[0]->id;
     $proveedor = Providers::all();
     $categories = CategoriesProducts::all();
@@ -79,6 +80,6 @@ class ProductsController extends Controller
   */
   public function indexByRecipe(Request $request)
   {
-      return response(Products_recipes::all());
+    return response(Products_recipes::all());
   }
 }

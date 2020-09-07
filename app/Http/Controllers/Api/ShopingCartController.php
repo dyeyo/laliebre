@@ -13,10 +13,17 @@ class ShopingCartController extends Controller
   //MI CARRITO SIN CONFIRMAR
   public function getShopingCart($id)
   {
-    $shopingCart = ShoppingCart::with(['recetas.productos', 'recetas.AE_ingredientes'])
+    $shopingCart = ShoppingCart::with(['recetas.productos'])
       ->where('user_id', $id)
       ->where('state', 3)
       ->get();
+    if ($shopingCart == null) {
+      $shopingCart = ShoppingCart::with(['recetas.productos', 'recetas.AE_ingredientes'])
+        ->where('user_id', $id)
+        ->where('state', 3)
+        ->get();
+    }
+
     if ($shopingCart) {
       return response()->json([
         'carrito' => $shopingCart,
@@ -59,6 +66,7 @@ class ShopingCartController extends Controller
         'state' => 2,
         'address' => $request->address,
         'delivery_date' => $request->delivery_date,
+        'delivery_day' => $request->delivery_day,
         'delivery_hours' => $request->delivery_hours,
         'details' => $request->details
       ]);
@@ -150,6 +158,7 @@ class ShopingCartController extends Controller
         'delivery_date' => $request->delivery_date,
         'delivery_hours' => $request->delivery_hours,
         'details' => $request->details,
+        'delivery_day' => $request->delivery_day
       ]);
       return response()->json([
         'estado' => 'Pedido confirmado',
@@ -169,6 +178,7 @@ class ShopingCartController extends Controller
       $cart->total = $request->total;
       $cart->user_id = $request->user_id;
       $cart->details = $request->details;
+      $cart->delivery_day = $request->delivery_day;
       $storeID =  Products_recipes::select('store_id')->where('id', $cart->product_id)->get();
       foreach ($storeID as $tienda) {
         $store_id = $tienda->store_id;

@@ -24,36 +24,35 @@ class UsersController extends Controller
       return response()->json(['error' => 'Unauthorized'], 401);
     } else {
       $user = User::find($id);
-      if ($request->password == '') {
+      if (Hash::check($user->password, $request->password_verificate)) {
         $user->name = $request->name;
         $user->lastname = $request->lastname;
-        $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->email = $request->email;
         $user->address = $request->address;
         $user->role_id = 3;
-        if ($request->hasFile('picture')) {
-          $file = $request->file('picture');
-          $name1 = $file->getClientOriginalName();
-          $file->move(public_path() . '/img/clientes/', $name1);
-          $user->picture = $name1;
-        }
-      } else {
-        $user->name = $request->name;
-        $user->lastname = $request->lastname;
-        $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->phone = $request->phone;
-        $user->role_id = 3;
-        $user->address = $request->address;
-        if ($request->hasFile('picture')) {
-          $file = $request->file('picture');
-          $name1 = $file->getClientOriginalName();
-          $file->move(public_path() . '/img/clientes/', $name1);
-          $user->picture = $name1;
-        }
+        $user->update();
+        return response()->json(['status' => 'Usuario actualizado con exito'], 200);
+      } else {
+        return response()->json(['status' => 'Las contraseñas no es correcta '], 400);
       }
-      $user->update();
-      return response()->json(['status' => 'Usuario actualizado con exito'], 200);
+    }
+  }
+
+  public function updatePass(Request $request, $id)
+  {
+    if (!auth('api')->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    } else {
+      $user = User::find($id);
+      if (!Hash::check($user->password, $request->password_verificate)) {
+        $user->password = Hash::make($request->password);
+        $user->update();
+        return response()->json(['status' => 'Usuario actualizado con exito'], 200);
+      } else {
+        return response()->json(['status' => 'Las contraseñas no es correcta '], 400);
+      }
     }
   }
 }
