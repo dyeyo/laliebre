@@ -126,9 +126,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/usuario/{id}', 'UsersController@update')->name('usuario.update');
     Route::delete('/usuario/{id}', 'UsersController@destroy')->name('usuario.delete');
 
-
     /*AJAX*/
     Route::get('recetas/productos/{id}', 'RecitesController@indexWithProducts');
+
+    //VENTAS
+    Route::get('/ventas', 'VentasController@index')->name('ventas');
   });
 
   Route::group(['middleware' => 'store'], function () {

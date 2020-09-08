@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\ShoppingCardProducts;
+use App\ShoppingCart;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,13 @@ class HomeController extends Controller
    */
   public function index()
   {
-    return view('home');
+    $totalVentasProd = ShoppingCardProducts::with('productos.stores', 'user')->where('state', 1)->count();
+    $totalVentasRecetas = ShoppingCart::with('recetas.productos.sotre', 'user')->where('state', 1)->count();
+    $totalUsuarios = User::where('role_id', 3)->count();
+    return view('home', compact(
+      'totalVentasProd',
+      'totalVentasRecetas',
+      'totalUsuarios'
+    ));
   }
 }
