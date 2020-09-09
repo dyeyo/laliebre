@@ -94,6 +94,10 @@
                 <i class="fas fa-lock"></i><span class="hide-menu">Gestion Administrativa</span></a>
             </li>
             <li>
+              <a class="waves-effect waves-dark" href="{{route('ventas_grafica')}}">
+                <i class="fas fa-chars"></i><span class="hide-menu">Graficas</span></a>
+            </li>
+            <li>
             <a class="waves-effect waves-dark" href="{{route('products')}}"><i class="fas fa-shopping-basket"></i><span class="hide-menu">Gestion de Productos</span></a>
             </li>
             <li>

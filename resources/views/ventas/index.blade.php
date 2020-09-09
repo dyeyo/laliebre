@@ -25,13 +25,13 @@
                 </div>
               @endif
               <ul class="nav nav-tabs profile-tab" role="tablist">
-                <li class="nav-item"> 
+                <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-selected="true">
                     Ventas Receta</a> </li>
-                <li class="nav-item"> 
+                <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-selected="false">
                     Ventas Productos</a> </li>
-                <li class="nav-item"> 
+                <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#prod" role="tab" aria-selected="false">
                     Productos mas vendidos</a> </li>
               </ul>
@@ -103,27 +103,31 @@
                   </div>
                   <div class="tab-pane" id="prod" role="tabpanel">
                       <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Imagen</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              @foreach($topProd as $item)
-                                <tr>
-                                  <td>{{ $item->productos->code}}</td>
-                                  <td>{{ $item->productos->name}}</td>
-                                  <td  style="width: 20%" >
-                                    <img src="{{url('img/products/'.$item->productos->image)}}" class="img-responsive img-fluid" style="width: 76%;"  alt="">
-                                  </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                          </table>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre</th>
+                                        <th>Imagen</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach($topProd as $item)
+                                    <tr>
+                                      <td>{{ $item->code}}</td>
+                                      <td>{{ $item->name}}</td>
+                                      <td  style="width: 20%" >
+                                        <img src="{{url('img/products/'.$item->image)}}" class="img-responsive img-fluid" style="width: 76%;"  alt="">
+                                      </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
                         </div>
                       </div>
                   </div>
@@ -131,4 +135,5 @@
       </div>
   </div>
 </div>
+
 @endsection

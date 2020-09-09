@@ -26,8 +26,8 @@ class HomeController extends Controller
    */
   public function index()
   {
-    $totalVentasProd = ShoppingCardProducts::with('productos.stores', 'user')->where('state', 1)->count();
-    $totalVentasRecetas = ShoppingCart::with('recetas.productos.sotre', 'user')->where('state', 1)->count();
+    $totalVentasProd = ShoppingCardProducts::where('state', 1)->count();
+    $totalVentasRecetas = ShoppingCart::where('state', 1)->count();
     $totalUsuarios = User::where('role_id', 3)->count();
     return view('home', compact(
       'totalVentasProd',

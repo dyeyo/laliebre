@@ -131,6 +131,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //VENTAS
     Route::get('/ventas', 'VentasController@index')->name('ventas');
+    Route::get('/ventas_grafica', 'VentasController@graficaVentas')->name('ventas_grafica');
   });
 
   Route::group(['middleware' => 'store'], function () {
