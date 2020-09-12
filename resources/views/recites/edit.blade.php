@@ -41,7 +41,7 @@
           </div>
       </div>
   </div>
-  <!-- <div class="col-lg-8 col-xlg-9 col-md-7">
+   <div class="col-lg-8 col-xlg-9 col-md-7">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Editar recetas {{$receta->name}}</h4>
@@ -164,8 +164,8 @@
         </div>
       </div>
     </div>
-  </div> -->
-  
+  </div>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
@@ -248,7 +248,7 @@ var app = new Vue({
           }
           formData.append('image', this.var_imagen)
           formData.append('model', JSON.stringify(model))
-       
+
         let {data} = await axios.post('/recetas/create', formData, {headers: {'Content-Type': 'multipart/form-data'}})
         location.reload()
         } catch(e) {
@@ -258,9 +258,9 @@ var app = new Vue({
   }
 })
 </script>
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
 
-<!-- <script>
+<script>
 $(document).ready(function()
 {
   var productName = "";
@@ -328,5 +328,5 @@ $(document).ready(function()
     //PRODUCTOS POR TIENDAS
   }
 });
-</script> -->
+</script>
 @endsection

@@ -30,7 +30,9 @@
               <p class="text-muted">PRODUCTOS TOTAL VENDIDOS</p>
             </div>
             <div class="ml-auto">
+              @isset($totalVentasProd)
               <h2 class="counter text-primary">{{$totalVentasProd}}</h2>
+              @endisset
             </div>
           </div>
         </div>
@@ -47,7 +49,9 @@
               <p class="text-muted">RECETAS TOTAL VENDIDAS</p>
             </div>
             <div class="ml-auto">
+              @isset($totalVentasRecetas)
               <h2 class="counter text-cyan">{{$totalVentasRecetas}}</h2>
+              @endisset
             </div>
           </div>
         </div>
@@ -64,7 +68,9 @@
               <p class="text-muted">TOTAL CLIENTES</p>
             </div>
             <div class="ml-auto">
+              @isset($totalUsuarios)
               <h2 class="counter text-purple">{{$totalUsuarios}}</h2>
+              @endisset
             </div>
           </div>
         </div>

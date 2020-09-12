@@ -132,6 +132,7 @@ Route::group(['middleware' => ['auth']], function () {
     //VENTAS
     Route::get('/ventas', 'VentasController@index')->name('ventas');
     Route::get('/ventas_grafica', 'VentasController@graficaVentas')->name('ventas_grafica');
+    Route::get('/productos_proveedor', 'ProductosProveedoresController@index')->name('productos_proveedor');
   });
 
   Route::group(['middleware' => 'store'], function () {

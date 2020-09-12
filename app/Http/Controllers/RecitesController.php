@@ -17,6 +17,7 @@ class RecitesController extends Controller
     $recipes = Recipes::with('productos')->get();
     $products = Products_recipes::all();
     $stores = Stores::all();
+    // dd($recipes);
     return view('recites.index', compact('recipes', 'products', 'stores'));
   }
 
@@ -28,16 +29,17 @@ class RecitesController extends Controller
 
   public function store(Request $request)
   {
+    dd($request->all());
     $data = json_decode($request['model']);
     // dd($request->all(), $data->products_recipe_id[0]->id);
     $recipe = new Recipes();
     $recipe->code = $data->code;
     $recipe->name = $data->name;
     $recipe->storeId = $data->storeId;
-    // $recipe->description = $data->description;
+    $recipe->description = $data->description;
     $recipe->servings = $data->servings;
     $recipe->price = $data->price;
-    // $recipe->link = $data->link;
+    $recipe->link = $data->link;
     $recipe->type = $data->type;
     if ($request->hasFile('image')) {
       $file = $request->file('image');
@@ -45,6 +47,7 @@ class RecitesController extends Controller
       $file->move(public_path() . '/img/recetas/', $name1);
       $recipe->image = $name1;
     }
+
     $recipe->save();
 
     foreach ($data->products_recipe_id as $key => $value) {
@@ -54,6 +57,7 @@ class RecitesController extends Controller
         ['quantity' => $value->quantity]
       );
     }
+
     $recipe->save();
 
     Session::flash('message', 'Receta creada con exito');
@@ -64,9 +68,6 @@ class RecitesController extends Controller
   {
     $receta =  Recipes::with('productos', 'store')->find($id);
     $products = Products_recipes::all();
-    //$ingredientes = Recipes::with('productos')->find($id);
-
-
     $ingredientes = DB::table('products_recipe_recipes')
       ->select(
         'products_recipe_recipes.id as recetaID',
@@ -79,9 +80,11 @@ class RecitesController extends Controller
       ->join('products_recipes', 'products_recipe_recipes.products_recipe_id', '=', 'products_recipes.id')
       ->where('products_recipe_recipes.recipes_id', $id)
       ->get();
-    // dd($ingredientes);
     $stores = Stores::all();
-    return view('recites.edit', compact('receta', 'products', 'stores', 'ingredientes'));
+    // dd($receta);
+    return view('recites.edit', compact('receta', 'products', 'ingredientes', 'stores'));
+
+    return response($receta);
   }
 
   public function update(Request $request, $id)
@@ -104,11 +107,12 @@ class RecitesController extends Controller
     }
     $recipe->save();
 
-    foreach ($request->products_recipe_id as $key => $value) {
+    foreach ($request->productos as $key => $value) {
+      dd();
       $recetaId = Recipes::findOrFail($recipe->id);
       $recetaId->productos()->attach(
-        $value,
-        ['quantity' => $request->quantity[$key]]
+        $value['id'],
+        ['quantity' => 1]
       );
     }
     $recipe->save();

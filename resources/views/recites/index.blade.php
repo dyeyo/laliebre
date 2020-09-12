@@ -63,9 +63,11 @@
                             <a href="{{route('receta.show', $recipe->id)}}" class="btn btn-btn-outline-light">Ver</a>
                           </td>
                           <td>
-                            <v-btn text @click="editarReceta({{ $recipe->id }} )" data-toggle="modal" data-target="#exampleModalEdit" class="btn btn-btn-outline-light">
+                            <a href="{{route('receta.edit', $recipe->id)}}" class="btn btn-btn-outline-light">EDITAR</a>
+
+                            {{-- <v-btn text @click="editarReceta({{ $recipe->id }} )" data-toggle="modal" data-target="#exampleModalEdit" class="btn btn-btn-outline-light">
                               Editar
-                            </v-btn>
+                            </v-btn> --}}
                           </td>
                           <td>
                             <form class="user"  action="{{route('receta.delete', $recipe->id)}}" method="post">
@@ -195,7 +197,6 @@
           }
         },
         async addReceta(){
-            try {
               var formData = new  FormData();
               var model = {
                 code: this.var_codigo,
@@ -211,11 +212,11 @@
               formData.append('image', this.var_imagen)
               formData.append('model', JSON.stringify(model))
 
-            let {data} = await axios.post('/recetas/create', formData, {headers: {'Content-Type': 'multipart/form-data'}})
-            location.reload()
-            } catch(e) {
-            console.log(e);
-            }
+            let {data} = await axios.post('/recetas/create', formData, {
+              headers: {'Content-Type': 'multipart/form-data'},
+            })
+            //location.reload()
+
         },
         async EditarReceta(){
           var URL = `/recetas/${this.Edit_receta.id}`
