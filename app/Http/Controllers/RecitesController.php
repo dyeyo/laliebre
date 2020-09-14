@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Products_recipes;
 use App\Recipes;
+use App\Products_recipe_recipes;
 use App\Stores;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +30,6 @@ class RecitesController extends Controller
 
   public function store(Request $request)
   {
-    dd($request->all());
     $data = json_decode($request['model']);
     // dd($request->all(), $data->products_recipe_id[0]->id);
     $recipe = new Recipes();
@@ -47,18 +47,23 @@ class RecitesController extends Controller
       $file->move(public_path() . '/img/recetas/', $name1);
       $recipe->image = $name1;
     }
-
     $recipe->save();
 
-    foreach ($data->products_recipe_id as $key => $value) {
-      $recetaId = Recipes::findOrFail($recipe->id);
-      $recetaId->productos()->attach(
-        $value->id,
-        ['quantity' => $value->quantity]
-      );
+    // agregado por javier para ver cual fue la ultima receta que guarde
+    $elemento_guardado = Recipes::orderby('id', 'desc')->first();
+
+    $conteo = count($data->products_recipe_id);
+
+    // return $data->products_recipe_id;
+    // return $conteo;
+
+    for ($i = 0; $i < $conteo; $i++){
+      $product_recipes_recipes =  new Products_recipe_recipes();
+      $product_recipes_recipes->quantity_producto = $data->products_recipe_id[$i]->cantidad; 
+      $product_recipes_recipes->products_recipe_id = $data->products_recipe_id[$i]->id;
+      $product_recipes_recipes->recipes_id = $elemento_guardado->id;
+      $product_recipes_recipes->save();
     }
-
-    $recipe->save();
 
     Session::flash('message', 'Receta creada con exito');
     return redirect()->route('recetas');
@@ -69,17 +74,17 @@ class RecitesController extends Controller
     $receta =  Recipes::with('productos', 'store')->find($id);
     $products = Products_recipes::all();
     $ingredientes = DB::table('products_recipe_recipes')
-      ->select(
-        'products_recipe_recipes.id as recetaID',
-        'products_recipe_recipes.quantity',
-        'products_recipe_recipes.products_recipe_id',
-        'products_recipe_recipes.recipes_id',
-        'products_recipes.name',
-        'products_recipes.image'
-      )
-      ->join('products_recipes', 'products_recipe_recipes.products_recipe_id', '=', 'products_recipes.id')
-      ->where('products_recipe_recipes.recipes_id', $id)
-      ->get();
+    ->select(
+      'products_recipe_recipes.id as recetaID',
+      'products_recipe_recipes.quantity',
+      'products_recipe_recipes.products_recipe_id',
+      'products_recipe_recipes.recipes_id',
+      'products_recipes.name',
+      'products_recipes.image'
+    )
+    ->join('products_recipes', 'products_recipe_recipes.products_recipe_id', '=', 'products_recipes.id')
+    ->where('products_recipe_recipes.recipes_id', $id)
+    ->get();
     $stores = Stores::all();
     // dd($receta);
     return view('recites.edit', compact('receta', 'products', 'ingredientes', 'stores'));

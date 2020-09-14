@@ -1,16 +1,16 @@
 <v-app>
-  <div class="modal fade{{--  show --}}" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"{{--  style="display:block;" --}}>
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Agregar Receta</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <div class="modal fade{{--  show --}} bd-example-modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"{{--  style="display:block;" --}}>
+    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Receta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
+          </button>
+        </div>
+        <div class="modal-body">
           <v-container>
-              <v-form ref="createForm" >
+            <v-form ref="createForm" >
               <v-row>
                 <v-col cols="12" sm="6" md="12">
                   <v-text-field
@@ -98,7 +98,7 @@
               </v-col>
               <v-data-table dense :headers="headers" :items="items_ingrediente" item-key="name" class="elevation-1">
                 <template v-slot:item.accion="{item}" >
-                <v-btn color="success" small icon @click="deleteIngrediente(item)"  >X</v-btn>
+                  <v-btn color="success" small icon @click="deleteIngrediente(item)"  >X</v-btn>
                 </template>
               </v-data-table>
 
@@ -113,27 +113,27 @@
 
               <v-col cols="12" sm="6" md="12">
                 <v-text-field
-                  label="link"
-                  id="id"
-                  v-model="var_link"
+                label="link"
+                id="id"
+                v-model="var_link"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="12">
-              <v-textarea
+                <v-textarea
                 label="Descripcion"
                 value=""
                 v-model="description"
-              ></v-textarea>
+                ></v-textarea>
               </v-col>
-              </v-form>
-            </v-row>
-          </v-container>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-            <button type="submit" class="btn btn-primary" @click="addReceta" >Guardar Receta</button>
-          </div>
+            </v-form>
+          </v-row>
+        </v-container>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+          <button type="submit" class="btn btn-primary" @click="addReceta" data-dismiss="modal">Guardar Receta</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 </v-app>
