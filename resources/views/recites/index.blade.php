@@ -60,14 +60,14 @@
                     <img src="{{asset('img/recetas/'.$recipe->image)}}" class="img-responsive img-fluid" style="width: 76%;" alt="">
                   </td>
                   <td>
-                    {{-- <a href="{{route('receta.show', $recipe->id)}}" class="btn btn-btn-outline-light">Ver</a> --}}
-                    <button type="button" data-toggle="modal" @click="verModal({{$recipe}})" data-target="#exampleVerModal">
+                    <a href="{{route('receta.show', $recipe->id)}}" class="btn btn-btn-outline-light">Ver</a>
+                    {{-- <button type="button" data-toggle="modal" @click="verModal({{$recipe}})" data-target="#exampleVerModal">
                       <i class="fas fa-eye"></i>
                       Ver
-                    </button>
+                    </button> --}}
                   </td>
                   <td>
-                    <button type="button" data-toggle="modal" data-target="#exampleEditarModal">
+                    <button type="button" data-toggle="modal" @click="editarModal({{$recipe}})" data-target="#exampleEditarModal">
                       <i class="fas fa-pencil-alt"></i>
                       Editar
                     </button>
@@ -166,7 +166,7 @@
       this.getPRoductosReceta()
     },
     methods:{
-      verModal(objeto){
+      editarModal(objeto){
         try{
           this.verPropiedadesReceta = objeto
           console.log(this.verPropiedadesReceta)
@@ -197,7 +197,8 @@
         this.producto_receta_selected = ''
       },
       async addIngredienteEditar(item, cantidad){
-        this.Edit_receta.productos.push({ id: item.id, name:item.name, cantidad, um:item.um, quantity: item.quantity })
+        // aqui deberia verificar si ya existe el eliemento en la lista pa poderlo agregar
+        this.verPropiedadesReceta.productos.push({ id: item.id, name:item.name, cantidad, um:item.um, quantity: item.quantity })
         this.var_cantidad_ingrediente = 0
         this.producto_receta_selected = ''
       },
@@ -205,12 +206,22 @@
         let index = this.items_ingrediente.findIndex(item => item.id === ingrediente.id)
         this.items_ingrediente.splice(index,1)
       },
+      // metodo tocado por richard
       async deleteIngredienteEditar(ingrediente){
-        let index = this.Edit_receta.productos.findIndex(item => item.id === ingrediente.id)
-        this.Edit_receta.productos.splice(index,1)
-        var URL = `/recetas/ingrediente/${ingrediente.id}`
+        let index = this.verPropiedadesReceta.productos.findIndex(item => item.products_recipe_id === ingrediente.products_recipe_id)
+        this.verPropiedadesReceta.productos.splice(index,1)
+        // var URL = `/recetas/ingrediente/${ingrediente.id}`
+        // try{
+        //   let data = await axios.delete(URL)
+        // }catch(e){
+        //   console.log(e)
+        // }
+      },
+      // metodo agregado por richard
+      async EditarRecetaActualizada(item){
+        var URL = `/recetas/editar`
         try{
-          let data = await axios.delete(URL)
+          let data = await axios.put(URL, item)
         }catch(e){
           console.log(e)
         }

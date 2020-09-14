@@ -69,27 +69,66 @@ class RecitesController extends Controller
     return redirect()->route('recetas');
   }
 
-  public function edit(Request $request, $id)
-  {
-    $receta =  Recipes::with('productos', 'store')->find($id);
-    $products = Products_recipes::all();
-    $ingredientes = DB::table('products_recipe_recipes')
-    ->select(
-      'products_recipe_recipes.id as recetaID',
-      'products_recipe_recipes.quantity',
-      'products_recipe_recipes.products_recipe_id',
-      'products_recipe_recipes.recipes_id',
-      'products_recipes.name',
-      'products_recipes.image'
-    )
-    ->join('products_recipes', 'products_recipe_recipes.products_recipe_id', '=', 'products_recipes.id')
-    ->where('products_recipe_recipes.recipes_id', $id)
-    ->get();
-    $stores = Stores::all();
-    // dd($receta);
-    return view('recites.edit', compact('receta', 'products', 'ingredientes', 'stores'));
+  // public function edit(Request $request, $id)
+  // {
+  //   $receta =  Recipes::with('productos', 'store')->find($id);
+  //   $products = Products_recipes::all();
+  //   $ingredientes = DB::table('products_recipe_recipes')
+  //   ->select(
+  //     'products_recipe_recipes.id as recetaID',
+  //     'products_recipe_recipes.quantity',
+  //     'products_recipe_recipes.products_recipe_id',
+  //     'products_recipe_recipes.recipes_id',
+  //     'products_recipes.name',
+  //     'products_recipes.image'
+  //   )
+  //   ->join('products_recipes', 'products_recipe_recipes.products_recipe_id', '=', 'products_recipes.id')
+  //   ->where('products_recipe_recipes.recipes_id', $id)
+  //   ->get();
+  //   $stores = Stores::all();
+  //   // dd($receta);
+  //   return view('recites.edit', compact('receta', 'products', 'ingredientes', 'stores'));
 
-    return response($receta);
+  //   return response($receta);
+  // }  
+
+  public function edit2(Request $request)
+  {
+    $recipe = Recipes::where('id', $request->id)->first();
+    $recipe->code = $request->code;
+    $recipe->name = $request->name;
+    $recipe->storeId = $request->storeId;
+    $recipe->description = $request->description;
+    $recipe->servings = $request->servings;
+    $recipe->price = $request->price;
+    $recipe->link = $request->link;
+    $recipe->type = $request->type;
+    if ($request->hasFile('image')) {
+      $file = $request->file('image');
+      $name1 = $file->getClientOriginalName();
+      $file->move(public_path() . '/img/recetas/', $name1);
+      $recipe->image = $name1;
+    }
+    $recipe->save();
+
+    // agregado por richard para ver cual fue la ultima receta que guarde
+    $elemento_guardado = Recipes::orderby('id', 'desc')->first();
+
+    // agregado por richard, para eliminar los productos de la receta
+    $eliminar_productos = Products_recipe_recipes::where('recipes_id', $request->id)->delete();
+
+    $conteo = count($request->productos);
+
+    for ($i = 0; $i < $conteo; $i++){
+      $product_recipes_recipes =  new Products_recipe_recipes();
+      $product_recipes_recipes->quantity_producto = $request->productos[$i]['quantity']; 
+      $product_recipes_recipes->products_recipe_id = $request->productos[$i]['id'];
+      $product_recipes_recipes->recipes_id = $elemento_guardado->id;
+      $product_recipes_recipes->save();
+    }
+
+    Session::flash('message', 'Receta creada con exito');
+    return redirect()->route('recetas');
   }
 
   public function update(Request $request, $id)

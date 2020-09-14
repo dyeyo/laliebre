@@ -102,7 +102,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/recetas', 'RecitesController@index')->name('recetas');
     Route::get('/recetas/show/{id}', 'RecitesController@show')->name('receta.show');
     Route::post('/recetas/create', 'RecitesController@store')->name('receta.store');
-    Route::get('/recetas/editar/{id}', 'RecitesController@edit')->name('receta.edit');
+    //comentado por richard
+    // Route::get('/recetas/editar/{id}', 'RecitesController@edit')->name('receta.edit');
+    //creado por richard
+    Route::put('/recetas/editar', 'RecitesController@edit2')->name('receta.edit');
     Route::put('/recetas/{id}', 'RecitesController@update')->name('receta.update');
     Route::get('/recetas/{id}', 'RecitesController@destroy')->name('receta.delete');
 
