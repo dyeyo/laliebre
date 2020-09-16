@@ -129,7 +129,9 @@
         sortable: false,
         value: 'name',
       },
-      { text: 'Cantidad', value: 'cantidad' },
+      // TOCADO POR RICHARD 
+      // { text: 'Cantidad', value: 'cantidad' },
+      { text: 'Cantidad', value: 'quantity_producto' },
       { text: 'Unidad de medida', value: 'um' },
       { text: 'accion', value: 'accion' },
       ],
@@ -192,13 +194,13 @@
         }
       },
       async addIngrediente(item, cantidad){
-        this.items_ingrediente.push({ id: item.id, name:item.name, cantidad, um:item.um, quantity: item.quantity })
+        this.items_ingrediente.push({ id: item.id, name:item.name, quantity_producto:cantidad, um:item.um, quantity: item.quantity })
         this.var_cantidad_ingrediente = 0
         this.producto_receta_selected = ''
       },
       async addIngredienteEditar(item, cantidad){
         // aqui deberia verificar si ya existe el eliemento en la lista pa poderlo agregar
-        this.verPropiedadesReceta.productos.push({ id: item.id, name:item.name, cantidad, um:item.um, quantity: item.quantity })
+        this.verPropiedadesReceta.productos.push({ id: item.id, name:item.name, quantity_producto:cantidad, um:item.um, quantity: item.quantity })
         this.var_cantidad_ingrediente = 0
         this.producto_receta_selected = ''
       },
