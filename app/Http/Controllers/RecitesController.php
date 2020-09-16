@@ -122,7 +122,13 @@ class RecitesController extends Controller
     for ($i = 0; $i < $conteo; $i++){
       $product_recipes_recipes =  new Products_recipe_recipes();
       $product_recipes_recipes->quantity_producto = $request->productos[$i]['quantity_producto']; 
-      $product_recipes_recipes->products_recipe_id = $request->productos[$i]['id'];
+
+      if(isset($request->productos[$i]['id'])){
+        $product_recipes_recipes->products_recipe_id = $request->productos[$i]['id'];
+      }else{
+        $product_recipes_recipes->products_recipe_id = $request->productos[$i]['products_recipe_id'];
+      }
+
       $product_recipes_recipes->recipes_id = $elemento_guardado->id;
       $product_recipes_recipes->save();
     }
