@@ -161,18 +161,28 @@
       rules: {
         required: value => !!value || 'Este campo es requerido',
       },
-      //creado por richard
-      verPropiedadesReceta: [],
-      verPropiedadesRecetaimagen: false
+      verPropiedadesReceta: [],     //creado por richard
+      verPropiedadesRecetaimagen: false     //creado por richard
     },
     mounted(){
       this.getPRoductosReceta()
     },
     methods:{
+      // metodo creado por richard
       editarModal(objeto){
         try{
-          console.log(objeto)
-          this.verPropiedadesReceta = objeto
+          this.verPropiedadesReceta = {
+            id: objeto.id,
+            code: objeto.code,
+            name: objeto.name,
+            storeId: this.items_stores.find(obj => obj.store_id === objeto.storeId),
+            servings: objeto.servings,
+            price: objeto.price,
+            productos: objeto.productos,
+            type: parseInt(objeto.type),
+            link: objeto.link,
+            description: objeto.description
+          }
           if(objeto.image != ''){
             this.verPropiedadesRecetaimagen = true
           }else{

@@ -92,6 +92,7 @@ class RecitesController extends Controller
   //   return response($receta);
   // }  
 
+  // metodo creado y refactorizado por richard
   public function edit2(Request $request)
   {
     $recipe = Recipes::where('id', $request->id)->first();
@@ -102,7 +103,15 @@ class RecitesController extends Controller
     $recipe->servings = $request->servings;
     $recipe->price = $request->price;
     $recipe->link = $request->link;
-    $recipe->type = $request->type['value'];
+
+    //este metodo sirve para ver si me esta llegando un array o un int
+    // el entero signidica si no cambio el select y el array signidica su cambio
+    if(gettype($request->type) == "array"){
+      $recipe->type = $request->type['value'];
+    }else{
+      $recipe->type = $request->type;
+    }
+
     if ($request->hasFile('image')) {
       $file = $request->file('image');
       $name1 = $file->getClientOriginalName();
