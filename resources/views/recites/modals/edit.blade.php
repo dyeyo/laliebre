@@ -48,7 +48,7 @@
                   label="tipo receta"
                   return-object
                   item-text="text"
-                  v-model="verPropiedadesReceta"
+                  v-model="verPropiedadesReceta.type"
                   ></v-select>
                 </v-col>
               </v-row>

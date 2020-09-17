@@ -94,15 +94,16 @@ class RecitesController extends Controller
 
   public function edit2(Request $request)
   {
+    // return $request;
     $recipe = Recipes::where('id', $request->id)->first();
     $recipe->code = $request->code;
     $recipe->name = $request->name;
-    $recipe->storeId = $request->storeId;
+    $recipe->storeId = $request->storeId['id']; //revisar
     $recipe->description = $request->description;
     $recipe->servings = $request->servings;
     $recipe->price = $request->price;
     $recipe->link = $request->link;
-    $recipe->type = $request->type;
+    $recipe->type = $request->type['value'];
     if ($request->hasFile('image')) {
       $file = $request->file('image');
       $name1 = $file->getClientOriginalName();
