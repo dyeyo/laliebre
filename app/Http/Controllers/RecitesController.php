@@ -94,11 +94,10 @@ class RecitesController extends Controller
 
   public function edit2(Request $request)
   {
-    // return $request;
     $recipe = Recipes::where('id', $request->id)->first();
     $recipe->code = $request->code;
     $recipe->name = $request->name;
-    $recipe->storeId = $request->storeId['id']; //revisar
+    $recipe->storeId = $request->storeId['id'];
     $recipe->description = $request->description;
     $recipe->servings = $request->servings;
     $recipe->price = $request->price;
@@ -112,8 +111,8 @@ class RecitesController extends Controller
     }
     $recipe->save();
 
-    // agregado por richard para ver cual fue la ultima receta que guarde
-    $elemento_guardado = Recipes::orderby('id', 'desc')->first();
+    // agregado por richard para ver cual es la receta que le pertenece
+    $elemento_editar = Recipes::where('id', $request->id)->first();
 
     // agregado por richard, para eliminar los productos de la receta
     $eliminar_productos = Products_recipe_recipes::where('recipes_id', $request->id)->delete();
@@ -130,47 +129,47 @@ class RecitesController extends Controller
         $product_recipes_recipes->products_recipe_id = $request->productos[$i]['products_recipe_id'];
       }
 
-      $product_recipes_recipes->recipes_id = $elemento_guardado->id;
+      $product_recipes_recipes->recipes_id = $elemento_editar->id;
       $product_recipes_recipes->save();
     }
 
-    Session::flash('message', 'Receta creada con exito');
+    Session::flash('message', 'Receta actualizada con exito');
     return redirect()->route('recetas');
   }
 
-  public function update(Request $request, $id)
-  {
-    $recipe = Recipes::with('productos', 'store')->find($id);
-    $recipe->code = $request->code;
-    $recipe->name = $request->name;
-    $recipe->storeId = $request->storeId;
-    $recipe->description = $request->description;
-    $recipe->servings = $request->servings;
-    $recipe->link = $request->link;
-    $recipe->type = $request->type;
-    $recipe->price = $request->price;
+  // public function update(Request $request, $id)
+  // {
+  //   $recipe = Recipes::with('productos', 'store')->find($id);
+  //   $recipe->code = $request->code;
+  //   $recipe->name = $request->name;
+  //   $recipe->storeId = $request->storeId;
+  //   $recipe->description = $request->description;
+  //   $recipe->servings = $request->servings;
+  //   $recipe->link = $request->link;
+  //   $recipe->type = $request->type;
+  //   $recipe->price = $request->price;
 
-    if ($request->hasFile('image')) {
-      $file = $request->file('image');
-      $name1 = $file->getClientOriginalName();
-      $file->move(public_path() . '/img/recetas/', $name1);
-      $recipe->image = $name1;
-    }
-    $recipe->save();
+  //   if ($request->hasFile('image')) {
+  //     $file = $request->file('image');
+  //     $name1 = $file->getClientOriginalName();
+  //     $file->move(public_path() . '/img/recetas/', $name1);
+  //     $recipe->image = $name1;
+  //   }
+  //   $recipe->save();
 
-    foreach ($request->productos as $key => $value) {
-      dd();
-      $recetaId = Recipes::findOrFail($recipe->id);
-      $recetaId->productos()->attach(
-        $value['id'],
-        ['quantity' => 1]
-      );
-    }
-    $recipe->save();
+  //   foreach ($request->productos as $key => $value) {
+  //     dd();
+  //     $recetaId = Recipes::findOrFail($recipe->id);
+  //     $recetaId->productos()->attach(
+  //       $value['id'],
+  //       ['quantity' => 1]
+  //     );
+  //   }
+  //   $recipe->save();
 
-    Session::flash('message', 'Receta editada con exito');
-    return redirect()->route('recetas');
-  }
+  //   Session::flash('message', 'Receta editada con exito');
+  //   return redirect()->route('recetas');
+  // }
 
   public function destroy($id)
   {

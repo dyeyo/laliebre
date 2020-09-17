@@ -103,7 +103,9 @@
                 </template>
               </v-data-table>
 
-              <v-col cols="12" sm="6" md="12">
+              <!-- manoseado por richard -->
+
+              <v-col cols="12" sm="6" md="12" v-show="verPropiedadesRecetaimagen === false">
                 <v-file-input
                 label="Seleccionar imagen"
                 filled
@@ -111,6 +113,12 @@
                 v-model="var_imagen"
                 ></v-file-input>
               </v-col>
+
+              <v-col cols="12" sm="6" md="12" v-show="verPropiedadesRecetaimagen === true">
+                <img class="figure-img img-fluid rounded" :src="`img/recetas/${verPropiedadesReceta.image}`" alt="">
+              </v-col>
+
+              <!-- Fin del manoseo-->
 
               <v-col cols="12" sm="6" md="12">
                 <v-text-field

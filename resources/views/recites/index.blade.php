@@ -162,7 +162,8 @@
         required: value => !!value || 'Este campo es requerido',
       },
       //creado por richard
-      verPropiedadesReceta: []
+      verPropiedadesReceta: [],
+      verPropiedadesRecetaimagen: false
     },
     mounted(){
       this.getPRoductosReceta()
@@ -170,8 +171,14 @@
     methods:{
       editarModal(objeto){
         try{
+          console.log(objeto)
           this.verPropiedadesReceta = objeto
-          console.log(this.verPropiedadesReceta)
+          if(objeto.image != ''){
+            this.verPropiedadesRecetaimagen = true
+          }else{
+            this.verPropiedadesRecetaimagen = false
+          }
+
         }catch(e){
           console.log(e)
         }
@@ -223,7 +230,12 @@
       async EditarRecetaActualizada(item){
         var URL = `/recetas/editar`
         try{
+          // location.reload()
+          var formData = new  FormData();
+          let imagen = formData.append('image', this.var_imagen)
+          item.image = imagen
           let data = await axios.put(URL, item)
+          await this.getPRoductosReceta()
         }catch(e){
           console.log(e)
         }
@@ -247,47 +259,47 @@
         let {data} = await axios.post('/recetas/create', formData, {
           headers: {'Content-Type': 'multipart/form-data'},
         })
-            //location.reload()
+        location.reload()
 
-          },
-          async EditarReceta(){
-            var URL = `/recetas/${this.Edit_receta.id}`
-            try{
-              let data = await axios.put(URL, this.Edit_receta)
-            }catch(e){
-              console.log(e)
-            }
-          }
-        }
-      })
-    </script>
-    <script>
-      $(document).ready(function()
-      {
-        var productName = "";
-        $.get("/productos/recetas", function(result) {
-          let max = result.length;
-          for (var i=0; i<max; i++) {
-            productName += '<option value="'+result[i].id+'">'+ result[i].name+ ' x '+ result[i].quantity+' '+result[i].um+ '</option>';
-          }
-        })
-        .fail(function(){
-          alert('Uff! Algo salio mal (@E0)');
-        });
-        $('.btn-edit').click (function(e) {
-          e.preventDefault();
-          var id = $(this).prev('input').val();
-          $.get("/recetas/productos/"+id, function(result) {
-            $("#code").val(result.code);
-            $("#name").val(result.name);
+      },
+      // async EditarReceta(){
+      //   var URL = `/recetas/${this.Edit_receta.id}`
+      //   try{
+      //     let data = await axios.put(URL, this.Edit_receta)
+      //   }catch(e){
+      //     console.log(e)
+      //   }
+      // }
+    }
+  })
+</script>
+<script>
+  $(document).ready(function()
+  {
+    var productName = "";
+    $.get("/productos/recetas", function(result) {
+      let max = result.length;
+      for (var i=0; i<max; i++) {
+        productName += '<option value="'+result[i].id+'">'+ result[i].name+ ' x '+ result[i].quantity+' '+result[i].um+ '</option>';
+      }
+    })
+    .fail(function(){
+      alert('Uff! Algo salio mal (@E0)');
+    });
+    $('.btn-edit').click (function(e) {
+      e.preventDefault();
+      var id = $(this).prev('input').val();
+      $.get("/recetas/productos/"+id, function(result) {
+        $("#code").val(result.code);
+        $("#name").val(result.name);
           // $("#store_id"   ).val(result.name);
           $("#editModal").modal("show");
           console.log(result);
         })
-          .fail(function(){
-            alert('Uff! Algo salio mal (@E0)');
-          });
-        });
+      .fail(function(){
+        alert('Uff! Algo salio mal (@E0)');
+      });
+    });
       // var x = 2;
       $('#product-add').click (function(e) {
         e.preventDefault();
