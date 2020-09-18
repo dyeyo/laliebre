@@ -143,7 +143,7 @@ class RecitesController extends Controller
     }
 
     Session::flash('message', 'Receta actualizada con exito');
-    return redirect()->route('recetas');
+    // header('Location: http://www.example.com/');
   }
 
   // public function update(Request $request, $id)

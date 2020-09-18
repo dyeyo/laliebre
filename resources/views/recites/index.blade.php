@@ -216,6 +216,8 @@
         this.producto_receta_selected = ''
       },
       async addIngredienteEditar(item, cantidad){
+        console.log(item)
+        console.log(cantidad)
         // aqui deberia verificar si ya existe el eliemento en la lista pa poderlo agregar
         this.verPropiedadesReceta.productos.push({ id: item.id, name:item.name, quantity_producto:cantidad, um:item.um, quantity: item.quantity })
         this.var_cantidad_ingrediente = 0
@@ -240,11 +242,12 @@
       async EditarRecetaActualizada(item){
         var URL = `/recetas/editar`
         try{
-          // location.reload()
           var formData = new  FormData();
           let imagen = formData.append('image', this.var_imagen)
           item.image = imagen
           let data = await axios.put(URL, item)
+          location.reload()
+          alert('Editado con exito')
           await this.getPRoductosReceta()
         }catch(e){
           console.log(e)
