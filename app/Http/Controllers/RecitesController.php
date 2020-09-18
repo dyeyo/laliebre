@@ -98,7 +98,11 @@ class RecitesController extends Controller
     $recipe = Recipes::where('id', $request->id)->first();
     $recipe->code = $request->code;
     $recipe->name = $request->name;
-    $recipe->storeId = $request->storeId['id'];
+    if(gettype($request->storeId) == "array"){
+      $recipe->storeId = $request->storeId['id'];
+    }else{
+      $recipe->storeId = $request->storeId;
+    }
     $recipe->description = $request->description;
     $recipe->servings = $request->servings;
     $recipe->price = $request->price;

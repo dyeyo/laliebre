@@ -171,11 +171,12 @@
       // metodo creado por richard
       editarModal(objeto){
         try{
+          console.log(this.items_stores)
           this.verPropiedadesReceta = {
             id: objeto.id,
             code: objeto.code,
             name: objeto.name,
-            storeId: this.items_stores.find(obj => obj.store_id === objeto.storeId),
+            storeId: this.items_stores.find(obj => obj.id === objeto.storeId),
             servings: objeto.servings,
             price: objeto.price,
             productos: objeto.productos,
@@ -247,7 +248,6 @@
           item.image = imagen
           let data = await axios.put(URL, item)
           location.reload()
-          alert('Editado con exito')
           await this.getPRoductosReceta()
         }catch(e){
           console.log(e)
