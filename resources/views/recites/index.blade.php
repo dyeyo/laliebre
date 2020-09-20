@@ -162,7 +162,9 @@
         required: value => !!value || 'Este campo es requerido',
       },
       verPropiedadesReceta: [],     //creado por richard
-      verPropiedadesRecetaimagen: false     //creado por richard
+      verPropiedadesRecetaimagen: false,     //creado por richard
+      items: ['Actualizar', 'NoActualizar', 'SinImagen'], //creado por richard
+      option_image: 'NoActualizar'  //creado por richard
     },
     mounted(){
       this.getPRoductosReceta()
@@ -171,11 +173,11 @@
       // metodo creado por richard
       editarModal(objeto){
         try{
-          console.log(this.items_stores)
           this.verPropiedadesReceta = {
             id: objeto.id,
             code: objeto.code,
             name: objeto.name,
+            image: objeto.image, //arreglar
             storeId: this.items_stores.find(obj => obj.id === objeto.storeId),
             servings: objeto.servings,
             price: objeto.price,
@@ -184,10 +186,10 @@
             link: objeto.link,
             description: objeto.description
           }
-          if(objeto.image != ''){
+          if(objeto.image != ""){
             this.verPropiedadesRecetaimagen = true
           }else{
-            this.verPropiedadesRecetaimagen = false
+            this.verPropiedadesRecetaimagen = false            
           }
 
         }catch(e){
@@ -244,9 +246,25 @@
         var URL = `/recetas/editar`
         try{
           var formData = new  FormData();
-          let imagen = formData.append('image', this.var_imagen)
-          item.image = imagen
-          let data = await axios.put(URL, item)
+          var model = {
+            code: item.code,
+            name: item.name,
+            storeId: item.storeId,
+            servings: item.servings,
+            price: item.price,
+            products_recipe_id: item.id,
+            type: item.type,
+            link: item.link,
+            description: item.description,
+            productos: item.productos,
+          }
+          formData.append('image', this.var_imagen)
+          formData.append('option_image', this.option_image)
+          formData.append('model', JSON.stringify(model))
+          let {data} = await axios.post(URL, formData, {
+            headers: {'Content-Type': 'multipart/form-data'},
+          })
+          // let data = await axios.put(URL, item)
           location.reload()
           await this.getPRoductosReceta()
         }catch(e){

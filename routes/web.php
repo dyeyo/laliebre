@@ -105,7 +105,7 @@ Route::group(['middleware' => ['auth']], function () {
     //comentado por richard
     // Route::get('/recetas/editar/{id}', 'RecitesController@edit')->name('receta.edit');
     //creado por richard
-    Route::put('/recetas/editar', 'RecitesController@edit2')->name('receta.edit');
+    Route::post('/recetas/editar', 'RecitesController@edit2')->name('receta.edit');
     Route::put('/recetas/{id}', 'RecitesController@update')->name('receta.update');
     Route::get('/recetas/{id}', 'RecitesController@destroy')->name('receta.delete');
 

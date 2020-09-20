@@ -104,8 +104,17 @@
               </v-data-table>
 
               <!-- manoseado por richard -->
+              <v-col cols="12" sm="6" md="12" class="mt-3">
+                <v-select
+                v-model="option_image"
+                :items="items"
+                value="NoActualizar"
+                label="Actualizar imagen"
+                ></v-select>
+              </v-col>
 
-              <v-col cols="12" sm="6" md="12" v-show="verPropiedadesRecetaimagen === false">
+
+              <v-col cols="12" sm="6" md="12" v-show="option_image === 'Actualizar'">
                 <v-file-input
                 label="Seleccionar imagen"
                 filled
@@ -114,8 +123,12 @@
                 ></v-file-input>
               </v-col>
 
-              <v-col cols="12" sm="6" md="12" v-show="verPropiedadesRecetaimagen === true">
+              <v-col cols="12" sm="6" md="12" v-show="option_image === 'NoActualizar'">
                 <img class="figure-img img-fluid rounded" :src="`img/recetas/${verPropiedadesReceta.image}`" alt="">
+              </v-col>
+
+              <v-col cols="12" sm="6" md="12" v-show="option_image === 'SinImagen'">
+                <h5>No desea guardar imagen</h5>
               </v-col>
 
               <!-- Fin del manoseo-->

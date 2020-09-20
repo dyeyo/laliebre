@@ -95,51 +95,62 @@ class RecitesController extends Controller
   // metodo creado y refactorizado por richard
   public function edit2(Request $request)
   {
-    $recipe = Recipes::where('id', $request->id)->first();
-    $recipe->code = $request->code;
-    $recipe->name = $request->name;
-    if(gettype($request->storeId) == "array"){
-      $recipe->storeId = $request->storeId['id'];
-    }else{
-      $recipe->storeId = $request->storeId;
-    }
-    $recipe->description = $request->description;
-    $recipe->servings = $request->servings;
-    $recipe->price = $request->price;
-    $recipe->link = $request->link;
+    $data = json_decode($request['model']);
+    // dd($request->all());
+    $recipe = Recipes::where('id', $data->products_recipe_id)->first();
+    $recipe->code = $data->code;
+    $recipe->name = $data->name;
+    // if(gettype($data->storeId) == "array"){
+    $recipe->storeId = $data->storeId->id;
+    // }else{
+      // $recipe->storeId = $data->storeId;
+    // }
+    $recipe->description = $data->description;
+    $recipe->servings = $data->servings;
+    $recipe->price = $data->price;
+    $recipe->link = $data->link;
 
     //este metodo sirve para ver si me esta llegando un array o un int
     // el entero signidica si no cambio el select y el array signidica su cambio
-    if(gettype($request->type) == "array"){
-      $recipe->type = $request->type['value'];
+    if(gettype($data->type) == "array"){
+      $recipe->type = $data->type->value;
     }else{
-      $recipe->type = $request->type;
+      $recipe->type = $data->type;
     }
 
-    if ($request->hasFile('image')) {
-      $file = $request->file('image');
-      $name1 = $file->getClientOriginalName();
-      $file->move(public_path() . '/img/recetas/', $name1);
-      $recipe->image = $name1;
+    $opticion_switch = $request['option_image'];
+
+    if($opticion_switch == "Actualizar"){
+      if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $name1 = $file->getClientOriginalName();
+        $file->move(public_path() . '/img/recetas/', $name1);
+        $recipe->image = $name1;
+      }
+    }else if($opticion_switch == "SinImagen"){
+      $recipe->image = "";
+    }else{
+      $recipe->image = $recipe->image;
     }
+
     $recipe->save();
 
     // agregado por richard para ver cual es la receta que le pertenece
-    $elemento_editar = Recipes::where('id', $request->id)->first();
+    $elemento_editar = Recipes::where('id', $data->products_recipe_id)->first();
 
     // agregado por richard, para eliminar los productos de la receta
-    $eliminar_productos = Products_recipe_recipes::where('recipes_id', $request->id)->delete();
+    $eliminar_productos = Products_recipe_recipes::where('recipes_id', $data->products_recipe_id)->delete();
 
-    $conteo = count($request->productos);
+    $conteo = count($data->productos);
 
     for ($i = 0; $i < $conteo; $i++){
       $product_recipes_recipes =  new Products_recipe_recipes();
-      $product_recipes_recipes->quantity_producto = $request->productos[$i]['quantity_producto']; 
+      $product_recipes_recipes->quantity_producto = $data->productos[$i]->quantity_producto; 
 
-      if(isset($request->productos[$i]['id'])){
-        $product_recipes_recipes->products_recipe_id = $request->productos[$i]['id'];
+      if(isset($data->productos[$i]->id)){
+        $product_recipes_recipes->products_recipe_id = $data->productos[$i]->id;
       }else{
-        $product_recipes_recipes->products_recipe_id = $request->productos[$i]['products_recipe_id'];
+        $product_recipes_recipes->products_recipe_id = $data->productos[$i]->products_recipe_id;
       }
 
       $product_recipes_recipes->recipes_id = $elemento_editar->id;
